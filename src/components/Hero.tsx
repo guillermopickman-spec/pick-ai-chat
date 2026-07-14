@@ -69,8 +69,12 @@ export function Hero() {
         </div>
 
         <pre
-          className="text-glow-magenta font-mono leading-[1.05] tracking-tight whitespace-pre overflow-x-auto max-w-full text-left inline-block"
-          style={{ fontSize: "clamp(0.42rem, 1.55vw, 1.1rem)" }}
+          className="text-glow-magenta font-mono leading-[1.2] tracking-tight whitespace-pre text-left inline-block"
+          style={{
+            fontSize: "clamp(0.55rem, 2.2vw, 1.1rem)",
+            fontFamily:
+              '"JetBrains Mono Variable", "JetBrains Mono", "Consolas", "Menlo", "Monaco", "Droid Sans Mono", "Courier New", monospace',
+          }}
           aria-label="PickAIChat"
         >
           {PICK.map((_, i) => (
