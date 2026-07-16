@@ -1,6 +1,9 @@
 import { Github, Linkedin, Palette } from "lucide-react";
+import { useLanguage } from "../lib/LanguageProvider";
 
 export function Footer() {
+  const { t } = useLanguage();
+
   return (
     <footer className="border-t border-border px-4 py-12">
       <div className="mx-auto flex max-w-6xl flex-col items-center gap-6 text-center md:flex-row md:justify-between md:text-left">
@@ -17,8 +20,8 @@ export function Footer() {
           <div>
             <div className="font-mono text-sm text-magenta">PickAIChat</div>
             <p className="mt-1 text-sm text-foreground">
-              Built by Guillermo Pickman —{" "}
-              <span className="text-muted-foreground">3D Character Artist & AI Engineer</span>
+              {t("footer.built")}{" "}
+              <span className="text-muted-foreground">{t("footer.role")}</span>
             </p>
           </div>
         </div>
@@ -53,7 +56,7 @@ export function Footer() {
           </a>
         </div>
 
-        <div className="text-xs text-muted-foreground">© 2026 PickAIChat. Hecho en Sevilla.</div>
+        <div className="text-xs text-muted-foreground">{t("footer.made")}</div>
       </div>
     </footer>
   );

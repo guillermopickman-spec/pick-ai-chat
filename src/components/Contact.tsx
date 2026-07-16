@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, CheckCircle } from "lucide-react";
+import { useLanguage } from "../lib/LanguageProvider";
 
 interface FormState {
   name: string;
@@ -21,24 +22,24 @@ const MAX_LENGTHS = {
   message: 1000,
 };
 
-function validate(values: FormState): FormErrors {
+function validate(values: FormState, t: (key: string, ...args: string[]) => string): FormErrors {
   const errors: FormErrors = {};
   const name = values.name.trim();
   const email = values.email.trim();
   const message = values.message.trim();
 
-  if (!name) errors.name = "El nombre es obligatorio";
+  if (!name) errors.name = t("contact.form.error.nameRequired");
   else if (name.length > MAX_LENGTHS.name)
-    errors.name = `El nombre no puede superar los ${MAX_LENGTHS.name} caracteres`;
+    errors.name = t("contact.form.error.nameMax", String(MAX_LENGTHS.name));
 
-  if (!email) errors.email = "El email es obligatorio";
+  if (!email) errors.email = t("contact.form.error.emailRequired");
   else if (email.length > MAX_LENGTHS.email)
-    errors.email = `El email no puede superar los ${MAX_LENGTHS.email} caracteres`;
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Introduce un email válido";
+    errors.email = t("contact.form.error.emailMax", String(MAX_LENGTHS.email));
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = t("contact.form.error.emailInvalid");
 
-  if (!message) errors.message = "El mensaje es obligatorio";
+  if (!message) errors.message = t("contact.form.error.messageRequired");
   else if (message.length > MAX_LENGTHS.message)
-    errors.message = `El mensaje no puede superar los ${MAX_LENGTHS.message} caracteres`;
+    errors.message = t("contact.form.error.messageMax", String(MAX_LENGTHS.message));
 
   return errors;
 }
@@ -50,6 +51,7 @@ export function ContactForm({
   onSubmitted?: () => void;
   buttonClassName?: string;
 }) {
+  const { t } = useLanguage();
   const [values, setValues] = useState<FormState>({
     name: "",
     email: "",
@@ -60,15 +62,15 @@ export function ContactForm({
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
-    const validation = validate(values);
+    const validation = validate(values, t);
     setErrors(validation);
     if (Object.keys(validation).length > 0) return;
 
     const subject = encodeURIComponent(
-      `PickAIChat — consulta de ${values.name} (${values.company || "Sin empresa"})`,
+      t("contact.form.subject", values.name, values.company || t("contact.form.sentAs")),
     );
     const body = encodeURIComponent(
-      `Nombre: ${values.name}\nEmail: ${values.email}\nEmpresa: ${values.company || "N/A"}\n\nMensaje:\n${values.message}`,
+      t("contact.form.body", values.name, values.email, values.company || t("contact.form.na"), values.message),
     );
     window.location.href = `mailto:hello@pickaichat.dev?subject=${subject}&body=${body}`;
     onSubmitted?.();
@@ -82,52 +84,52 @@ export function ContactForm({
     >
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <label className="flex flex-col gap-1.5">
-          <span className="text-xs font-medium text-foreground">Nombre</span>
+          <span className="text-xs font-medium text-foreground">{t("contact.form.name")}</span>
           <input
             type="text"
             value={values.name}
             onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
             maxLength={MAX_LENGTHS.name}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-magenta"
-            placeholder="Tu nombre"
+            placeholder={t("contact.form.namePlaceholder")}
           />
           {errors.name && <span className="text-xs text-destructive">{errors.name}</span>}
         </label>
 
         <label className="flex flex-col gap-1.5">
-          <span className="text-xs font-medium text-foreground">Email</span>
+          <span className="text-xs font-medium text-foreground">{t("contact.form.email")}</span>
           <input
             type="email"
             value={values.email}
             onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
             maxLength={MAX_LENGTHS.email}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-magenta"
-            placeholder="tu@email.com"
+            placeholder={t("contact.form.emailPlaceholder")}
           />
           {errors.email && <span className="text-xs text-destructive">{errors.email}</span>}
         </label>
 
         <label className="flex flex-col gap-1.5 sm:col-span-2">
-          <span className="text-xs font-medium text-foreground">Empresa</span>
+          <span className="text-xs font-medium text-foreground">{t("contact.form.company")}</span>
           <input
             type="text"
             value={values.company}
             onChange={(e) => setValues((v) => ({ ...v, company: e.target.value }))}
             maxLength={MAX_LENGTHS.company}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-magenta"
-            placeholder="Nombre de tu negocio"
+            placeholder={t("contact.form.companyPlaceholder")}
           />
         </label>
 
         <label className="flex flex-col gap-1.5 sm:col-span-2">
-          <span className="text-xs font-medium text-foreground">Mensaje</span>
+          <span className="text-xs font-medium text-foreground">{t("contact.form.message")}</span>
           <textarea
             value={values.message}
             onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
             maxLength={MAX_LENGTHS.message}
             rows={4}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-magenta"
-            placeholder="Cuéntanos qué necesitas..."
+            placeholder={t("contact.form.messagePlaceholder")}
           />
           {errors.message && <span className="text-xs text-destructive">{errors.message}</span>}
         </label>
@@ -140,12 +142,12 @@ export function ContactForm({
           (buttonClassName ?? "")
         }
       >
-        Enviar mensaje
+        {t("contact.form.submit")}
         <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
       </button>
 
       <p className="mt-4 text-center text-xs text-muted-foreground">
-        O envíanos un email directamente a{" "}
+        {t("contact.form.orEmail")}{" "}
         <a href="mailto:hello@pickaichat.dev" className="text-magenta hover:underline">
           hello@pickaichat.dev
         </a>
@@ -155,6 +157,7 @@ export function ContactForm({
 }
 
 export function ContactSection() {
+  const { t } = useLanguage();
   const [submitted, setSubmitted] = useState(false);
 
   if (submitted) {
@@ -163,18 +166,17 @@ export function ContactSection() {
         <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-card p-8 text-center sm:p-12">
           <CheckCircle size={48} className="mx-auto text-magenta" />
           <h2 className="mt-6 text-2xl font-bold text-foreground">
-            Mensaje listo en tu correo
+            {t("contact.form.success.title")}
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Solo tienes que darle a enviar en tu aplicación de email y te responderemos en menos de
-            24 horas.
+            {t("contact.form.success.body")}
           </p>
           <button
             type="button"
             onClick={() => setSubmitted(false)}
             className="mt-6 text-sm text-magenta hover:underline"
           >
-            Enviar otro mensaje
+            {t("contact.form.success.new")}
           </button>
         </div>
       </section>
@@ -186,27 +188,26 @@ export function ContactSection() {
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           <div>
-<div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-            // Empieza ahora
-          </div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            ¿Listo para que tu negocio responda solo?
-          </h2>
-          <p className="mt-4 text-muted-foreground">
-            Cuéntanos qué necesitas y te enviamos un plan personalizado en menos de 24 horas. Sin
-            compromiso, sin tarjeta de crédito.
-          </p>
-          <ul className="mt-8 space-y-3 text-sm text-muted-foreground">
-            <li className="flex items-center gap-2">
-              <span className="text-magenta">✓</span> Sin tarjeta de crédito para empezar
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-magenta">✓</span> Configuración en 24 horas
-            </li>
-            <li className="flex items-center gap-2">
-              <span className="text-magenta">✓</span> Soporte en español, de Sevilla para el mundo
-            </li>
-          </ul>
+            <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
+              {t("contact.section")}
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+              {t("contact.heading")}
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              {t("contact.subtitle")}
+            </p>
+            <ul className="mt-8 space-y-3 text-sm text-muted-foreground">
+              <li className="flex items-center gap-2">
+                <span className="text-magenta">✓</span> {t("contact.bullet1")}
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-magenta">✓</span> {t("contact.bullet2")}
+              </li>
+              <li className="flex items-center gap-2">
+                <span className="text-magenta">✓</span> {t("contact.bullet3")}
+              </li>
+            </ul>
           </div>
 
           <ContactForm onSubmitted={() => setSubmitted(true)} />

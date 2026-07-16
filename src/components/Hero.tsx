@@ -1,3 +1,5 @@
+import { useLanguage } from "../lib/LanguageProvider";
+
 const PICK = [
   "██████╗ ██╗ ██████╗██╗  ██╗",
   "██╔══██╗██║██╔════╝██║ ██╔╝",
@@ -30,6 +32,8 @@ function scrollTo(id: string) {
 }
 
 export function Hero() {
+  const { t } = useLanguage();
+
   return (
     <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-24">
       <div
@@ -52,7 +56,7 @@ export function Hero() {
       <div className="relative z-10 flex w-full max-w-6xl flex-col items-center text-center fade-in-up">
         <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-xs font-mono text-muted-foreground backdrop-blur">
           <span className="h-1.5 w-1.5 rounded-full bg-terminal shadow-[0_0_8px_var(--terminal)]" />
-          v1.0 · funcionando 24/7 · configuración en 24h
+          {t("hero.badge")}
         </div>
 
         <div className="mb-8 flex items-center justify-center">
@@ -86,15 +90,13 @@ export function Hero() {
           ))}
         </pre>
 
-        <h1 className="sr-only">PickAIChat — Asistente AI para tu negocio</h1>
+        <h1 className="sr-only">{t("hero.title")}</h1>
 
         <p className="mt-10 max-w-2xl text-lg font-medium text-foreground sm:text-xl">
-          Tu negocio responde al instante en WhatsApp —{" "}
-          <span className="text-magenta">con AI que entiende a tus clientes.</span>
+          {t("hero.subtitle", t("hero.subtitle.highlight"))}
         </p>
         <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
-          PickAIChat conecta con WhatsApp, web y email para responder automáticamente las preguntas
-          de tus clientes 24/7. Sin instalar nada, sin equipos grandes.
+          {t("hero.description")}
         </p>
 
         <div className="mt-10 flex flex-col gap-3 sm:flex-row">
@@ -102,14 +104,14 @@ export function Hero() {
             onClick={() => scrollTo("chatbot")}
             className="group inline-flex items-center justify-center rounded-lg bg-magenta px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 hover:shadow-[0_0_32px_-4px_var(--magenta-glow)]"
           >
-            Probar el Chatbot
+            {t("hero.cta.try")}
             <span className="ml-2 transition group-hover:translate-x-0.5">→</span>
           </button>
           <button
             onClick={() => scrollTo("pricing")}
             className="inline-flex items-center justify-center rounded-lg border border-border bg-card/60 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur transition hover:border-magenta/60 hover:text-magenta"
           >
-            Ver Precios
+            {t("hero.cta.pricing")}
           </button>
         </div>
       </div>

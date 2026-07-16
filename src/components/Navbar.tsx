@@ -1,13 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-
-const NAV_LINKS = [
-  { label: "Funciones", to: "/", hash: "features" },
-  { label: "Demo", to: "/", hash: "chatbot" },
-  { label: "Precios", to: "/", hash: "pricing" },
-  { label: "FAQ", to: "/", hash: "faq" },
-];
+import { useLanguage } from "../lib/LanguageProvider";
 
 function scrollToHash(hash: string) {
   const el = document.getElementById(hash);
@@ -17,8 +11,16 @@ function scrollToHash(hash: string) {
 }
 
 export function Navbar() {
+  const { t, lang, setLang } = useLanguage();
   const [visible, setVisible] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
+
+  const NAV_LINKS = [
+    { label: t("nav.features"), to: "/", hash: "features" },
+    { label: t("nav.demo"), to: "/", hash: "chatbot" },
+    { label: t("nav.pricing"), to: "/", hash: "pricing" },
+    { label: t("nav.faq"), to: "/", hash: "faq" },
+  ];
 
   useEffect(() => {
     const onScroll = () => {
@@ -55,21 +57,46 @@ export function Navbar() {
           <span className="font-mono text-lg font-semibold text-magenta">PickAIChat</span>
         </Link>
 
-        <div className="hidden items-center gap-8 md:flex">
+        <div className="hidden items-center gap-6 md:flex">
           {NAV_LINKS.map((link) => (
             <button
-              key={link.label}
+              key={link.hash}
               onClick={() => scrollToHash(link.hash)}
               className="text-sm text-muted-foreground transition hover:text-foreground"
             >
               {link.label}
             </button>
           ))}
+
+          <div className="flex items-center gap-1 border-l border-border pl-4">
+            <button
+              onClick={() => setLang("es")}
+              className={`rounded px-2 py-1 text-xs font-mono transition ${
+                lang === "es"
+                  ? "bg-magenta/20 text-magenta"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              ES
+            </button>
+            <span className="text-xs text-muted-foreground/40">/</span>
+            <button
+              onClick={() => setLang("en")}
+              className={`rounded px-2 py-1 text-xs font-mono transition ${
+                lang === "en"
+                  ? "bg-magenta/20 text-magenta"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              EN
+            </button>
+          </div>
+
           <Link
             to="/contact"
             className="rounded-lg bg-magenta px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
           >
-            Empezar
+            {t("nav.cta")}
           </Link>
         </div>
 
@@ -89,7 +116,7 @@ export function Navbar() {
           <div className="flex flex-col gap-3">
             {NAV_LINKS.map((link) => (
               <button
-                key={link.label}
+                key={link.hash}
                 onClick={() => {
                   setMobileOpen(false);
                   scrollToHash(link.hash);
@@ -99,12 +126,34 @@ export function Navbar() {
                 {link.label}
               </button>
             ))}
+            <div className="flex items-center gap-2 border-t border-border pt-3">
+              <button
+                onClick={() => { setLang("es"); setMobileOpen(false); }}
+                className={`rounded px-3 py-1.5 text-xs font-mono transition ${
+                  lang === "es"
+                    ? "bg-magenta/20 text-magenta"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                ES
+              </button>
+              <button
+                onClick={() => { setLang("en"); setMobileOpen(false); }}
+                className={`rounded px-3 py-1.5 text-xs font-mono transition ${
+                  lang === "en"
+                    ? "bg-magenta/20 text-magenta"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
+              >
+                EN
+              </button>
+            </div>
             <Link
               to="/contact"
               onClick={() => setMobileOpen(false)}
               className="mt-1 rounded-lg bg-magenta px-4 py-2 text-center text-sm font-semibold text-primary-foreground transition hover:brightness-110"
             >
-              Empezar
+              {t("nav.cta")}
             </Link>
           </div>
         </div>

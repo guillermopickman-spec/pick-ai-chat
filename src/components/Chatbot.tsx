@@ -2,6 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { Settings as SettingsIcon, Send, Terminal } from "lucide-react";
 import { useChat, type Platform } from "@/hooks/useChat";
 import { SettingsPanel } from "./Settings";
+import { useLanguage } from "../lib/LanguageProvider";
 
 const PLATFORMS: Platform[] = ["Telegram", "WhatsApp", "Web Chat"];
 
@@ -11,6 +12,7 @@ function formatTime(ts: number) {
 }
 
 export function Chatbot() {
+  const { t } = useLanguage();
   const { settings, updateSettings, messages, platform, setPlatform, isTyping, send } = useChat();
   const [input, setInput] = useState("");
   const [showSettings, setShowSettings] = useState(false);
@@ -33,12 +35,11 @@ export function Chatbot() {
       <div className="mx-auto max-w-4xl">
         <div className="mb-10 text-center">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-            // Demo en vivo
+            {t("chatbot.section")}
           </div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Prueba el asistente</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t("chatbot.heading")}</h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Escribe cualquier pregunta que haría un cliente y mira cómo responde PickAIChat. Puedes
-            cambiar de canal para ver cómo funciona en WhatsApp, web chat y Telegram.
+            {t("chatbot.subtitle")}
           </p>
         </div>
 
@@ -66,7 +67,7 @@ export function Chatbot() {
               aria-expanded={showSettings}
             >
               <SettingsIcon size={12} />
-              Configurar
+              {t("chatbot.config")}
             </button>
           </div>
 
@@ -75,7 +76,7 @@ export function Chatbot() {
           {/* platform selector */}
           <div className="flex items-center gap-2 border-b border-border bg-background/30 px-4 py-3">
             <span className="text-[11px] uppercase tracking-widest text-muted-foreground">
-              canal:
+              {t("chatbot.channel")}
             </span>
             {PLATFORMS.map((p) => (
               <button
@@ -128,7 +129,7 @@ export function Chatbot() {
             ))}
             {isTyping && (
               <div className="text-terminal slide-in-msg">
-                <span className="text-muted-foreground">…</span> pickaichat está pensando
+                <span className="text-muted-foreground">…</span> {t("chatbot.thinking")}
                 <span className="caret-blink">▍</span>
               </div>
             )}
@@ -143,7 +144,7 @@ export function Chatbot() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={`Enviar como ${platform}…`}
+              placeholder={t("chatbot.placeholder", platform)}
               className="flex-1 bg-transparent px-1 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
               spellCheck={false}
               autoComplete="off"
@@ -154,7 +155,7 @@ export function Chatbot() {
               className="inline-flex items-center gap-1.5 rounded-md bg-magenta px-4 py-2 text-xs font-semibold text-primary-foreground transition hover:brightness-110 disabled:opacity-40"
             >
               <Send size={12} />
-              Enviar
+              {t("chatbot.send")}
             </button>
           </form>
         </div>

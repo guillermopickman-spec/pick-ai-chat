@@ -8,6 +8,7 @@ import { Pricing } from "@/components/Pricing";
 import { Chatbot } from "@/components/Chatbot";
 import { FAQ } from "@/components/FAQ";
 import { ContactSection } from "@/components/Contact";
+import { useLanguage } from "@/lib/LanguageProvider";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -34,6 +35,11 @@ export const Route = createFileRoute("/")({
         name: "twitter:description",
         content: "Tu negocio responde al instante en WhatsApp con AI que entiende a tus clientes.",
       },
+    ],
+    links: [
+      { rel: "alternate", hrefLang: "es", href: "https://pickaichat.com" },
+      { rel: "alternate", hrefLang: "en", href: "https://pickaichat.com?lang=en" },
+      { rel: "alternate", hrefLang: "x-default", href: "https://pickaichat.com" },
     ],
   }),
   component: LandingPage,

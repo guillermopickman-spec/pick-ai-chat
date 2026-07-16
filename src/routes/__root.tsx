@@ -12,8 +12,10 @@ import { useEffect, type ReactNode } from "react";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Footer } from "../components/Footer";
+import { LanguageProvider, useLanguage } from "../lib/LanguageProvider";
 
 function NotFoundComponent() {
+  const { t } = useLanguage();
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
       <div className="max-w-md text-center">
@@ -104,7 +106,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <html lang="en">
+    <LanguageProvider>
+      <RootShellInner>{children}</RootShellInner>
+    </LanguageProvider>
+  );
+}
+
+function RootShellInner({ children }: { children: ReactNode }) {
+  const { lang } = useLanguage();
+  return (
+    <html lang={lang}>
       <head>
         <HeadContent />
       </head>
@@ -121,7 +132,6 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      {/* Required: nested routes render here. Removing <Outlet /> breaks all child routes. */}
       <Outlet />
       <Footer />
     </QueryClientProvider>
