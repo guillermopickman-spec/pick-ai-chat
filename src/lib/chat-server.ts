@@ -12,7 +12,7 @@ export const chatWithAI = createServerFn({ method: "POST" })
     const d = data as { message?: string; model?: string };
     return {
       message: (d.message || "").trim(),
-      model: d.model || "google/gemma-4-26b-a4b-it:free",
+      model: d.model || "openrouter/free",
     };
   })
   .handler(async ({ data }) => {

@@ -5,14 +5,14 @@ export interface ChatSettings {
 }
 
 export const DEFAULT_SETTINGS: ChatSettings = {
-  model: "google/gemma-4-26b-a4b-it:free",
+  model: "openrouter/free",
 };
 
 export const MODEL_OPTIONS = [
+  "openrouter/free",
+  "openrouter/auto",
   "google/gemma-4-26b-a4b-it:free",
   "deepseek/deepseek-v4-flash:free",
-  "nvidia/nemotron-3-super-120b-a12b:free",
-  "minimax/maxim-m2.5:free",
 ];
 
 export async function sendChatMessage(
