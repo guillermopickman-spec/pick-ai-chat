@@ -9,33 +9,33 @@ interface Feature {
 const FEATURES: Feature[] = [
   {
     icon: Cable,
-    title: "Multi-Channel Routing",
-    body: "One engine handles Telegram, WhatsApp, Web Chat, and Email through a single dispatcher.",
+    title: "WhatsApp + Web + Email",
+    body: "Un solo asistente AI que funciona en WhatsApp, en tu página web y por email. Tus clientes te escriben donde prefieran, el motor responde igual.",
   },
   {
     icon: Brain,
-    title: "Session Memory",
-    body: "Cross-channel persistence — conversation state follows users wherever they message you.",
+    title: "Responde como tu negocio",
+    body: "Cárgale tus precios, horarios, catálogo y FAQ. La AI responde con tu información real, no inventa. Sin entrenar, sin configurar.",
   },
   {
     icon: ShieldCheck,
-    title: "Rate Limiting & Auth",
-    body: "Built-in middleware, API key authentication, and configurable per-user rate limits.",
+    title: "Disponible 24/7",
+    body: "Mientras duermes, tu asistente sigue respondiendo. Preguntas frecuentes, disponibilidad, precios — todo al instante, siempre.",
   },
   {
     icon: Layers,
-    title: "Upsell Architecture",
-    body: "Drop-in paid addons — CRM sync, analytics, custom flows — without touching the core.",
+    title: "Escala contigo",
+    body: "De 10 a 10.000 mensajes al día. Añade canales, integra tu CRM, conecta con tu equipo humano cuando haga falta.",
   },
   {
     icon: Shuffle,
-    title: "Provider Agnostic",
-    body: "Swap LLM models mid-workflow. OpenRouter, OpenAI, Anthropic, local — your call.",
+    title: "Sin ataduras",
+    body: "No pagas por agente, no pagas por mensaje. Funciona con tu propio hardware o en la nube. Tú controlas todo.",
   },
   {
     icon: Rocket,
-    title: "48-Hour Deployment",
-    body: "Order to production in two days. Docker-ready with zero-downtime deploys.",
+    title: "Configuración en 24 horas",
+    body: "Te damos acceso, escaneas un QR con tu móvil y el asistente ya está respondiendo. En un día laboral, no en meses.",
   },
 ];
 
@@ -45,14 +45,14 @@ export function Features() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-            // Capabilities
+            // Lo que hace
           </div>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Everything a real chat engine needs
+            Tu cliente pregunta, PickAIChat responde
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Purpose-built for teams shipping AI conversation surfaces to production — not another
-            wrapper around a chat completions endpoint.
+            No es un chatbot de reglas fijas. Es una AI entrenada con TU información, que habla con
+            el tono de TU negocio y nunca deja un mensaje sin responder.
           </p>
         </div>
 

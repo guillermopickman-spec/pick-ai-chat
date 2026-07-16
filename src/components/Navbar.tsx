@@ -3,9 +3,9 @@ import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 
 const NAV_LINKS = [
-  { label: "Features", to: "/", hash: "features" },
+  { label: "Funciones", to: "/", hash: "features" },
   { label: "Demo", to: "/", hash: "chatbot" },
-  { label: "Pricing", to: "/", hash: "pricing" },
+  { label: "Precios", to: "/", hash: "pricing" },
   { label: "FAQ", to: "/", hash: "faq" },
 ];
 
@@ -69,7 +69,7 @@ export function Navbar() {
             to="/contact"
             className="rounded-lg bg-magenta px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
           >
-            Get Started
+            Empezar
           </Link>
         </div>
 
@@ -104,7 +104,7 @@ export function Navbar() {
               onClick={() => setMobileOpen(false)}
               className="mt-1 rounded-lg bg-magenta px-4 py-2 text-center text-sm font-semibold text-primary-foreground transition hover:brightness-110"
             >
-              Get Started
+              Empezar
             </Link>
           </div>
         </div>

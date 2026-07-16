@@ -2,34 +2,34 @@ import { ChevronDown } from "lucide-react";
 
 const FAQS = [
   {
-    question: "What channels are supported out of the box?",
+    question: "¿Qué canales puedo conectar?",
     answer:
-      "Telegram, WhatsApp, Web Chat, and Email are supported through a single dispatcher. Additional channels can be added via the modular adapter architecture.",
+      "WhatsApp, web chat y email. Un solo asistente responde en todos lados. Si tu cliente te escribe por WhatsApp, le responde por WhatsApp. Si usa el chat de tu web, lo mismo.",
   },
   {
-    question: "Can I use my own LLM API key?",
+    question: "¿Tengo que instalar algo en mi ordenador?",
     answer:
-      "Yes. PickAIChat is provider-agnostic. Bring your OpenRouter, OpenAI, Anthropic, or local model credentials and configure them in one place.",
+      "No. Solo escaneas un código QR con tu móvil para conectar tu WhatsApp. El resto funciona solo. Nosotros nos encargamos de que el sistema esté siempre activo.",
   },
   {
-    question: "What does the 48-hour deployment include?",
+    question: "¿La AI alucina o inventa respuestas?",
     answer:
-      "It covers a working PickAIChat instance with your chosen channels, auth, rate limiting, and memory configured. Docker manifests and deployment guidance are included.",
+      "No. La AI solo responde con la información que tú le das: tus precios, horarios, productos y FAQ. Si no sabe algo, te lo deriva a ti en lugar de inventar.",
   },
   {
-    question: "Is there ongoing maintenance?",
+    question: "¿Puedo seguir usando WhatsApp normal en mi móvil?",
     answer:
-      "The one-time build is yours to run. Enterprise plans include SLA and priority support. Business plans include analytics and CRM sync updates as needed.",
+      "Sí. Tu WhatsApp sigue funcionando exactamente igual. PickAIChat se conecta como un 'dispositivo vinculado' adicional, igual que WhatsApp Web. No interfiere con tu uso normal.",
   },
   {
-    question: "How does the upsell architecture work?",
+    question: "¿Qué pasa si la AI no sabe responder?",
     answer:
-      "Core engine stays untouched. Add-ons like CRM sync, analytics dashboards, and custom flows are built as separate modules that hook into the dispatcher.",
+      "Te reenvía la conversación a ti con todo el contexto. Tú respondes y la AI aprende para la próxima. También puedes configurar horarios en los que solo respondes tú.",
   },
   {
-    question: "Do I own the infrastructure?",
+    question: "¿Cuánto cuesta mantenerlo?",
     answer:
-      "Yes. PickAIChat is delivered as source + Docker manifests. You host it on your own cloud account with no per-seat or usage tax.",
+      "El plan mensual incluye hosting, mantenimiento y actualizaciones. No hay costes ocultos ni sorpresas. Si quieres probar antes de comprometerte, tenemos una demo gratuita.",
   },
 ];
 
@@ -41,9 +41,9 @@ export function FAQ() {
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
             // FAQ
           </div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Questions? Answered.</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">¿Dudas? Resueltas.</h2>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Everything you need to know before starting your PickAIChat build.
+            Todo lo que necesitas saber antes de probar PickAIChat en tu negocio.
           </p>
         </div>
 

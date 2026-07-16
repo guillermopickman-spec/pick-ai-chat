@@ -35,13 +35,13 @@ export function SocialProof() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-12 text-center">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-            // Trusted by builders
+            // Quiénes confían
           </div>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            Built for teams shipping AI to production
+            Negocios como el tuyo ya responden con AI
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-sm text-muted-foreground">
-            Replace the placeholder logos and testimonials below with your real clients and quotes.
+            Próximamente: casos reales de clientes usando PickAIChat en sus negocios.
           </p>
         </div>
 

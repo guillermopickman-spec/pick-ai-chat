@@ -4,20 +4,20 @@ const STEPS = [
   {
     icon: Cable,
     number: "01",
-    title: "Connect channels",
-    body: "Plug in Telegram, WhatsApp, Web Chat, and Email through a single dispatcher. One integration, every surface.",
+    title: "Escanear QR",
+    body: "Te damos acceso al sistema. Escaneas un código QR con tu móvil y conectas el número de WhatsApp de tu negocio. No necesitas instalar nada.",
   },
   {
     icon: Sliders,
     number: "02",
-    title: "Configure routing",
-    body: "Set auth, rate limits, cross-channel memory, and LLM provider — OpenRouter, OpenAI, Anthropic, or local.",
+    title: "Alimentar la AI",
+    body: "Subes tus precios, horarios, productos y FAQ. La AI aprende de tu información y empieza a responder como lo harías tú.",
   },
   {
     icon: Rocket,
     number: "03",
-    title: "Deploy in 48h",
-    body: "Ship with Docker-ready manifests and zero-downtime blue/green updates. Production-ready from day one.",
+    title: "A funcionar",
+    body: "En 24 horas tu asistente ya está respondiendo clientes. Tú recibes un resumen diario de lo que ha pasado. Sin complicaciones.",
   },
 ];
 
@@ -27,14 +27,14 @@ export function HowItWorks() {
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-            // How it works
+            // Cómo funciona
           </div>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-            From channels to production in three steps
+            De escanear un QR a tener tu asistente en 24 horas
           </h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            No rewrites, no channel-specific glue. PickAIChat handles the plumbing so you can focus
-            on the conversation.
+            Sin instalaciones complicadas, sin contratar informáticos, sin leer manuales.
+            Configuras PickAIChat como configuras el WiFi de tu casa.
           </p>
         </div>
 

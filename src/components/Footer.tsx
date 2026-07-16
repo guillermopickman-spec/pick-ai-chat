@@ -53,7 +53,7 @@ export function Footer() {
           </a>
         </div>
 
-        <div className="text-xs text-muted-foreground">© 2026 PickAIChat.</div>
+        <div className="text-xs text-muted-foreground">© 2026 PickAIChat. Hecho en Sevilla.</div>
       </div>
     </footer>
   );

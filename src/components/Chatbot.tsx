@@ -33,12 +33,12 @@ export function Chatbot() {
       <div className="mx-auto max-w-4xl">
         <div className="mb-10 text-center">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-            // Live Demo
+            // Demo en vivo
           </div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Test the dispatcher</h2>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Prueba el asistente</h2>
           <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            Bring your own OpenRouter key. Switch channels to see how PickAIChat tags inbound
-            traffic before routing to the model.
+            Escribe cualquier pregunta que haría un cliente y mira cómo responde PickAIChat. Puedes
+            cambiar de canal para ver cómo funciona en WhatsApp, web chat y Telegram.
           </p>
         </div>
 
@@ -66,7 +66,7 @@ export function Chatbot() {
               aria-expanded={showSettings}
             >
               <SettingsIcon size={12} />
-              Settings
+              Configurar
             </button>
           </div>
 
@@ -75,7 +75,7 @@ export function Chatbot() {
           {/* platform selector */}
           <div className="flex items-center gap-2 border-b border-border bg-background/30 px-4 py-3">
             <span className="text-[11px] uppercase tracking-widest text-muted-foreground">
-              channel:
+              canal:
             </span>
             {PLATFORMS.map((p) => (
               <button
@@ -128,7 +128,7 @@ export function Chatbot() {
             ))}
             {isTyping && (
               <div className="text-terminal slide-in-msg">
-                <span className="text-muted-foreground">…</span> pickaichat is thinking
+                <span className="text-muted-foreground">…</span> pickaichat está pensando
                 <span className="caret-blink">▍</span>
               </div>
             )}
@@ -143,7 +143,7 @@ export function Chatbot() {
             <input
               value={input}
               onChange={(e) => setInput(e.target.value)}
-              placeholder={`Send as ${platform}…`}
+              placeholder={`Enviar como ${platform}…`}
               className="flex-1 bg-transparent px-1 py-2 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none"
               spellCheck={false}
               autoComplete="off"
@@ -154,7 +154,7 @@ export function Chatbot() {
               className="inline-flex items-center gap-1.5 rounded-md bg-magenta px-4 py-2 text-xs font-semibold text-primary-foreground transition hover:brightness-110 disabled:opacity-40"
             >
               <Send size={12} />
-              Send
+              Enviar
             </button>
           </form>
         </div>

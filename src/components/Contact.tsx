@@ -27,18 +27,18 @@ function validate(values: FormState): FormErrors {
   const email = values.email.trim();
   const message = values.message.trim();
 
-  if (!name) errors.name = "Name is required";
+  if (!name) errors.name = "El nombre es obligatorio";
   else if (name.length > MAX_LENGTHS.name)
-    errors.name = `Name must be under ${MAX_LENGTHS.name} characters`;
+    errors.name = `El nombre no puede superar los ${MAX_LENGTHS.name} caracteres`;
 
-  if (!email) errors.email = "Email is required";
+  if (!email) errors.email = "El email es obligatorio";
   else if (email.length > MAX_LENGTHS.email)
-    errors.email = `Email must be under ${MAX_LENGTHS.email} characters`;
-  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Please enter a valid email";
+    errors.email = `El email no puede superar los ${MAX_LENGTHS.email} caracteres`;
+  else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) errors.email = "Introduce un email válido";
 
-  if (!message) errors.message = "Message is required";
+  if (!message) errors.message = "El mensaje es obligatorio";
   else if (message.length > MAX_LENGTHS.message)
-    errors.message = `Message must be under ${MAX_LENGTHS.message} characters`;
+    errors.message = `El mensaje no puede superar los ${MAX_LENGTHS.message} caracteres`;
 
   return errors;
 }
@@ -65,10 +65,10 @@ export function ContactForm({
     if (Object.keys(validation).length > 0) return;
 
     const subject = encodeURIComponent(
-      `PickAIChat inquiry from ${values.name} — ${values.company || "No company"}`,
+      `PickAIChat — consulta de ${values.name} (${values.company || "Sin empresa"})`,
     );
     const body = encodeURIComponent(
-      `Name: ${values.name}\nEmail: ${values.email}\nCompany: ${values.company || "N/A"}\n\nMessage:\n${values.message}`,
+      `Nombre: ${values.name}\nEmail: ${values.email}\nEmpresa: ${values.company || "N/A"}\n\nMensaje:\n${values.message}`,
     );
     window.location.href = `mailto:hello@pickaichat.dev?subject=${subject}&body=${body}`;
     onSubmitted?.();
@@ -82,14 +82,14 @@ export function ContactForm({
     >
       <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
         <label className="flex flex-col gap-1.5">
-          <span className="text-xs font-medium text-foreground">Name</span>
+          <span className="text-xs font-medium text-foreground">Nombre</span>
           <input
             type="text"
             value={values.name}
             onChange={(e) => setValues((v) => ({ ...v, name: e.target.value }))}
             maxLength={MAX_LENGTHS.name}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-magenta"
-            placeholder="Jane Doe"
+            placeholder="Tu nombre"
           />
           {errors.name && <span className="text-xs text-destructive">{errors.name}</span>}
         </label>
@@ -102,32 +102,32 @@ export function ContactForm({
             onChange={(e) => setValues((v) => ({ ...v, email: e.target.value }))}
             maxLength={MAX_LENGTHS.email}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-magenta"
-            placeholder="jane@company.com"
+            placeholder="tu@email.com"
           />
           {errors.email && <span className="text-xs text-destructive">{errors.email}</span>}
         </label>
 
         <label className="flex flex-col gap-1.5 sm:col-span-2">
-          <span className="text-xs font-medium text-foreground">Company</span>
+          <span className="text-xs font-medium text-foreground">Empresa</span>
           <input
             type="text"
             value={values.company}
             onChange={(e) => setValues((v) => ({ ...v, company: e.target.value }))}
             maxLength={MAX_LENGTHS.company}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-magenta"
-            placeholder="Acme Corp"
+            placeholder="Nombre de tu negocio"
           />
         </label>
 
         <label className="flex flex-col gap-1.5 sm:col-span-2">
-          <span className="text-xs font-medium text-foreground">Message</span>
+          <span className="text-xs font-medium text-foreground">Mensaje</span>
           <textarea
             value={values.message}
             onChange={(e) => setValues((v) => ({ ...v, message: e.target.value }))}
             maxLength={MAX_LENGTHS.message}
             rows={4}
             className="rounded-lg border border-border bg-background px-3 py-2 text-sm text-foreground outline-none focus:border-magenta"
-            placeholder="Tell us about your project..."
+            placeholder="Cuéntanos qué necesitas..."
           />
           {errors.message && <span className="text-xs text-destructive">{errors.message}</span>}
         </label>
@@ -140,12 +140,12 @@ export function ContactForm({
           (buttonClassName ?? "")
         }
       >
-        Send message
+        Enviar mensaje
         <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
       </button>
 
       <p className="mt-4 text-center text-xs text-muted-foreground">
-        Or email us directly at{" "}
+        O envíanos un email directamente a{" "}
         <a href="mailto:hello@pickaichat.dev" className="text-magenta hover:underline">
           hello@pickaichat.dev
         </a>
@@ -163,17 +163,18 @@ export function ContactSection() {
         <div className="mx-auto max-w-2xl rounded-2xl border border-border bg-card p-8 text-center sm:p-12">
           <CheckCircle size={48} className="mx-auto text-magenta" />
           <h2 className="mt-6 text-2xl font-bold text-foreground">
-            Message opened in your email client
+            Mensaje listo en tu correo
           </h2>
           <p className="mt-3 text-muted-foreground">
-            Hit send in your email app and we’ll get back to you within one business day.
+            Solo tienes que darle a enviar en tu aplicación de email y te responderemos en menos de
+            24 horas.
           </p>
           <button
             type="button"
             onClick={() => setSubmitted(false)}
             className="mt-6 text-sm text-magenta hover:underline"
           >
-            Send another message
+            Enviar otro mensaje
           </button>
         </div>
       </section>
@@ -185,28 +186,27 @@ export function ContactSection() {
       <div className="mx-auto max-w-6xl">
         <div className="grid grid-cols-1 gap-12 lg:grid-cols-2">
           <div>
-            <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-              // Get started
-            </div>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Ready to deploy your chat engine?
-            </h2>
-            <p className="mt-4 text-muted-foreground">
-              Tell us what you're building. We'll reply with a tailored build plan and next steps
-              within 24 hours.
-            </p>
-            <ul className="mt-8 space-y-3 text-sm text-muted-foreground">
-              <li className="flex items-center gap-2">
-                <span className="text-magenta">✓</span> No credit card required to start the
-                conversation
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-magenta">✓</span> One-time build fee, no hidden usage costs
-              </li>
-              <li className="flex items-center gap-2">
-                <span className="text-magenta">✓</span> Production-ready in 48 hours
-              </li>
-            </ul>
+<div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
+            // Empieza ahora
+          </div>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
+            ¿Listo para que tu negocio responda solo?
+          </h2>
+          <p className="mt-4 text-muted-foreground">
+            Cuéntanos qué necesitas y te enviamos un plan personalizado en menos de 24 horas. Sin
+            compromiso, sin tarjeta de crédito.
+          </p>
+          <ul className="mt-8 space-y-3 text-sm text-muted-foreground">
+            <li className="flex items-center gap-2">
+              <span className="text-magenta">✓</span> Sin tarjeta de crédito para empezar
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-magenta">✓</span> Configuración en 24 horas
+            </li>
+            <li className="flex items-center gap-2">
+              <span className="text-magenta">✓</span> Soporte en español, de Sevilla para el mundo
+            </li>
+          </ul>
           </div>
 
           <ContactForm onSubmitted={() => setSubmitted(true)} />
