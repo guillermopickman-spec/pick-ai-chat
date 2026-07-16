@@ -1,10 +1,4 @@
 import { createServerFn } from "@tanstack/react-start";
-import { z } from "zod";
-
-const ChatSchema = z.object({
-  message: z.string().min(1).max(4000),
-  model: z.string().optional().default("google/gemma-4-31b-it:free"),
-});
 
 const SYSTEM_PROMPT =
   "You are PickAIChat, a universal AI chat engine assistant. You help developers " +
@@ -14,7 +8,13 @@ const SYSTEM_PROMPT =
   "routing. Be concise, technical, and friendly.";
 
 export const chatWithAI = createServerFn({ method: "POST" })
-  .validator((data: unknown) => ChatSchema.parse(data))
+  .validator((data: unknown) => {
+    const d = data as { message?: string; model?: string };
+    return {
+      message: (d.message || "").trim(),
+      model: d.model || "google/gemma-4-31b-it:free",
+    };
+  })
   .handler(async ({ data }) => {
     const apiKey = process.env.OPENROUTER_API_KEY;
 
@@ -23,6 +23,10 @@ export const chatWithAI = createServerFn({ method: "POST" })
         success: false as const,
         error: "Server not configured — contact the site owner",
       };
+    }
+
+    if (!data.message) {
+      return { success: false as const, error: "Message is required" };
     }
 
     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
