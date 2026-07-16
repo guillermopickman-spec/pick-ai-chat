@@ -18,7 +18,11 @@ function loadSettings(): ChatSettings {
   try {
     const raw = window.localStorage.getItem(STORAGE_KEY);
     if (!raw) return DEFAULT_SETTINGS;
-    return { ...DEFAULT_SETTINGS, ...JSON.parse(raw) };
+    // Strip any old apiKey/endpoint that might be in localStorage
+    const parsed = JSON.parse(raw);
+    return {
+      model: parsed.model || DEFAULT_SETTINGS.model,
+    };
   } catch {
     return DEFAULT_SETTINGS;
   }
@@ -45,7 +49,7 @@ export function useChat() {
   const updateSettings = useCallback((next: ChatSettings) => {
     setSettings(next);
     try {
-      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ model: next.model }));
     } catch {
       /* ignore */
     }
