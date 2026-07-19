@@ -80,10 +80,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "PickAIChat — Universal AI Chat Engine" },
+      { title: "PickAIChat — Hub de Agentes AI para tu Negocio" },
       {
         name: "description",
-        content: "Universal AI Chat Engine. Build once, deploy everywhere.",
+        content: "Hub de agentes AI para WhatsApp, web y email. Automatiza tu negocio 24/7 con el agente multi-herramienta más económico del mercado.",
       },
       { name: "author", content: "Guillermo Pickman" },
       { property: "og:type", content: "website" },

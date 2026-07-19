@@ -11,7 +11,7 @@ function formatTime(ts: number) {
   return d.toTimeString().slice(0, 8);
 }
 
-export function Chatbot() {
+export function Chatbot({ compact }: { compact?: boolean }) {
   const { t } = useLanguage();
   const { settings, updateSettings, messages, platform, setPlatform, isTyping, send } = useChat();
   const [input, setInput] = useState("");
@@ -31,19 +31,21 @@ export function Chatbot() {
   }
 
   return (
-    <section id="chatbot" className="relative px-4 py-24 sm:py-32">
+    <section id="chatbot" className={"relative px-4 py-24 sm:py-32 " + (compact ? "!p-0" : "")}>
       <div className="mx-auto max-w-4xl">
-        <div className="mb-10 text-center">
-          <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-            {t("chatbot.section")}
+        {!compact && (
+          <div className="mb-10 text-center">
+            <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
+              {t("chatbot.section")}
+            </div>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t("chatbot.heading")}</h2>
+            <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
+              {t("chatbot.subtitle")}
+            </p>
           </div>
-          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{t("chatbot.heading")}</h2>
-          <p className="mx-auto mt-4 max-w-2xl text-muted-foreground">
-            {t("chatbot.subtitle")}
-          </p>
-        </div>
+        )}
 
-        <div className="overflow-hidden rounded-xl border border-border bg-card font-mono shadow-2xl shadow-black/40">
+        <div className={"overflow-hidden rounded-xl border border-border bg-card font-mono shadow-2xl shadow-black/40 " + (compact ? "text-xs" : "")}>
           {/* terminal chrome */}
           <div className="flex items-center justify-between border-b border-border bg-background/60 px-4 py-2.5">
             <div className="flex items-center gap-2">
@@ -97,7 +99,7 @@ export function Chatbot() {
           {/* transcript */}
           <div
             ref={scrollRef}
-            className="h-[440px] overflow-y-auto bg-background/70 p-4 text-[13px] leading-relaxed"
+            className={"overflow-y-auto bg-background/70 p-4 text-[13px] leading-relaxed " + (compact ? "h-[280px]" : "h-[440px]")}
           >
             {messages.map((m) => (
               <div key={m.id} className="slide-in-msg mb-2">

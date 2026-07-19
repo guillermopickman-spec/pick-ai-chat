@@ -1,34 +1,9 @@
 import { Quote } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 
-const PLACEHOLDER_LOGOS = ["Acme Corp", "Globex", "Initech", "Massive Dynamic", "Umbrella"];
+const PLACEHOLDER_LOGOS = ["Ferretería Mendoza", "Clínica DentalCare", "Pizzería Da Miguel", "Tienda Sol", "Taller García"];
 
-const TESTIMONIALS = [
-  {
-    quote:
-      "PickAIChat cut our multi-channel support rollout from weeks to two days. The dispatcher architecture is exactly what we needed.",
-    name: "Alex Rivera",
-    role: "Head of Engineering",
-    company: "Acme Corp",
-    initials: "AR",
-  },
-  {
-    quote:
-      "Finally a chat engine that doesn't lock us into one LLM provider. Swapping models mid-project was painless.",
-    name: "Sam Chen",
-    role: "CTO",
-    company: "Globex Labs",
-    initials: "SC",
-  },
-  {
-    quote:
-      "The upsell architecture let us ship CRM sync and analytics as paid addons without touching the core engine.",
-    name: "Jordan Patel",
-    role: "Product Lead",
-    company: "Initech",
-    initials: "JP",
-  },
-];
+const SOCIAL_KEYS = ["0", "1", "2"];
 
 export function SocialProof() {
   const { t } = useLanguage();
@@ -60,21 +35,21 @@ export function SocialProof() {
         </div>
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-          {TESTIMONIALS.map((t_) => (
+          {SOCIAL_KEYS.map((key) => (
             <div
-              key={t_.name}
+              key={key}
               className="relative rounded-xl border border-border bg-card p-6 transition hover:border-magenta/40"
             >
               <Quote size={24} className="absolute right-6 top-6 text-magenta/20" />
-              <p className="relative text-sm leading-relaxed text-foreground/90">“{t_.quote}”</p>
+              <p className="relative text-sm leading-relaxed text-foreground/90">“{t(`social.${key}.quote`)}”</p>
               <div className="mt-6 flex items-center gap-3">
                 <div className="flex h-10 w-10 items-center justify-center rounded-full border border-border bg-background font-mono text-xs font-semibold text-magenta">
-                  {t_.initials}
+                  {t(`social.${key}.initials`)}
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-foreground">{t_.name}</div>
+                  <div className="text-sm font-semibold text-foreground">{t(`social.${key}.name`)}</div>
                   <div className="text-xs text-muted-foreground">
-                    {t_.role}, {t_.company}
+                    {t(`social.${key}.role`)}, {t(`social.${key}.company`)}
                   </div>
                 </div>
               </div>

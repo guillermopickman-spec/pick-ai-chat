@@ -1,8 +1,8 @@
-import { Cable, Sliders, Rocket } from "lucide-react";
+import { Scan, Sliders, Rocket } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 
 const STEPS = [
-  { icon: Cable, key: "0" },
+  { icon: Scan, key: "0" },
   { icon: Sliders, key: "1" },
   { icon: Rocket, key: "2" },
 ];

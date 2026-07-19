@@ -1,31 +1,5 @@
 import { useLanguage } from "../lib/LanguageProvider";
-
-const PICK = [
-  "██████╗ ██╗ ██████╗██╗  ██╗",
-  "██╔══██╗██║██╔════╝██║ ██╔╝",
-  "██████╔╝██║██║     █████╔╝ ",
-  "██╔═══╝ ██║██║     ██╔═██╗ ",
-  "██║     ██║╚██████╗██║  ██╗",
-  "╚═╝     ╚═╝ ╚═════╝╚═╝  ╚═╝",
-];
-
-const AI = [
-  " █████╗ ██",
-  "██╔══██╗██",
-  "███████║██",
-  "██╔══██║██",
-  "██║  ██║██",
-  "╚═╝  ╚═╝╚═",
-];
-
-const CHAT = [
-  "╗ ██████╗██╗  ██╗ █████╗ ████████╗",
-  "║██╔════╝██║  ██╔██╔══██╗╚══██╔══╝",
-  "║██║     ███████╝███████║   ██║   ",
-  "║██║     ██╔══██╗██╔══██║   ██║   ",
-  "║╚██████╗██║  ██╗██║  ██║   ██║   ",
-  "╝ ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝   ╚═╝   ",
-];
+import { Chatbot } from "./Chatbot";
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -35,7 +9,7 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden px-4 py-24">
+    <section className="relative min-h-[90vh] flex flex-col overflow-hidden px-4 py-12 sm:py-16 lg:py-20">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
@@ -53,66 +27,70 @@ export function Hero() {
         }}
       />
 
-      <div className="relative z-10 flex w-full max-w-6xl flex-col items-center text-center fade-in-up">
-        <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-xs font-mono text-muted-foreground backdrop-blur">
-          <span className="h-1.5 w-1.5 rounded-full bg-terminal shadow-[0_0_8px_var(--terminal)]" />
-          {t("hero.badge")}
-        </div>
+      <div className="relative z-10 mx-auto flex w-full max-w-7xl flex-1 flex-col items-center gap-8 lg:flex-row lg:items-center">
+        {/* Left: Hero text */}
+        <div className="flex w-full max-w-2xl flex-col items-center text-center lg:items-start lg:text-left lg:pr-8 fade-in-up">
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-border bg-card/60 px-4 py-1.5 text-xs font-mono text-muted-foreground backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-terminal shadow-[0_0_8px_var(--terminal)]" />
+            {t("hero.badge")}
+          </div>
 
-        <div className="mb-8 flex items-center justify-center">
-          <div className="mx-auto h-48 w-48 overflow-hidden rounded-full sm:h-56 sm:w-56 md:h-72 md:w-72 drop-shadow-[0_0_30px_rgba(217,70,239,0.4)]">
-            <img
-              src="/logo/logo-only-400.webp"
-              alt="PickAIChat"
-              width={288}
-              height={288}
-              className="h-full w-full object-cover"
-              loading="eager"
-            />
+          <div className="mb-6 flex items-center justify-center lg:hidden">
+            <div className="mx-auto h-32 w-32 overflow-hidden rounded-full sm:h-40 sm:w-40 drop-shadow-[0_0_30px_rgba(217,70,239,0.4)]">
+              <img
+                src="/logo/logo-only-400.webp"
+                alt="PickAIChat"
+                width={160}
+                height={160}
+                className="h-full w-full object-cover"
+                loading="eager"
+              />
+            </div>
+          </div>
+
+          <img
+            src="/logo/LOGO-NAME.png"
+            alt="PickAIChat"
+            className="mx-auto max-w-[200px] sm:max-w-[260px] lg:mx-0 h-auto drop-shadow-[0_0_30px_rgba(217,70,239,0.4)]"
+            loading="eager"
+          />
+
+          <h1 className="sr-only">{t("hero.title")}</h1>
+
+          <p className="mt-6 max-w-2xl text-lg font-medium text-foreground sm:text-xl">
+            {t("hero.subtitle", t("hero.subtitle.highlight"))}
+          </p>
+          <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
+            {t("hero.description")}
+          </p>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <button
+              onClick={() => scrollTo("chatbot")}
+              className="group inline-flex items-center justify-center rounded-lg bg-magenta px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 hover:shadow-[0_0_32px_-4px_var(--magenta-glow)]"
+            >
+              {t("hero.cta.try")}
+              <span className="ml-2 transition group-hover:translate-x-0.5">→</span>
+            </button>
+            <button
+              onClick={() => scrollTo("pricing")}
+              className="inline-flex items-center justify-center rounded-lg border border-border bg-card/60 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur transition hover:border-magenta/60 hover:text-magenta"
+            >
+              {t("hero.cta.pricing")}
+            </button>
           </div>
         </div>
 
-        <pre
-          className="text-glow-magenta font-mono leading-[1.2] tracking-tight whitespace-pre text-left inline-block"
-          style={{
-            fontSize: "clamp(0.55rem, 2.2vw, 1.1rem)",
-            fontFamily:
-              '"JetBrains Mono Variable", "JetBrains Mono", "Consolas", "Menlo", "Monaco", "Droid Sans Mono", "Courier New", monospace',
-          }}
-          aria-label="PickAIChat"
-        >
-          {PICK.map((_, i) => (
-            <div key={i}>
-              <span className="text-[#e2a8f0]">{PICK[i]}</span>
-              <span className="text-magenta">{AI[i]}</span>
-              <span className="text-[#e2a8f0]">{CHAT[i]}</span>
-            </div>
-          ))}
-        </pre>
-
-        <h1 className="sr-only">{t("hero.title")}</h1>
-
-        <p className="mt-10 max-w-2xl text-lg font-medium text-foreground sm:text-xl">
-          {t("hero.subtitle", t("hero.subtitle.highlight"))}
-        </p>
-        <p className="mt-3 max-w-xl text-sm text-muted-foreground sm:text-base">
-          {t("hero.description")}
-        </p>
-
-        <div className="mt-10 flex flex-col gap-3 sm:flex-row">
-          <button
-            onClick={() => scrollTo("chatbot")}
-            className="group inline-flex items-center justify-center rounded-lg bg-magenta px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 hover:shadow-[0_0_32px_-4px_var(--magenta-glow)]"
-          >
-            {t("hero.cta.try")}
-            <span className="ml-2 transition group-hover:translate-x-0.5">→</span>
-          </button>
-          <button
-            onClick={() => scrollTo("pricing")}
-            className="inline-flex items-center justify-center rounded-lg border border-border bg-card/60 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur transition hover:border-magenta/60 hover:text-magenta"
-          >
-            {t("hero.cta.pricing")}
-          </button>
+        {/* Right: Chatbot demo on desktop */}
+        <div className="hidden w-full max-w-lg lg:block fade-in-up [animation-delay:200ms]">
+          <div className="relative">
+            <div
+              aria-hidden
+              className="absolute -inset-4 rounded-2xl opacity-30 blur-xl"
+              style={{ background: "var(--magenta)" }}
+            />
+            <Chatbot compact />
+          </div>
         </div>
       </div>
     </section>

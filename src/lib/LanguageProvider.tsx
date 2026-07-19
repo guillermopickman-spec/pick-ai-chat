@@ -9,8 +9,32 @@ interface LanguageContextType {
 
 const LanguageContext = createContext<LanguageContextType | null>(null);
 
+function detectLanguage(): Lang {
+  if (typeof window === "undefined") return "es";
+  try {
+    // Check localStorage first
+    const stored = window.localStorage.getItem("pickaichat.lang");
+    if (stored === "es" || stored === "en") return stored as Lang;
+    // Detect browser language
+    const browserLang = navigator.language || navigator.languages?.[0] || "";
+    if (browserLang.startsWith("es")) return "es";
+    return "en";
+  } catch {
+    return "en";
+  }
+}
+
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLang] = useState<Lang>("es");
+  const [lang, setLangState] = useState<Lang>(detectLanguage);
+
+  const setLang = (next: Lang) => {
+    setLangState(next);
+    try {
+      window.localStorage.setItem("pickaichat.lang", next);
+    } catch {
+      /* ignore */
+    }
+  };
 
   const value: LanguageContextType = {
     lang,

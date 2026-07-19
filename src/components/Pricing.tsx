@@ -1,10 +1,11 @@
 import { Check } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
+import { translations } from "../lib/i18n";
 
 const PLANS = ["0", "1", "2"];
 
 export function Pricing() {
-  const { t } = useLanguage();
+  const { t, lang } = useLanguage();
 
   return (
     <section id="pricing" className="relative px-4 py-24 sm:py-32">
@@ -23,7 +24,7 @@ export function Pricing() {
 
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {PLANS.map((key) => {
-            const features = t(`pricing.${key}.features`) as unknown as string[];
+            const features = translations[lang][`pricing.${key}.features`] as string[];
             return (
               <div
                 key={key}
@@ -35,8 +36,8 @@ export function Pricing() {
                 }
               >
                 {key === "1" && (
-                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-magenta px-4 py-1 text-xs font-semibold uppercase tracking-wider text-primary-foreground">
-                    Más popular
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-magenta px-4 py-1 text-xs font-semibold uppercase tracking-wider text-primary-foreground whitespace-nowrap">
+                    {t("pricing.badge")}
                   </div>
                 )}
 

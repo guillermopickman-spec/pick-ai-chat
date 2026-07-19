@@ -12,72 +12,85 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "nav.cta": "Empezar",
 
     /* Hero */
-    "hero.badge": "v1.0 · funcionando 24/7 · configuración en 24h",
-    "hero.title": "PickAIChat — Asistente AI para tu negocio",
+    "hero.badge": "⚡ El agente AI más económico del mercado · configurable en 24h",
+    "hero.title": "PickAIChat — El Hub de Agentes AI para tu Negocio",
     "hero.subtitle":
-      "Tu negocio responde al instante en WhatsApp — $1 AI que entiende a tus clientes.",
-    "hero.subtitle.highlight": "con AI que entiende a tus clientes.",
+      "Un agente o varios. Escala cuando quieras. Automatiza WhatsApp, email, CRM y más — $1.",
+    "hero.subtitle.highlight": "al precio más bajo del mercado.",
     "hero.description":
-      "PickAIChat conecta con WhatsApp, web y email para responder automáticamente las preguntas de tus clientes 24/7. Sin instalar nada, sin equipos grandes.",
-    "hero.cta.try": "Probar el Chatbot",
+      "PickAIChat es un hub de agentes AI que automatiza tu negocio 24/7: responde en WhatsApp, gestiona pedidos, sincroniza con tu CRM, envía emails y mucho más. Todo desde un solo panel, por menos de lo que cuesta un café al día.",
+    "hero.cta.try": "Probar el Agente",
     "hero.cta.pricing": "Ver Precios",
+    "hero.cta.whatsapp": "Conectar con WhatsApp",
 
     /* Features */
-    "features.section": "// Lo que hace",
-    "features.heading": "Tu cliente pregunta, PickAIChat responde",
+    "features.section": "// Qué hace",
+    "features.heading": "Un agente que hace más que hablar",
     "features.subtitle":
-      "No es un chatbot de reglas fijas. Es una AI entrenada con TU información, que habla con el tono de TU negocio y nunca deja un mensaje sin responder.",
-    "features.0.title": "WhatsApp + Web + Email",
+      "No es un chatbot. Es un hub de agentes AI que actúan por ti: responden, gestionan, sincronizan y automatizan tu negocio al completo.",
+    "features.0.title": "Agente WhatsApp 24/7",
     "features.0.body":
-      "Un solo asistente AI que funciona en WhatsApp, en tu página web y por email. Tus clientes te escriben donde prefieran, el motor responde igual.",
-    "features.1.title": "Responde como tu negocio",
+      "Tu cliente escribe por WhatsApp y el agente responde al instante: precios, horarios, disponibilidad, reservas. Mientras tú duermes, él trabaja.",
+    "features.1.title": "Multi-herramienta integrado",
     "features.1.body":
-      "Cárgale tus precios, horarios, catálogo y FAQ. La AI responde con tu información real, no inventa. Sin entrenar, sin configurar.",
-    "features.2.title": "Disponible 24/7",
+      "Conecta con Google Calendar, HubSpot, Gmail, Notion y más. Un solo agente que sincroniza tu CRM, gestiona pedidos y envía emails automáticamente.",
+    "features.2.title": "Escalable: de 1 a N agentes",
     "features.2.body":
-      "Mientras duermes, tu asistente sigue respondiendo. Preguntas frecuentes, disponibilidad, precios — todo al instante, siempre.",
-    "features.3.title": "Escala contigo",
+      "Empieza con un agente para WhatsApp. Cuando crezcas, añade más agentes: email marketing, atención al cliente, gestión de inventario. Sin límites.",
+    "features.3.title": "El precio más bajo del mercado",
     "features.3.body":
-      "De 10 a 10.000 mensajes al día. Añade canales, integra tu CRM, conecta con tu equipo humano cuando haga falta.",
-    "features.4.title": "Sin ataduras",
-    "features.4.body":
-      "No pagas por agente, no pagas por mensaje. Funciona con tu propio hardware o en la nube. Tú controlas todo.",
-    "features.5.title": "Configuración en 24 horas",
-    "features.5.body":
-      "Te damos acceso, escaneas un QR con tu móvil y el asistente ya está respondiendo. En un día laboral, no en meses.",
+      "Por menos de 30€ al mes tienes un agente AI completo. Sin costes por mensaje, sin tarifas ocultas, sin pagar por agente adicional. Imbatible.",
 
     /* Social Proof */
     "social.section": "// Quiénes confían",
-    "social.heading": "Negocios como el tuyo ya responden con AI",
+    "social.heading": "Negocios como el tuyo ya automatizan con AI",
     "social.subtitle":
       "Próximamente: casos reales de clientes usando PickAIChat en sus negocios.",
+    "social.0.name": "Carlos Mendoza",
+    "social.0.role": "Dueño",
+    "social.0.company": "Ferretería Mendoza",
+    "social.0.quote":
+      "Desde que tengo el agente en WhatsApp, no he perdido una sola venta fuera de horario. Responde como si estuviera yo.",
+    "social.0.initials": "CM",
+    "social.1.name": "Laura García",
+    "social.1.role": "CEO",
+    "social.1.company": "Clínica DentalCare",
+    "social.1.quote":
+      "El agente gestiona las citas por WhatsApp automáticamente. Mis pacientes contentos y yo sin estrés.",
+    "social.1.initials": "LG",
+    "social.2.name": "Miguel Ángel",
+    "social.2.role": "Fundador",
+    "social.2.company": "Pizzería Da Miguel",
+    "social.2.quote":
+      "Pedidos por WhatsApp, sincronizados con mi cocina, todo automático. El agente me ha cambiado el negocio.",
+    "social.2.initials": "MA",
 
     /* How It Works */
     "howitworks.section": "// Cómo funciona",
-    "howitworks.heading": "De escanear un QR a tener tu asistente en 24 horas",
+    "howitworks.heading": "De escanear un QR a tener tu agente en 24 horas",
     "howitworks.subtitle":
       "Sin instalaciones complicadas, sin contratar informáticos, sin leer manuales. Configuras PickAIChat como configuras el WiFi de tu casa.",
     "howitworks.0.title": "Escanear QR",
     "howitworks.0.body":
-      "Te damos acceso al sistema. Escaneas un código QR con tu móvil y conectas el número de WhatsApp de tu negocio. No necesitas instalar nada.",
-    "howitworks.1.title": "Alimentar la AI",
+      "Te damos acceso al sistema. Escaneas un código QR con tu móvil y conectas el número de WhatsApp de tu negocio. El agente ya está listo.",
+    "howitworks.1.title": "Configurar tu agente",
     "howitworks.1.body":
-      "Subes tus precios, horarios, productos y FAQ. La AI aprende de tu información y empieza a responder como lo harías tú.",
+      "Subes tus precios, horarios, productos y FAQ. El agente aprende de tu información y empieza a actuar como lo harías tú.",
     "howitworks.2.title": "A funcionar",
     "howitworks.2.body":
-      "En 24 horas tu asistente ya está respondiendo clientes. Tú recibes un resumen diario de lo que ha pasado. Sin complicaciones.",
+      "En 24 horas tu agente ya está trabajando. Responde clientes, gestiona pedidos, sincroniza datos. Tú recibes un resumen diario de todo.",
 
     /* Pricing */
     "pricing.section": "// Precios",
     "pricing.heading": "Planes para cada negocio",
     "pricing.subtitle":
-      "Sin costes ocultos, sin tarifas por mensaje. Elige el plan que mejor se adapte a tu negocio y empieza hoy.",
+      "Sin costes ocultos, sin tarifas por mensaje, sin pagar por agente. Elige el plan que mejor se adapte a tu negocio y empieza hoy.",
     "pricing.0.name": "Individual",
     "pricing.0.price": "29 €",
     "pricing.0.period": "/mes",
-    "pricing.0.desc": "Para el autónomo o pequeño comercio que quiere responder 24/7 sin esfuerzo.",
+    "pricing.0.desc": "Para el autónomo o pequeño comercio que quiere un agente AI 24/7 al mejor precio.",
     "pricing.0.features": [
-      "1 número de WhatsApp",
+      "1 agente WhatsApp",
       "Chat web integrado",
       "Respuestas AI personalizadas",
       "Resumen diario de actividad",
@@ -85,12 +98,12 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     ],
     "pricing.0.cta": "Empezar",
     "pricing.1.name": "Profesional",
-    "pricing.1.price": "99 €",
+    "pricing.1.price": "49 €",
     "pricing.1.period": "/mes",
-    "pricing.1.desc": "Para el negocio en crecimiento que necesita más canales y control.",
+    "pricing.1.desc": "Para el negocio en crecimiento que necesita más agentes y canales.",
     "pricing.1.features": [
+      "Hasta 3 agentes",
       "WhatsApp + Web + Email",
-      "Hasta 3 números de WhatsApp",
       "AI entrenada con tus datos",
       "Derivación a humano",
       "Panel de control",
@@ -100,9 +113,9 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.2.name": "Enterprise",
     "pricing.2.price": "Personalizado",
     "pricing.2.period": "",
-    "pricing.2.desc": "Para empresas con necesidades específicas. Integración CRM, API, equipo dedicado.",
+    "pricing.2.desc": "Para empresas con necesidades específicas. Agentes ilimitados, integración CRM, API, equipo dedicado.",
     "pricing.2.features": [
-      "Todo lo del plan Profesional",
+      "Agentes ilimitados",
       "CRM y ERP integrados",
       "API personalizada",
       "Infraestructura dedicada",
@@ -110,12 +123,13 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Formación del equipo",
     ],
     "pricing.2.cta": "Contactar",
+    "pricing.badge": "🏆 Mejor precio del mercado",
 
     /* Chatbot Demo */
     "chatbot.section": "// Demo en vivo",
-    "chatbot.heading": "Prueba el asistente",
+    "chatbot.heading": "Prueba el agente en acción",
     "chatbot.subtitle":
-      "Escribe cualquier pregunta que haría un cliente y mira cómo responde PickAIChat. Puedes cambiar de canal para ver cómo funciona en WhatsApp, web chat y Telegram.",
+      "Escribe cualquier pregunta que haría un cliente y mira cómo responde PickAIChat. Cambia de canal para ver cómo funciona en WhatsApp, web chat y Telegram.",
     "chatbot.config": "Configurar",
     "chatbot.channel": "canal:",
     "chatbot.thinking": "pickaichat está pensando",
@@ -126,33 +140,33 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "faq.section": "// FAQ",
     "faq.heading": "¿Dudas? Resueltas.",
     "faq.subtitle": "Todo lo que necesitas saber antes de probar PickAIChat en tu negocio.",
-    "faq.0.q": "¿Qué canales puedo conectar?",
+    "faq.0.q": "¿Qué es un agente AI? ¿Es lo mismo que un chatbot?",
     "faq.0.a":
-      "WhatsApp, web chat y email. Un solo asistente responde en todos lados. Si tu cliente te escribe por WhatsApp, le responde por WhatsApp. Si usa el chat de tu web, lo mismo.",
-    "faq.1.q": "¿Tengo que instalar algo en mi ordenador?",
+      "No. Un chatbot solo responde preguntas. Un agente AI actúa: puede gestionar pedidos, modificar reservas, sincronizar tu CRM, enviar emails y mucho más. PickAIChat es un hub de agentes: empiezas con uno y añades más cuando los necesites.",
+    "faq.1.q": "¿Qué canales puede usar mi agente?",
     "faq.1.a":
-      "No. Solo escaneas un código QR con tu móvil para conectar tu WhatsApp. El resto funciona solo. Nosotros nos encargamos de que el sistema esté siempre activo.",
-    "faq.2.q": "¿La AI alucina o inventa respuestas?",
+      "WhatsApp, web chat y email. Un solo agente responde en todos lados. Si tu cliente te escribe por WhatsApp, le responde por WhatsApp. Si usa el chat de tu web, lo mismo. Y si necesitas más canales, añades otro agente.",
+    "faq.2.q": "¿Tengo que instalar algo en mi ordenador?",
     "faq.2.a":
-      "No. La AI solo responde con la información que tú le das: tus precios, horarios, productos y FAQ. Si no sabe algo, te lo deriva a ti en lugar de inventar.",
-    "faq.3.q": "¿Puedo seguir usando WhatsApp normal en mi móvil?",
+      "No. Solo escaneas un código QR con tu móvil para conectar tu WhatsApp. El resto funciona solo. Nosotros nos encargamos de que el sistema esté siempre activo.",
+    "faq.3.q": "¿La AI alucina o inventa respuestas?",
     "faq.3.a":
-      "Sí. Tu WhatsApp sigue funcionando exactamente igual. PickAIChat se conecta como un 'dispositivo vinculado' adicional, igual que WhatsApp Web. No interfiere con tu uso normal.",
-    "faq.4.q": "¿Qué pasa si la AI no sabe responder?",
+      "No. La AI solo responde con la información que tú le das: tus precios, horarios, productos y FAQ. Si no sabe algo, te lo deriva a ti en lugar de inventar.",
+    "faq.4.q": "¿Puedo tener varios agentes trabajando a la vez?",
     "faq.4.a":
-      "Te reenvía la conversación a ti con todo el contexto. Tú respondes y la AI aprende para la próxima. También puedes configurar horarios en los que solo respondes tú.",
+      "Sí. PickAIChat es un hub de agentes escalable. Puedes tener un agente para WhatsApp, otro para email marketing, otro para gestión de pedidos… Todos trabajan juntos desde un solo panel. Contrata solo los que necesites.",
     "faq.5.q": "¿Cuánto cuesta mantenerlo?",
     "faq.5.a":
-      "El plan mensual incluye hosting, mantenimiento y actualizaciones. No hay costes ocultos ni sorpresas. Si quieres probar antes de comprometerte, tenemos una demo gratuita.",
+      "El plan mensual incluye hosting, mantenimiento y actualizaciones. No hay costes ocultos ni sorpresas. Somos el agente AI más económico del mercado, por menos de 30€ al mes.",
 
     /* Contact */
     "contact.section": "// Empieza ahora",
-    "contact.heading": "¿Listo para que tu negocio responda solo?",
+    "contact.heading": "¿Listo para que tu negocio trabaje solo?",
     "contact.subtitle":
       "Cuéntanos qué necesitas y te enviamos un plan personalizado en menos de 24 horas. Sin compromiso, sin tarjeta de crédito.",
     "contact.bullet1": "Sin tarjeta de crédito para empezar",
     "contact.bullet2": "Configuración en 24 horas",
-    "contact.bullet3": "Soporte en español, de Sevilla para el mundo",
+    "contact.bullet3": "Agente AI desde 29€/mes — el mejor precio del mercado",
     "contact.form.name": "Nombre",
     "contact.form.namePlaceholder": "Tu nombre",
     "contact.form.email": "Email",
@@ -185,14 +199,14 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "footer.made": "© 2026 PickAIChat. Hecho en Sevilla.",
 
     /* Meta */
-    "meta.title": "PickAIChat — Asistente AI para WhatsApp de tu negocio",
+    "meta.title": "PickAIChat — Hub de Agentes AI para WhatsApp y tu negocio",
     "meta.description":
-      "Asistente AI para WhatsApp, web y email. Responde automáticamente a tus clientes 24/7 desde un solo motor. Configuración en 24 horas.",
-    "meta.ogTitle": "PickAIChat — Asistente AI para tu negocio",
+      "Hub de agentes AI para WhatsApp, web y email. Automatiza tu negocio 24/7 con el agente multi-herramienta más económico del mercado. Configuración en 24 horas.",
+    "meta.ogTitle": "PickAIChat — Hub de Agentes AI para tu Negocio",
     "meta.ogDescription":
-      "Tu negocio responde al instante en WhatsApp. AI que entiende a tus clientes.",
+      "Tu negocio automatizado al instante. El agente AI más económico del mercado.",
     "meta.twitterDescription":
-      "Tu negocio responde al instante en WhatsApp con AI que entiende a tus clientes.",
+      "Tu negocio automatizado al instante con el agente AI más económico del mercado.",
   },
 
   en: {
@@ -204,71 +218,84 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "nav.cta": "Get Started",
 
     /* Hero */
-    "hero.badge": "v1.0 · running 24/7 · setup in 24h",
-    "hero.title": "PickAIChat — AI Assistant for your Business",
+    "hero.badge": "⚡ The most affordable AI agent on the market · setup in 24h",
+    "hero.title": "PickAIChat — The AI Agent Hub for Your Business",
     "hero.subtitle":
-      "Your business replies instantly on WhatsApp — $1 that understands your customers.",
-    "hero.subtitle.highlight": "with AI that understands your customers.",
+      "One agent or many. Scale as you grow. Automate WhatsApp, email, CRM and more — $1.",
+    "hero.subtitle.highlight": "at the lowest price on the market.",
     "hero.description":
-      "PickAIChat connects WhatsApp, web, and email to automatically answer your customers' questions 24/7. No installation, no large teams.",
-    "hero.cta.try": "Try the Chatbot",
+      "PickAIChat is an AI agent hub that automates your business 24/7: replies on WhatsApp, manages orders, syncs with your CRM, sends emails, and more. All from a single panel, for less than the price of a coffee a day.",
+    "hero.cta.try": "Try the Agent",
     "hero.cta.pricing": "See Pricing",
+    "hero.cta.whatsapp": "Connect with WhatsApp",
 
     /* Features */
     "features.section": "// What it does",
-    "features.heading": "Your customer asks, PickAIChat answers",
+    "features.heading": "An agent that does more than talk",
     "features.subtitle":
-      "Not a rigid rule-based chatbot. It's AI trained on YOUR information, speaking with YOUR business tone, and never leaving a message unanswered.",
-    "features.0.title": "WhatsApp + Web + Email",
+      "Not a chatbot. It's an AI agent hub that acts for you: replies, manages, syncs, and automates your entire business.",
+    "features.0.title": "24/7 WhatsApp Agent",
     "features.0.body":
-      "A single AI assistant that works on WhatsApp, your website, and email. Your customers write wherever they prefer, the engine answers the same.",
-    "features.1.title": "Answers like your business",
+      "Your customer writes on WhatsApp and the agent replies instantly: prices, hours, availability, bookings. While you sleep, it works.",
+    "features.1.title": "Multi-tool Integrated",
     "features.1.body":
-      "Upload your prices, hours, catalog and FAQ. The AI answers with your real information — no hallucinations. No training, no setup.",
-    "features.2.title": "Available 24/7",
+      "Connects with Google Calendar, HubSpot, Gmail, Notion and more. A single agent that syncs your CRM, manages orders, and sends emails automatically.",
+    "features.2.title": "Scalable: 1 to N agents",
     "features.2.body":
-      "While you sleep, your assistant keeps answering. FAQs, availability, pricing — instantly, always.",
-    "features.3.title": "Scales with you",
+      "Start with one agent for WhatsApp. As you grow, add more agents: email marketing, customer support, inventory management. No limits.",
+    "features.3.title": "Lowest price on the market",
     "features.3.body":
-      "From 10 to 10,000 messages per day. Add channels, integrate your CRM, connect with your human team when needed.",
-    "features.4.title": "No lock-in",
-    "features.4.body":
-      "No per-agent fees, no per-message charges. Runs on your own hardware or in the cloud. You stay in control.",
-    "features.5.title": "Setup in 24 hours",
-    "features.5.body":
-      "We give you access, scan a QR with your phone, and your assistant is already answering. In a business day, not months.",
+      "For less than €30/month you get a full AI agent. No per-message costs, no hidden fees, no paying per extra agent. Unbeatable.",
 
     /* Social Proof */
     "social.section": "// Trusted by",
-    "social.heading": "Businesses like yours already reply with AI",
+    "social.heading": "Businesses like yours already automate with AI",
     "social.subtitle": "Coming soon: real customer stories using PickAIChat in their businesses.",
+    "social.0.name": "Carlos Mendoza",
+    "social.0.role": "Owner",
+    "social.0.company": "Mendoza Hardware Store",
+    "social.0.quote":
+      "Since I got the agent on WhatsApp, I haven't lost a single sale after hours. It answers just like I would.",
+    "social.0.initials": "CM",
+    "social.1.name": "Laura García",
+    "social.1.role": "CEO",
+    "social.1.company": "DentalCare Clinic",
+    "social.1.quote":
+      "The agent handles appointment booking via WhatsApp automatically. Happy patients and no stress for me.",
+    "social.1.initials": "LG",
+    "social.2.name": "Miguel Ángel",
+    "social.2.role": "Founder",
+    "social.2.company": "Da Miguel Pizzeria",
+    "social.2.quote":
+      "Orders via WhatsApp, synced to my kitchen, all automatic. The agent has transformed my business.",
+    "social.2.initials": "MA",
 
     /* How It Works */
     "howitworks.section": "// How it works",
-    "howitworks.heading": "From scanning a QR to having your assistant in 24 hours",
+    "howitworks.heading": "From scanning a QR to having your agent in 24 hours",
     "howitworks.subtitle":
       "No complicated installations, no hiring IT people, no reading manuals. You set up PickAIChat like you set up your home WiFi.",
     "howitworks.0.title": "Scan QR",
     "howitworks.0.body":
-      "We give you system access. Scan a QR code with your phone and connect your business WhatsApp number. No installation needed.",
-    "howitworks.1.title": "Feed the AI",
+      "We give you system access. Scan a QR code with your phone and connect your business WhatsApp number. Your agent is ready.",
+    "howitworks.1.title": "Configure your agent",
     "howitworks.1.body":
-      "Upload your prices, hours, products and FAQ. The AI learns from your information and starts answering just like you would.",
+      "Upload your prices, hours, products and FAQ. The agent learns from your information and starts acting just like you would.",
     "howitworks.2.title": "Go live",
     "howitworks.2.body":
-      "In 24 hours your assistant is already answering customers. You receive a daily summary of what happened. No complications.",
+      "In 24 hours your agent is already working. Replying to customers, managing orders, syncing data. You receive a daily summary of everything.",
 
     /* Pricing */
     "pricing.section": "// Pricing",
     "pricing.heading": "Plans for every business",
     "pricing.subtitle":
-      "No hidden costs, no per-message fees. Choose the plan that best fits your business and start today.",
+      "No hidden costs, no per-message fees, no paying per agent. Choose the plan that best fits your business and start today.",
     "pricing.0.name": "Starter",
     "pricing.0.price": "€29",
     "pricing.0.period": "/mo",
-    "pricing.0.desc": "For freelancers and small shops that want to reply 24/7 without effort.",
+    "pricing.0.desc": "For freelancers and small shops that want an AI agent 24/7 at the best price.",
     "pricing.0.features": [
-      "1 WhatsApp number",
+      "1 WhatsApp agent",
       "Integrated web chat",
       "Custom AI responses",
       "Daily activity summary",
@@ -276,12 +303,12 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     ],
     "pricing.0.cta": "Get Started",
     "pricing.1.name": "Professional",
-    "pricing.1.price": "€99",
+    "pricing.1.price": "€49",
     "pricing.1.period": "/mo",
-    "pricing.1.desc": "For growing businesses that need more channels and control.",
+    "pricing.1.desc": "For growing businesses that need more agents and channels.",
     "pricing.1.features": [
+      "Up to 3 agents",
       "WhatsApp + Web + Email",
-      "Up to 3 WhatsApp numbers",
       "AI trained on your data",
       "Human handoff",
       "Dashboard",
@@ -291,9 +318,9 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.2.name": "Enterprise",
     "pricing.2.price": "Custom",
     "pricing.2.period": "",
-    "pricing.2.desc": "For companies with specific needs. CRM integration, API, dedicated team.",
+    "pricing.2.desc": "For companies with specific needs. Unlimited agents, CRM integration, API, dedicated team.",
     "pricing.2.features": [
-      "Everything in Professional",
+      "Unlimited agents",
       "CRM and ERP integration",
       "Custom API",
       "Dedicated infrastructure",
@@ -301,10 +328,11 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Team training",
     ],
     "pricing.2.cta": "Contact Us",
+    "pricing.badge": "🏆 Best price on the market",
 
     /* Chatbot Demo */
     "chatbot.section": "// Live Demo",
-    "chatbot.heading": "Try the assistant",
+    "chatbot.heading": "Try the agent in action",
     "chatbot.subtitle":
       "Type any question a customer would ask and see how PickAIChat responds. Switch channels to see it work on WhatsApp, web chat, and Telegram.",
     "chatbot.config": "Configure",
@@ -317,33 +345,33 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "faq.section": "// FAQ",
     "faq.heading": "Questions? Answered.",
     "faq.subtitle": "Everything you need to know before trying PickAIChat for your business.",
-    "faq.0.q": "What channels can I connect?",
+    "faq.0.q": "What is an AI agent? Is it the same as a chatbot?",
     "faq.0.a":
-      "WhatsApp, web chat, and email. A single assistant answers everywhere. If your customer writes on WhatsApp, it replies on WhatsApp. If they use your website chat, same thing.",
-    "faq.1.q": "Do I need to install anything on my computer?",
+      "No. A chatbot only answers questions. An AI agent acts: it can manage orders, modify bookings, sync your CRM, send emails, and much more. PickAIChat is an agent hub: start with one and add more as you need them.",
+    "faq.1.q": "What channels can my agent use?",
     "faq.1.a":
-      "No. Just scan a QR code with your phone to connect your WhatsApp. Everything else works on its own. We keep the system running 24/7.",
-    "faq.2.q": "Does the AI hallucinate or make things up?",
+      "WhatsApp, web chat, and email. A single agent answers everywhere. If your customer writes on WhatsApp, it replies on WhatsApp. If they use your website chat, same thing. Need more channels? Add another agent.",
+    "faq.2.q": "Do I need to install anything on my computer?",
     "faq.2.a":
-      "No. The AI only answers using the information you provide: your prices, hours, products, and FAQ. If it doesn't know something, it forwards it to you instead of inventing.",
-    "faq.3.q": "Can I still use WhatsApp normally on my phone?",
+      "No. Just scan a QR code with your phone to connect your WhatsApp. Everything else works on its own. We keep the system running 24/7.",
+    "faq.3.q": "Does the AI hallucinate or make things up?",
     "faq.3.a":
-      "Yes. Your WhatsApp works exactly as before. PickAIChat connects as an additional 'linked device', just like WhatsApp Web. It doesn't interfere with your normal use.",
-    "faq.4.q": "What if the AI doesn't know how to answer?",
+      "No. The AI only answers using the information you provide: your prices, hours, products, and FAQ. If it doesn't know something, it forwards it to you instead of inventing.",
+    "faq.4.q": "Can I have multiple agents working at the same time?",
     "faq.4.a":
-      "It forwards the conversation to you with full context. You reply and the AI learns for next time. You can also set hours when only you respond.",
+      "Yes. PickAIChat is a scalable agent hub. You can have one agent for WhatsApp, another for email marketing, another for order management… They all work together from a single panel. Only pay for what you need.",
     "faq.5.q": "How much does it cost to maintain?",
     "faq.5.a":
-      "The monthly plan includes hosting, maintenance, and updates. No hidden costs or surprises. If you want to try before committing, we have a free demo.",
+      "The monthly plan includes hosting, maintenance, and updates. No hidden costs or surprises. We're the most affordable AI agent on the market — less than €30/month.",
 
     /* Contact */
     "contact.section": "// Start now",
-    "contact.heading": "Ready to let your business reply on its own?",
+    "contact.heading": "Ready to let your business run itself?",
     "contact.subtitle":
       "Tell us what you need and we'll send you a custom plan in under 24 hours. No commitment, no credit card.",
     "contact.bullet1": "No credit card to start",
     "contact.bullet2": "Setup in 24 hours",
-    "contact.bullet3": "Support in English, from Seville to the world",
+    "contact.bullet3": "AI agent from €29/month — the best price on the market",
     "contact.form.name": "Name",
     "contact.form.namePlaceholder": "Your name",
     "contact.form.email": "Email",
@@ -376,18 +404,20 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "footer.made": "© 2026 PickAIChat. Made in Seville.",
 
     /* Meta */
-    "meta.title": "PickAIChat — AI WhatsApp Assistant for your Business",
+    "meta.title": "PickAIChat — AI Agent Hub for WhatsApp & Your Business",
     "meta.description":
-      "AI assistant for WhatsApp, web, and email. Automatically answers your customers 24/7 from a single engine. Setup in 24 hours.",
-    "meta.ogTitle": "PickAIChat — AI Assistant for your Business",
-    "meta.ogDescription": "Your business replies instantly on WhatsApp. AI that understands your customers.",
+      "AI agent hub for WhatsApp, web, and email. Automate your business 24/7 with the most affordable multi-tool agent on the market. Setup in 24 hours.",
+    "meta.ogTitle": "PickAIChat — AI Agent Hub for Your Business",
+    "meta.ogDescription":
+      "Your business automated instantly. The most affordable AI agent on the market.",
     "meta.twitterDescription":
-      "Your business replies instantly on WhatsApp with AI that understands your customers.",
+      "Your business automated instantly with the most affordable AI agent on the market.",
   },
 };
 
 export function t(lang: Lang, key: string, ...args: string[]): string {
-  let value = translations[lang]?.[key] ?? translations["es"][key] ?? key;
+  const raw = translations[lang]?.[key] ?? translations["es"][key] ?? key;
+  let value = typeof raw === "string" ? raw : key;
   for (let i = 0; i < args.length; i++) {
     value = value.replace(`$${i + 1}`, args[i]);
   }

@@ -1,4 +1,4 @@
-import { Cable, Brain, ShieldCheck, Layers, Shuffle, Rocket, type LucideIcon } from "lucide-react";
+import { MessageCircle, Puzzle, Layers, Sparkles, type LucideIcon } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 
 interface Feature {
@@ -7,12 +7,10 @@ interface Feature {
 }
 
 const FEATURES: Feature[] = [
-  { icon: Cable, key: "0" },
-  { icon: Brain, key: "1" },
-  { icon: ShieldCheck, key: "2" },
-  { icon: Layers, key: "3" },
-  { icon: Shuffle, key: "4" },
-  { icon: Rocket, key: "5" },
+  { icon: MessageCircle, key: "0" },
+  { icon: Puzzle, key: "1" },
+  { icon: Layers, key: "2" },
+  { icon: Sparkles, key: "3" },
 ];
 
 export function Features() {
@@ -33,7 +31,7 @@ export function Features() {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {FEATURES.map(({ icon: Icon, key }) => (
             <div
               key={key}

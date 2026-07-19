@@ -8,21 +8,20 @@ import { Pricing } from "@/components/Pricing";
 import { Chatbot } from "@/components/Chatbot";
 import { FAQ } from "@/components/FAQ";
 import { ContactSection } from "@/components/Contact";
-import { useLanguage } from "@/lib/LanguageProvider";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "PickAIChat — Asistente AI para WhatsApp de tu negocio" },
+      { title: "PickAIChat — Hub de Agentes AI para WhatsApp y tu negocio" },
       {
         name: "description",
         content:
-          "Asistente AI para WhatsApp, web y email. Responde automáticamente a tus clientes 24/7 desde un solo motor. Configuración en 24 horas.",
+          "Hub de agentes AI para WhatsApp, web y email. Automatiza tu negocio 24/7 con el agente multi-herramienta más económico del mercado. Configuración en 24 horas.",
       },
-      { property: "og:title", content: "PickAIChat — Asistente AI para tu negocio" },
+      { property: "og:title", content: "PickAIChat — Hub de Agentes AI para tu Negocio" },
       {
         property: "og:description",
-        content: "Tu negocio responde al instante en WhatsApp. AI que entiende a tus clientes.",
+        content: "Tu negocio automatizado al instante. El agente AI más económico del mercado.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/logo/logo-800x437.png" },
@@ -30,10 +29,10 @@ export const Route = createFileRoute("/")({
       { property: "og:image:height", content: "437" },
       { name: "twitter:card", content: "summary_large_image" },
       { name: "twitter:image", content: "/logo/logo-800x437.png" },
-      { name: "twitter:title", content: "PickAIChat — Asistente AI para tu negocio" },
+      { name: "twitter:title", content: "PickAIChat — Hub de Agentes AI para tu Negocio" },
       {
         name: "twitter:description",
-        content: "Tu negocio responde al instante en WhatsApp con AI que entiende a tus clientes.",
+        content: "Tu negocio automatizado al instante con el agente AI más económico del mercado.",
       },
     ],
     links: [
@@ -54,7 +53,10 @@ function LandingPage() {
         <Features />
         <SocialProof />
         <HowItWorks />
-        <Chatbot />
+        {/* Standalone chatbot — visible on mobile (hidden on desktop since it's already in Hero) */}
+        <div className="lg:hidden">
+          <Chatbot />
+        </div>
         <Pricing />
         <FAQ />
         <ContactSection />
