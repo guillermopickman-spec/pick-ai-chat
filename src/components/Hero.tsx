@@ -64,6 +64,10 @@ export function Hero() {
             {t("hero.description")}
           </p>
 
+          <p className="mt-6 text-lg font-semibold text-magenta italic tracking-wide">
+            {t("hero.motto")}
+          </p>
+
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
             <button
               onClick={() => scrollTo("chatbot")}

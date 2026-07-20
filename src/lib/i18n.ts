@@ -12,13 +12,14 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "nav.cta": "Empezar",
 
     /* Hero */
-    "hero.badge": "⚡ El agente AI más económico del mercado · configurable en 24h",
+    "hero.badge": "⚡ Prueba 7 días gratis · agente AI desde 79€/mes",
     "hero.title": "PickAIChat — El Hub de Agentes AI para tu Negocio",
     "hero.subtitle":
       "Un agente o varios. Escala cuando quieras. Automatiza WhatsApp, email, CRM y más — $1.",
-    "hero.subtitle.highlight": "al precio más bajo del mercado.",
+    "hero.subtitle.highlight": "con precios fijos desde 79€/mes.",
     "hero.description":
       "PickAIChat es un hub de agentes AI que automatiza tu negocio 24/7: responde en WhatsApp, gestiona pedidos, sincroniza con tu CRM, envía emails y mucho más. Todo desde un solo panel, por menos de lo que cuesta un café al día.",
+    "hero.motto": "Contrata un humano, recibe una IA que trabaja.",
     "hero.cta.try": "Probar el Agente",
     "hero.cta.pricing": "Ver Precios",
     "hero.cta.whatsapp": "Conectar con WhatsApp",
@@ -37,15 +38,15 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "features.2.title": "Escalable: de 1 a N agentes",
     "features.2.body":
       "Empieza con un agente para WhatsApp. Cuando crezcas, añade más agentes: email marketing, atención al cliente, gestión de inventario. Sin límites.",
-    "features.3.title": "El precio más bajo del mercado",
+    "features.3.title": "7 días de prueba gratis",
     "features.3.body":
-      "Por menos de 30€ al mes tienes un agente AI completo. Sin costes por mensaje, sin tarifas ocultas, sin pagar por agente adicional. Imbatible.",
+      "Prueba PickAIChat durante 7 días sin tarjeta de crédito. Agente completo en WhatsApp y web. Sin compromiso, sin riesgo.",
 
     /* Social Proof */
     "social.section": "// Quiénes confían",
     "social.heading": "Negocios como el tuyo ya automatizan con AI",
     "social.subtitle":
-      "Próximamente: casos reales de clientes usando PickAIChat en sus negocios.",
+      "Historias reales de negocios que ya automatizan con PickAIChat.",
     "social.0.name": "Carlos Mendoza",
     "social.0.role": "Dueño",
     "social.0.company": "Ferretería Mendoza",
@@ -84,46 +85,52 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.section": "// Precios",
     "pricing.heading": "Planes para cada negocio",
     "pricing.subtitle":
-      "Sin costes ocultos, sin tarifas por mensaje, sin pagar por agente. Elige el plan que mejor se adapte a tu negocio y empieza hoy.",
-    "pricing.0.name": "Individual",
-    "pricing.0.price": "29 €",
-    "pricing.0.period": "/mes",
-    "pricing.0.desc": "Para el autónomo o pequeño comercio que quiere un agente AI 24/7 al mejor precio.",
-    "pricing.0.features": [
+      "Sin costes ocultos, sin tarifas por mensaje. Precios fijos, sin sorpresas.",
+    "pricing.trial.name": "Prueba Gratis — 7 Días",
+    "pricing.trial.desc": "Sin tarjeta de crédito. Agente completo en WhatsApp + web. Configuración en 24h.",
+    "pricing.trial.cta": "Probar Gratis",
+    "pricing.1.name": "Starter",
+    "pricing.1.price": "79 €",
+    "pricing.1.period": "/mes",
+    "pricing.1.desc": "Para el autónomo o pequeño comercio que quiere su primer agente AI.",
+    "pricing.1.features": [
       "1 agente WhatsApp",
       "Chat web integrado",
       "Respuestas AI personalizadas",
+      "Hasta 1.000 mensajes/mes",
       "Resumen diario de actividad",
       "Soporte por email",
     ],
-    "pricing.0.cta": "Empezar",
-    "pricing.1.name": "Profesional",
-    "pricing.1.price": "49 €",
-    "pricing.1.period": "/mes",
-    "pricing.1.desc": "Para el negocio en crecimiento que necesita más agentes y canales.",
-    "pricing.1.features": [
-      "Hasta 3 agentes",
+    "pricing.1.cta": "Empezar",
+    "pricing.2.name": "Business",
+    "pricing.2.price": "149 €",
+    "pricing.2.period": "/mes",
+    "pricing.2.desc": "Para el negocio en crecimiento que necesita más canales y capacidad.",
+    "pricing.2.features": [
+      "2 agentes",
       "WhatsApp + Web + Email",
       "AI entrenada con tus datos",
+      "Hasta 5.000 mensajes/mes",
       "Derivación a humano",
       "Panel de control",
       "Soporte prioritario",
     ],
-    "pricing.1.cta": "Empezar",
-    "pricing.2.name": "Enterprise",
-    "pricing.2.price": "Personalizado",
-    "pricing.2.period": "",
-    "pricing.2.desc": "Para empresas con necesidades específicas. Agentes ilimitados, integración CRM, API, equipo dedicado.",
-    "pricing.2.features": [
+    "pricing.2.cta": "Empezar",
+    "pricing.3.name": "Pro",
+    "pricing.3.price": "299 €",
+    "pricing.3.period": "/mes",
+    "pricing.3.desc": "Para empresas que necesitan capacidad total y atención dedicada.",
+    "pricing.3.features": [
       "Agentes ilimitados",
-      "CRM y ERP integrados",
+      "WhatsApp + Web + Email + Telegram",
+      "CRM y herramientas integradas",
+      "Mensajes ilimitados",
       "API personalizada",
       "Infraestructura dedicada",
       "Soporte 24/7 prioritario",
-      "Formación del equipo",
     ],
-    "pricing.2.cta": "Contactar",
-    "pricing.badge": "🏆 Mejor precio del mercado",
+    "pricing.3.cta": "Contactar",
+    "pricing.badge": "🏆 Más popular",
 
     /* Chatbot Demo */
     "chatbot.section": "// Demo en vivo",
@@ -157,7 +164,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Sí. PickAIChat es un hub de agentes escalable. Puedes tener un agente para WhatsApp, otro para email marketing, otro para gestión de pedidos… Todos trabajan juntos desde un solo panel. Contrata solo los que necesites.",
     "faq.5.q": "¿Cuánto cuesta mantenerlo?",
     "faq.5.a":
-      "El plan mensual incluye hosting, mantenimiento y actualizaciones. No hay costes ocultos ni sorpresas. Somos el agente AI más económico del mercado, por menos de 30€ al mes.",
+      "El plan mensual incluye hosting, mantenimiento y actualizaciones. No hay costes ocultos ni sorpresas. Precios desde 79€/mes.",
 
     /* Contact */
     "contact.section": "// Empieza ahora",
@@ -166,7 +173,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Cuéntanos qué necesitas y te enviamos un plan personalizado en menos de 24 horas. Sin compromiso, sin tarjeta de crédito.",
     "contact.bullet1": "Sin tarjeta de crédito para empezar",
     "contact.bullet2": "Configuración en 24 horas",
-    "contact.bullet3": "Agente AI desde 29€/mes — el mejor precio del mercado",
+    "contact.bullet3": "Agente AI desde 79€/mes — prueba 7 días gratis",
     "contact.form.name": "Nombre",
     "contact.form.namePlaceholder": "Tu nombre",
     "contact.form.email": "Email",
@@ -198,6 +205,13 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "footer.role": "3D Character Artist & AI Engineer",
     "footer.made": "© 2026 PickAIChat. Hecho en Sevilla.",
 
+    /* About */
+    "about.section": "// Quién está detrás",
+    "about.heading": "Un humano, una misión: simplificar la AI para tu negocio",
+    "about.body":
+      "PickAIChat nació de una idea simple: la AI debería funcionar para el negocio, no al revés. Sin contratos complicados, sin jerga técnica, sin equipos de ingenieros.\n\nSoy Guillermo, creador de PickAIChat. Llevo años construyendo sistemas AI, pero viendo cómo la tecnología se queda solo en manos de grandes empresas. PickAIChat es mi forma de poner agentes AI al alcance de cualquier negocio — desde una ferretería hasta una clínica dental.\n\nEl modelo es sencillo: contratas un humano que entiende de AI, y recibes un sistema que trabaja por ti 24/7. Sin que tengas que aprender nada nuevo.",
+    "about.cta": "Hablar con Guillermo",
+
     /* Meta */
     "meta.title": "PickAIChat — Hub de Agentes AI para WhatsApp y tu negocio",
     "meta.description":
@@ -218,13 +232,14 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "nav.cta": "Get Started",
 
     /* Hero */
-    "hero.badge": "⚡ The most affordable AI agent on the market · setup in 24h",
+    "hero.badge": "⚡ Try 7 days free · AI agent from €79/mo",
     "hero.title": "PickAIChat — The AI Agent Hub for Your Business",
     "hero.subtitle":
       "One agent or many. Scale as you grow. Automate WhatsApp, email, CRM and more — $1.",
-    "hero.subtitle.highlight": "at the lowest price on the market.",
+    "hero.subtitle.highlight": "with fixed pricing from €79/mo.",
     "hero.description":
       "PickAIChat is an AI agent hub that automates your business 24/7: replies on WhatsApp, manages orders, syncs with your CRM, sends emails, and more. All from a single panel, for less than the price of a coffee a day.",
+    "hero.motto": "Hire a human, get an AI that delivers.",
     "hero.cta.try": "Try the Agent",
     "hero.cta.pricing": "See Pricing",
     "hero.cta.whatsapp": "Connect with WhatsApp",
@@ -243,14 +258,14 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "features.2.title": "Scalable: 1 to N agents",
     "features.2.body":
       "Start with one agent for WhatsApp. As you grow, add more agents: email marketing, customer support, inventory management. No limits.",
-    "features.3.title": "Lowest price on the market",
+    "features.3.title": "7 days free trial",
     "features.3.body":
-      "For less than €30/month you get a full AI agent. No per-message costs, no hidden fees, no paying per extra agent. Unbeatable.",
+      "Try PickAIChat for 7 days with no credit card. Full WhatsApp and web agent. No commitment, no risk.",
 
     /* Social Proof */
     "social.section": "// Trusted by",
     "social.heading": "Businesses like yours already automate with AI",
-    "social.subtitle": "Coming soon: real customer stories using PickAIChat in their businesses.",
+    "social.subtitle": "Real stories from businesses already automating with PickAIChat.",
     "social.0.name": "Carlos Mendoza",
     "social.0.role": "Owner",
     "social.0.company": "Mendoza Hardware Store",
@@ -289,46 +304,52 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.section": "// Pricing",
     "pricing.heading": "Plans for every business",
     "pricing.subtitle":
-      "No hidden costs, no per-message fees, no paying per agent. Choose the plan that best fits your business and start today.",
-    "pricing.0.name": "Starter",
-    "pricing.0.price": "€29",
-    "pricing.0.period": "/mo",
-    "pricing.0.desc": "For freelancers and small shops that want an AI agent 24/7 at the best price.",
-    "pricing.0.features": [
+      "No hidden costs, no per-message fees. Fixed pricing, no surprises.",
+    "pricing.trial.name": "Free Trial — 7 Days",
+    "pricing.trial.desc": "No credit card needed. Full WhatsApp + web agent. Setup in 24h.",
+    "pricing.trial.cta": "Try Free",
+    "pricing.1.name": "Starter",
+    "pricing.1.price": "€79",
+    "pricing.1.period": "/mo",
+    "pricing.1.desc": "For freelancers and small shops wanting their first AI agent.",
+    "pricing.1.features": [
       "1 WhatsApp agent",
       "Integrated web chat",
       "Custom AI responses",
+      "Up to 1,000 messages/mo",
       "Daily activity summary",
       "Email support",
     ],
-    "pricing.0.cta": "Get Started",
-    "pricing.1.name": "Professional",
-    "pricing.1.price": "€49",
-    "pricing.1.period": "/mo",
-    "pricing.1.desc": "For growing businesses that need more agents and channels.",
-    "pricing.1.features": [
-      "Up to 3 agents",
+    "pricing.1.cta": "Get Started",
+    "pricing.2.name": "Business",
+    "pricing.2.price": "€149",
+    "pricing.2.period": "/mo",
+    "pricing.2.desc": "For growing businesses needing more channels and capacity.",
+    "pricing.2.features": [
+      "2 agents",
       "WhatsApp + Web + Email",
       "AI trained on your data",
+      "Up to 5,000 messages/mo",
       "Human handoff",
       "Dashboard",
       "Priority support",
     ],
-    "pricing.1.cta": "Get Started",
-    "pricing.2.name": "Enterprise",
-    "pricing.2.price": "Custom",
-    "pricing.2.period": "",
-    "pricing.2.desc": "For companies with specific needs. Unlimited agents, CRM integration, API, dedicated team.",
-    "pricing.2.features": [
+    "pricing.2.cta": "Get Started",
+    "pricing.3.name": "Pro",
+    "pricing.3.price": "€299",
+    "pricing.3.period": "/mo",
+    "pricing.3.desc": "For companies needing full capacity and dedicated attention.",
+    "pricing.3.features": [
       "Unlimited agents",
-      "CRM and ERP integration",
+      "WhatsApp + Web + Email + Telegram",
+      "CRM and tool integrations",
+      "Unlimited messages",
       "Custom API",
       "Dedicated infrastructure",
       "24/7 priority support",
-      "Team training",
     ],
-    "pricing.2.cta": "Contact Us",
-    "pricing.badge": "🏆 Best price on the market",
+    "pricing.3.cta": "Contact Us",
+    "pricing.badge": "🏆 Most popular",
 
     /* Chatbot Demo */
     "chatbot.section": "// Live Demo",
@@ -362,7 +383,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Yes. PickAIChat is a scalable agent hub. You can have one agent for WhatsApp, another for email marketing, another for order management… They all work together from a single panel. Only pay for what you need.",
     "faq.5.q": "How much does it cost to maintain?",
     "faq.5.a":
-      "The monthly plan includes hosting, maintenance, and updates. No hidden costs or surprises. We're the most affordable AI agent on the market — less than €30/month.",
+      "The monthly plan includes hosting, maintenance, and updates. No hidden costs or surprises. Pricing from €79/month.",
 
     /* Contact */
     "contact.section": "// Start now",
@@ -371,7 +392,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Tell us what you need and we'll send you a custom plan in under 24 hours. No commitment, no credit card.",
     "contact.bullet1": "No credit card to start",
     "contact.bullet2": "Setup in 24 hours",
-    "contact.bullet3": "AI agent from €29/month — the best price on the market",
+    "contact.bullet3": "AI agent from €79/month — try 7 days free",
     "contact.form.name": "Name",
     "contact.form.namePlaceholder": "Your name",
     "contact.form.email": "Email",
@@ -402,6 +423,13 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "footer.built": "Built by Guillermo Pickman —",
     "footer.role": "3D Character Artist & AI Engineer",
     "footer.made": "© 2026 PickAIChat. Made in Seville.",
+
+    /* About */
+    "about.section": "// Who's behind this",
+    "about.heading": "A human with one mission: make AI simple for your business",
+    "about.body":
+      "PickAIChat was born from a simple idea: AI should work for the business, not the other way around. No complicated contracts, no tech jargon, no engineering teams.\n\nI'm Guillermo, creator of PickAIChat. I've spent years building AI systems, watching the technology stay locked inside big companies. PickAIChat is my way of putting AI agents within reach of any business — from a hardware store to a dental clinic.\n\nThe model is simple: you hire a human who understands AI, and you get a system that works for you 24/7. Without having to learn anything new.",
+    "about.cta": "Talk to Guillermo",
 
     /* Meta */
     "meta.title": "PickAIChat — AI Agent Hub for WhatsApp & Your Business",

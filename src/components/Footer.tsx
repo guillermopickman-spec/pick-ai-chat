@@ -1,4 +1,4 @@
-import { Github, Linkedin, Palette } from "lucide-react";
+import { Github, Linkedin } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 
 export function Footer() {
@@ -28,7 +28,7 @@ export function Footer() {
 
         <div className="flex items-center gap-2">
           <a
-            href="https://github.com"
+            href="https://github.com/guillermopickman-spec"
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub"
@@ -37,16 +37,16 @@ export function Footer() {
             <Github size={16} />
           </a>
           <a
-            href="https://artstation.com"
+            href="https://pickaichat.com"
             target="_blank"
             rel="noreferrer"
-            aria-label="ArtStation"
+            aria-label="Website"
             className="inline-flex h-9 w-9 items-center justify-center rounded-md border border-border text-muted-foreground transition hover:border-magenta hover:text-magenta"
           >
-            <Palette size={16} />
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="h-4 w-4"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
           </a>
           <a
-            href="https://linkedin.com"
+            href="https://linkedin.com/in/guillermo-pickman"
             target="_blank"
             rel="noreferrer"
             aria-label="LinkedIn"
@@ -57,6 +57,10 @@ export function Footer() {
         </div>
 
         <div className="text-xs text-muted-foreground">{t("footer.made")}</div>
+      </div>
+      <div className="mx-auto mt-6 flex max-w-6xl justify-center gap-6 text-xs text-muted-foreground">
+        <a href="/privacy" className="hover:text-magenta transition">Privacy Policy</a>
+        <a href="/terms" className="hover:text-magenta transition">Terms of Service</a>
       </div>
     </footer>
   );

@@ -1,8 +1,11 @@
-import { Check } from "lucide-react";
+import { Check, Sparkles } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
-import { translations } from "../lib/i18n";
 
-const PLANS = ["0", "1", "2"];
+function scrollTo(id: string) {
+  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+const PLANS = ["1", "2", "3"];
 
 export function Pricing() {
   const { t, lang } = useLanguage();
@@ -22,20 +25,33 @@ export function Pricing() {
           </p>
         </div>
 
+        {/* Free Trial Banner */}
+        <div className="mx-auto mb-10 max-w-2xl rounded-2xl border border-magenta/30 bg-magenta/5 p-6 text-center shadow-[0_0_20px_-4px_var(--magenta-glow)]">
+          <Sparkles size={24} className="mx-auto mb-2 text-magenta" />
+          <h3 className="text-lg font-semibold">{t("pricing.trial.name")}</h3>
+          <p className="mt-1 text-sm text-muted-foreground">{t("pricing.trial.desc")}</p>
+          <button
+            onClick={() => scrollTo("contact")}
+            className="mt-4 inline-flex items-center justify-center rounded-lg bg-magenta px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+          >
+            {t("pricing.trial.cta")}
+          </button>
+        </div>
+
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {PLANS.map((key) => {
-            const features = translations[lang][`pricing.${key}.features`] as string[];
+            const features = t(`pricing.${key}.features`) as unknown as string[];
             return (
               <div
                 key={key}
                 className={
                   "relative flex flex-col rounded-2xl border bg-card p-8 transition hover:-translate-y-1 " +
-                  (key === "1"
+                  (key === "2"
                     ? "border-magenta shadow-[0_0_24px_-6px_var(--magenta-glow)]"
                     : "border-border")
                 }
               >
-                {key === "1" && (
+                {key === "2" && (
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-magenta px-4 py-1 text-xs font-semibold uppercase tracking-wider text-primary-foreground whitespace-nowrap">
                     {t("pricing.badge")}
                   </div>
@@ -62,7 +78,7 @@ export function Pricing() {
                 </div>
 
                 <ul className="mb-8 flex flex-col gap-3">
-                  {features.map((f: string) => (
+                  {Array.isArray(features) && features.map((f: string) => (
                     <li key={f} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <Check size={16} className="mt-0.5 shrink-0 text-magenta" />
                       {f}
@@ -72,9 +88,10 @@ export function Pricing() {
 
                 <div className="mt-auto">
                   <button
+                    onClick={() => scrollTo("contact")}
                     className={
                       "inline-flex w-full items-center justify-center rounded-lg px-5 py-3 text-sm font-semibold transition " +
-                      (key === "1"
+                      (key === "2"
                         ? "bg-magenta text-primary-foreground hover:brightness-110"
                         : "border border-border text-foreground hover:border-magenta/60 hover:text-magenta")
                     }

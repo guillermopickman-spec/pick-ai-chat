@@ -72,7 +72,25 @@ export function ContactForm({
     const body = encodeURIComponent(
       t("contact.form.body", values.name, values.email, values.company || t("contact.form.na"), values.message),
     );
-    window.location.href = `mailto:hello@pickaichat.dev?subject=${subject}&body=${body}`;
+
+    // Try POST to backend first
+    const payload = {
+      name: values.name.trim(),
+      email: values.email.trim(),
+      company: values.company.trim(),
+      message: values.message.trim(),
+    };
+
+    fetch("https://mail.pickaichat.com/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(payload),
+      mode: "no-cors",
+    }).catch(() => {
+      // Fallback to mailto if backend unreachable
+    });
+
+    window.location.href = `mailto:hello@pickaichat.com?subject=${subject}&body=${body}`;
     onSubmitted?.();
   }
 
@@ -148,8 +166,8 @@ export function ContactForm({
 
       <p className="mt-4 text-center text-xs text-muted-foreground">
         {t("contact.form.orEmail")}{" "}
-        <a href="mailto:hello@pickaichat.dev" className="text-magenta hover:underline">
-          hello@pickaichat.dev
+        <a href="mailto:hello@pickaichat.com" className="text-magenta hover:underline">
+          hello@pickaichat.com
         </a>
       </p>
     </form>
