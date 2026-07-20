@@ -1,4 +1,4 @@
-import { Check, Sparkles } from "lucide-react";
+import { Check, Sparkles, Cpu } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 
 function scrollTo(id: string) {
@@ -25,19 +25,32 @@ export function Pricing() {
           </p>
         </div>
 
-        {/* Free Trial Banner */}
-        <div className="mx-auto mb-10 max-w-2xl rounded-2xl border border-magenta/30 bg-magenta/5 p-6 text-center shadow-[0_0_20px_-4px_var(--magenta-glow)]">
-          <Sparkles size={24} className="mx-auto mb-2 text-magenta" />
-          <h3 className="text-lg font-semibold">{t("pricing.trial.name")}</h3>
-          <p className="mt-1 text-sm text-muted-foreground">{t("pricing.trial.desc")}</p>
+        {/* Free Tier Card */}
+        <div className="mx-auto mb-10 max-w-md rounded-2xl border border-border bg-card/50 p-6 text-center">
+          <Sparkles size={24} className="mx-auto mb-2 text-muted-foreground" />
+          <h3 className="text-lg font-semibold">{t("pricing.0.name")}</h3>
+          <div className="my-4">
+            <span className="text-4xl font-bold">{t("pricing.0.price")}</span>
+            <span className="ml-1 text-sm text-muted-foreground">{t("pricing.0.period")}</span>
+          </div>
+          <p className="mb-6 text-sm text-muted-foreground">{t("pricing.0.desc")}</p>
+          <ul className="mb-6 flex flex-col gap-2 text-left">
+            {(t("pricing.0.features") as unknown as string[]).map((f: string) => (
+              <li key={f} className="flex items-start gap-3 text-sm text-muted-foreground">
+                <Check size={16} className="mt-0.5 shrink-0 text-magenta" />
+                {f}
+              </li>
+            ))}
+          </ul>
           <button
             onClick={() => scrollTo("contact")}
-            className="mt-4 inline-flex items-center justify-center rounded-lg bg-magenta px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
+            className="inline-flex w-full items-center justify-center rounded-lg border border-border px-5 py-3 text-sm font-semibold text-foreground transition hover:border-magenta/60 hover:text-magenta"
           >
-            {t("pricing.trial.cta")}
+            {t("pricing.0.cta")}
           </button>
         </div>
 
+        {/* Paid Plans Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {PLANS.map((key) => {
             const features = t(`pricing.${key}.features`) as unknown as string[];
@@ -66,7 +79,7 @@ export function Pricing() {
                   </p>
                 </div>
 
-                <div className="mb-8">
+                <div className="mb-4">
                   <span className="text-4xl font-bold text-foreground">
                     {t(`pricing.${key}.price`)}
                   </span>
@@ -75,6 +88,12 @@ export function Pricing() {
                       {t(`pricing.${key}.period`)}
                     </span>
                   )}
+                </div>
+
+                {/* Model info */}
+                <div className="mb-6 rounded-lg border border-border/50 bg-muted/30 p-3 text-xs text-muted-foreground">
+                  <Cpu size={14} className="mr-1 inline-block" />
+                  {t(`pricing.${key}.model`)}
                 </div>
 
                 <ul className="mb-8 flex flex-col gap-3">
@@ -102,6 +121,26 @@ export function Pricing() {
               </div>
             );
           })}
+        </div>
+
+        {/* Model Upgrade Add-ons */}
+        <div className="mx-auto mt-10 max-w-2xl rounded-2xl border border-border bg-card/30 p-6 text-center">
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            {t("pricing.upgrades.title")}
+          </h3>
+          <p className="mb-6 text-sm text-muted-foreground">
+            {t("pricing.upgrades.desc")}
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            {(t("pricing.upgrades.options") as unknown as string[]).map((opt: string) => (
+              <div
+                key={opt}
+                className="rounded-lg border border-border/50 bg-card px-5 py-3 text-sm font-medium"
+              >
+                {opt}
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>

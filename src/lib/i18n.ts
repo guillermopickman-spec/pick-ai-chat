@@ -85,14 +85,27 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.section": "// Precios",
     "pricing.heading": "Planes para cada negocio",
     "pricing.subtitle":
-      "Sin costes ocultos, sin tarifas por mensaje. Precios fijos, sin sorpresas.",
+      "Empieza gratis con modelos OpenRouter. Actualiza cuando necesites más capacidad o mejores modelos.",
+    "pricing.0.name": "Gratis",
+    "pricing.0.price": "0 €",
+    "pricing.0.period": "/mes",
+    "pricing.0.desc": "Para probar el agente sin compromiso. Modelos gratuitos de OpenRouter, capacidad limitada.",
+    "pricing.0.features": [
+      "1 agente WhatsApp",
+      "Chat web integrado",
+      "Modelos OpenRouter gratuitos",
+      "Hasta 500 mensajes/mes",
+      "Sin tarjeta de crédito",
+    ],
+    "pricing.0.cta": "Empezar Gratis",
     "pricing.trial.name": "Prueba Gratis — 7 Días",
     "pricing.trial.desc": "Sin tarjeta de crédito. Agente completo en WhatsApp + web. Configuración en 24h.",
     "pricing.trial.cta": "Probar Gratis",
     "pricing.1.name": "Starter",
     "pricing.1.price": "79 €",
     "pricing.1.period": "/mes",
-    "pricing.1.desc": "Para el autónomo o pequeño comercio que quiere su primer agente AI.",
+    "pricing.1.model": "🧠 DeepSeek V4 incluido",
+    "pricing.1.desc": "Para el autónomo o pequeño comercio que quiere su primer agente AI profesional.",
     "pricing.1.features": [
       "1 agente WhatsApp",
       "Chat web integrado",
@@ -105,6 +118,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.2.name": "Business",
     "pricing.2.price": "149 €",
     "pricing.2.period": "/mes",
+    "pricing.2.model": "🧠 DeepSeek V4 incluido",
     "pricing.2.desc": "Para el negocio en crecimiento que necesita más canales y capacidad.",
     "pricing.2.features": [
       "2 agentes",
@@ -119,6 +133,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.3.name": "Pro",
     "pricing.3.price": "299 €",
     "pricing.3.period": "/mes",
+    "pricing.3.model": "🧠 DeepSeek V4 incluido",
     "pricing.3.desc": "Para empresas que necesitan capacidad total y atención dedicada.",
     "pricing.3.features": [
       "Agentes ilimitados",
@@ -131,6 +146,12 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     ],
     "pricing.3.cta": "Contactar",
     "pricing.badge": "🏆 Más popular",
+    "pricing.upgrades.title": "🚀 Mejora tu modelo",
+    "pricing.upgrades.desc": "Elige el modelo que prefieras. Disponible como añadido a cualquier plan de pago.",
+    "pricing.upgrades.options": [
+      "DeepSeek V4 · +5$/mes",
+      "Claude Sonnet · +15$/mes",
+    ],
 
     /* Chatbot Demo */
     "chatbot.section": "// Demo en vivo",
@@ -304,14 +325,27 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.section": "// Pricing",
     "pricing.heading": "Plans for every business",
     "pricing.subtitle":
-      "No hidden costs, no per-message fees. Fixed pricing, no surprises.",
+      "Start free with OpenRouter models. Upgrade when you need more capacity or better models.",
+    "pricing.0.name": "Free",
+    "pricing.0.price": "$0",
+    "pricing.0.period": "/mo",
+    "pricing.0.desc": "Try the agent with no commitment. Free OpenRouter models, limited capacity.",
+    "pricing.0.features": [
+      "1 WhatsApp agent",
+      "Integrated web chat",
+      "Free OpenRouter models",
+      "Up to 500 messages/mo",
+      "No credit card",
+    ],
+    "pricing.0.cta": "Start Free",
     "pricing.trial.name": "Free Trial — 7 Days",
     "pricing.trial.desc": "No credit card needed. Full WhatsApp + web agent. Setup in 24h.",
     "pricing.trial.cta": "Try Free",
     "pricing.1.name": "Starter",
     "pricing.1.price": "€79",
     "pricing.1.period": "/mo",
-    "pricing.1.desc": "For freelancers and small shops wanting their first AI agent.",
+    "pricing.1.model": "🧠 DeepSeek V4 included",
+    "pricing.1.desc": "For freelancers and small shops wanting their first professional AI agent.",
     "pricing.1.features": [
       "1 WhatsApp agent",
       "Integrated web chat",
@@ -324,6 +358,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.2.name": "Business",
     "pricing.2.price": "€149",
     "pricing.2.period": "/mo",
+    "pricing.2.model": "🧠 DeepSeek V4 included",
     "pricing.2.desc": "For growing businesses needing more channels and capacity.",
     "pricing.2.features": [
       "2 agents",
@@ -338,6 +373,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.3.name": "Pro",
     "pricing.3.price": "€299",
     "pricing.3.period": "/mo",
+    "pricing.3.model": "🧠 DeepSeek V4 included",
     "pricing.3.desc": "For companies needing full capacity and dedicated attention.",
     "pricing.3.features": [
       "Unlimited agents",
@@ -350,6 +386,12 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     ],
     "pricing.3.cta": "Contact Us",
     "pricing.badge": "🏆 Most popular",
+    "pricing.upgrades.title": "🚀 Upgrade your model",
+    "pricing.upgrades.desc": "Pick the model you prefer. Available as an add-on to any paid plan.",
+    "pricing.upgrades.options": [
+      "DeepSeek V4 · +$5/mo",
+      "Claude Sonnet · +$15/mo",
+    ],
 
     /* Chatbot Demo */
     "chatbot.section": "// Live Demo",
