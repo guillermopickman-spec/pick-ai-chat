@@ -1,5 +1,6 @@
 import { Check, Sparkles, Cpu } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
+import { translations } from "../lib/i18n";
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -35,7 +36,7 @@ export function Pricing() {
           </div>
           <p className="mb-6 text-sm text-muted-foreground">{t("pricing.0.desc")}</p>
           <ul className="mb-6 flex flex-col gap-2 text-left">
-            {(t("pricing.0.features") as unknown as string[]).map((f: string) => (
+            {(translations[lang]["pricing.0.features"] as string[]).map((f: string) => (
               <li key={f} className="flex items-start gap-3 text-sm text-muted-foreground">
                 <Check size={16} className="mt-0.5 shrink-0 text-magenta" />
                 {f}
@@ -53,7 +54,7 @@ export function Pricing() {
         {/* Paid Plans Grid */}
         <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
           {PLANS.map((key) => {
-            const features = t(`pricing.${key}.features`) as unknown as string[];
+            const features = translations[lang][`pricing.${key}.features`] as string[];
             return (
               <div
                 key={key}
@@ -97,7 +98,7 @@ export function Pricing() {
                 </div>
 
                 <ul className="mb-8 flex flex-col gap-3">
-                  {Array.isArray(features) && features.map((f: string) => (
+                  {features.map((f: string) => (
                     <li key={f} className="flex items-start gap-3 text-sm text-muted-foreground">
                       <Check size={16} className="mt-0.5 shrink-0 text-magenta" />
                       {f}
@@ -132,7 +133,7 @@ export function Pricing() {
             {t("pricing.upgrades.desc")}
           </p>
           <div className="flex flex-wrap justify-center gap-4">
-            {(t("pricing.upgrades.options") as unknown as string[]).map((opt: string) => (
+            {(translations[lang]["pricing.upgrades.options"] as string[]).map((opt: string) => (
               <div
                 key={opt}
                 className="rounded-lg border border-border/50 bg-card px-5 py-3 text-sm font-medium"
