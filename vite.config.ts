@@ -12,7 +12,12 @@ import { defineConfig } from "@lovable.dev/vite-tanstack-config";
 const deployTarget = process.env.DEPLOY_TARGET ?? "cloudflare";
 
 /** Nitro config per deployment target */
-const nitroPreset = deployTarget === "vercel" ? "vercel" : "cloudflare-module";
+const NITRO_PRESETS: Record<string, string> = {
+  vercel: "vercel",
+  cloudflare: "cloudflare-module",
+  node: "node-server",
+};
+const nitroPreset = NITRO_PRESETS[deployTarget] ?? "cloudflare-module";
 
 export default defineConfig({
   tanstackStart: {

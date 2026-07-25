@@ -1,7 +1,8 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
+import { SignInButton, UserButton, Show } from "@clerk/tanstack-react-start";
 
 function scrollToHash(hash: string) {
   const el = document.getElementById(hash);
@@ -12,7 +13,6 @@ function scrollToHash(hash: string) {
 
 export function Navbar() {
   const { t, lang, setLang } = useLanguage();
-  const [visible, setVisible] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
 
   const NAV_LINKS = [
@@ -22,23 +22,8 @@ export function Navbar() {
     { label: t("nav.faq"), to: "/", hash: "faq" },
   ];
 
-  useEffect(() => {
-    const onScroll = () => {
-      const heroHeight = window.innerHeight * 0.85;
-      setVisible(window.scrollY > heroHeight);
-    };
-    onScroll();
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
-
   return (
-    <header
-      className={
-        "fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur transition-transform duration-300 " +
-        (visible ? "translate-y-0" : "-translate-y-full")
-      }
-    >
+    <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur">
       <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
         <Link
           to="/"
@@ -57,6 +42,7 @@ export function Navbar() {
           <span className="font-mono text-lg font-semibold text-magenta">PickAIChat</span>
         </Link>
 
+        {/* Desktop nav */}
         <div className="hidden items-center gap-6 md:flex">
           {NAV_LINKS.map((link) => (
             <button
@@ -92,6 +78,31 @@ export function Navbar() {
             </button>
           </div>
 
+          <Show when="signed-in">
+            <div className="flex items-center gap-2">
+              <Link
+                to="/chat"
+                className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+              >
+                Chat
+              </Link>
+              <Link
+                to="/mail"
+                className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+              >
+                Mail
+              </Link>
+              <UserButton />
+            </div>
+          </Show>
+          <Show when="signed-out">
+            <SignInButton mode="modal">
+              <button className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta">
+                Sign In
+              </button>
+            </SignInButton>
+          </Show>
+
           <Link
             to="/contact"
             className="rounded-lg bg-magenta px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
@@ -100,6 +111,7 @@ export function Navbar() {
           </Link>
         </div>
 
+        {/* Hamburger (mobile only) */}
         <button
           type="button"
           onClick={() => setMobileOpen((s) => !s)}
@@ -111,6 +123,7 @@ export function Navbar() {
         </button>
       </nav>
 
+      {/* Mobile menu */}
       {mobileOpen && (
         <div className="border-t border-border bg-background px-4 py-4 md:hidden">
           <div className="flex flex-col gap-3">
@@ -147,6 +160,38 @@ export function Navbar() {
               >
                 EN
               </button>
+            </div>
+            {/* Mobile auth buttons */}
+            <div className="border-t border-border pt-3">
+              <Show when="signed-in">
+                <div className="flex items-center gap-2">
+                  <Link
+                    to="/chat"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                  >
+                    Chat
+                  </Link>
+                  <Link
+                    to="/mail"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                  >
+                    Mail
+                  </Link>
+                  <UserButton />
+                </div>
+              </Show>
+              <Show when="signed-out">
+                <SignInButton mode="modal">
+                  <button
+                    onClick={() => setMobileOpen(false)}
+                    className="w-full rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                  >
+                    Sign In
+                  </button>
+                </SignInButton>
+              </Show>
             </div>
             <Link
               to="/contact"
