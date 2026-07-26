@@ -8,7 +8,7 @@ import {
   Scripts,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { ClerkProvider } from "@clerk/tanstack-react-start";
+import { ClerkProvider, useAuth } from "@clerk/tanstack-react-start";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -137,6 +137,30 @@ function RootComponent() {
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <Footer />
+      <PwaAuthGuard />
     </QueryClientProvider>
   );
+}
+
+/** Force sign-in when opening the PWA standalone app for the first time */
+function PwaAuthGuard() {
+  const { isLoaded, isSignedIn } = useAuth();
+
+  useEffect(() => {
+    if (!isLoaded) return;
+
+    const isStandalone =
+      // iOS standalone mode
+      (window.navigator as { standalone?: boolean }).standalone ||
+      // Android/other PWA mode
+      window.matchMedia("(display-mode: standalone)").matches;
+
+    if (isStandalone && !isSignedIn) {
+      // Redirect to Clerk sign-in, then back to home after login
+      const signInUrl = `/sign-in?redirect_url=${encodeURIComponent(window.location.pathname)}`;
+      window.location.href = signInUrl;
+    }
+  }, [isLoaded, isSignedIn]);
+
+  return null;
 }
