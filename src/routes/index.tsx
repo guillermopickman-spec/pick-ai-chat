@@ -18,12 +18,12 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Hub de agentes AI para WhatsApp, web y email. Automatiza tu negocio 24/7 con el agente multi-herramienta más económico del mercado. Configuración en 24 horas.",
+          "Hub de agentes AI para WhatsApp, web y email. Automatiza tu negocio 24/7 con AI asequible. Configuración en 24 horas.",
       },
       { property: "og:title", content: "PickAIChat — Hub de Agentes AI para tu Negocio" },
       {
         property: "og:description",
-        content: "Tu negocio automatizado al instante. El agente AI más económico del mercado.",
+        content: "Tu negocio automatizado al instante. AI asequible para cada negocio.",
       },
       { property: "og:type", content: "website" },
       { property: "og:image", content: "/logo/logo-800x437.png" },
@@ -34,7 +34,7 @@ export const Route = createFileRoute("/")({
       { name: "twitter:title", content: "PickAIChat — Hub de Agentes AI para tu Negocio" },
       {
         name: "twitter:description",
-        content: "Tu negocio automatizado al instante con el agente AI más económico del mercado.",
+        content: "Tu negocio automatizado al instante con AI asequible para cada negocio.",
       },
     ],
     links: [
