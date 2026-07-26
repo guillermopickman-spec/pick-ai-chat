@@ -59,6 +59,8 @@ export function ContactForm({
     message: "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
+  const [sending, setSending] = useState(false);
+  const [sendError, setSendError] = useState<string | null>(null);
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault();
@@ -66,14 +68,9 @@ export function ContactForm({
     setErrors(validation);
     if (Object.keys(validation).length > 0) return;
 
-    const subject = encodeURIComponent(
-      t("contact.form.subject", values.name, values.company || t("contact.form.sentAs")),
-    );
-    const body = encodeURIComponent(
-      t("contact.form.body", values.name, values.email, values.company || t("contact.form.na"), values.message),
-    );
+    setSending(true);
+    setSendError(null);
 
-    // Try POST to backend first
     const payload = {
       name: values.name.trim(),
       email: values.email.trim(),
@@ -85,13 +82,22 @@ export function ContactForm({
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(payload),
-      mode: "no-cors",
-    }).catch(() => {
-      // Fallback to mailto if backend unreachable
-    });
-
-    window.location.href = `mailto:hello@pickaichat.com?subject=${subject}&body=${body}`;
-    onSubmitted?.();
+    })
+      .then((res) => {
+        if (!res.ok) throw new Error("Server error");
+        return res.json();
+      })
+      .then((data) => {
+        if (data.ok) {
+          onSubmitted?.();
+        } else {
+          setSendError("Something went wrong. Please try again.");
+        }
+      })
+      .catch(() => {
+        setSendError("Could not reach server. Please email us directly.");
+      })
+      .finally(() => setSending(false));
   }
 
   return (
@@ -155,14 +161,19 @@ export function ContactForm({
 
       <button
         type="submit"
+        disabled={sending}
         className={
-          "group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-magenta px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 " +
+          "group mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-magenta px-5 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 disabled:opacity-50 " +
           (buttonClassName ?? "")
         }
       >
-        {t("contact.form.submit")}
+        {sending ? "Sending..." : t("contact.form.submit")}
         <ArrowRight size={16} className="transition group-hover:translate-x-0.5" />
       </button>
+
+      {sendError && (
+        <p className="mt-4 text-center text-xs text-destructive">{sendError}</p>
+      )}
 
       <p className="mt-4 text-center text-xs text-muted-foreground">
         {t("contact.form.orEmail")}{" "}

@@ -12,16 +12,16 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "nav.cta": "Empezar",
 
     /* Hero */
-    "hero.badge": "⚡ Prueba 7 días gratis · agente AI desde 79€/mes",
+    "hero.badge": "⚡ Prueba 7 días gratis · AI asequible para tu negocio",
     "hero.title": "PickAIChat — El Hub de Agentes AI para tu Negocio",
     "hero.subtitle":
-      "Un agente o varios. Escala cuando quieras. Automatiza WhatsApp, email, CRM y más — $1.",
-    "hero.subtitle.highlight": "con precios fijos desde 79€/mes.",
+      "Un agente o varios. Escala cuando quieras. Automatiza WhatsApp, email, CRM y más.",
+    "hero.subtitle.highlight": "sin precios fijos, contacta con nosotros.",
     "hero.description":
-      "PickAIChat es un hub de agentes AI que automatiza tu negocio 24/7: responde en WhatsApp, gestiona pedidos, sincroniza con tu CRM, envía emails y mucho más. Todo desde un solo panel, por menos de lo que cuesta un café al día.",
+      "PickAIChat es un hub de agentes AI que automatiza tu negocio 24/7: responde en WhatsApp, gestiona pedidos, sincroniza con tu CRM, envía emails y mucho más. AI asequible, sin contratos complicados.",
     "hero.motto": "Contrata un humano, recibe una IA que trabaja.",
     "hero.cta.try": "Probar el Agente",
-    "hero.cta.pricing": "Ver Precios",
+    "hero.cta.pricing": "Contactar",
     "hero.cta.whatsapp": "Conectar con WhatsApp",
 
     /* Features */
@@ -85,7 +85,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.section": "// Precios",
     "pricing.heading": "Planes para cada negocio",
     "pricing.subtitle":
-      "Empieza gratis con modelos OpenRouter. Actualiza cuando necesites más capacidad o mejores modelos.",
+      "Cada negocio es único. Cuéntanos qué necesitas y te preparamos un plan a medida.",
     "pricing.0.name": "Gratis",
     "pricing.0.price": "0 €",
     "pricing.0.period": "/mes",
@@ -102,8 +102,8 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.trial.desc": "Sin tarjeta de crédito. Agente completo en WhatsApp + web. Configuración en 24h.",
     "pricing.trial.cta": "Probar Gratis",
     "pricing.1.name": "Starter",
-    "pricing.1.price": "79 €",
-    "pricing.1.period": "/mes",
+    "pricing.1.price": "",
+    "pricing.1.period": "",
     "pricing.1.model": "🧠 DeepSeek V4 incluido",
     "pricing.1.desc": "Para el autónomo o pequeño comercio que quiere su primer agente AI profesional.",
     "pricing.1.features": [
@@ -114,10 +114,10 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Resumen diario de actividad",
       "Soporte por email",
     ],
-    "pricing.1.cta": "Empezar",
+    "pricing.1.cta": "Contactar",
     "pricing.2.name": "Business",
-    "pricing.2.price": "149 €",
-    "pricing.2.period": "/mes",
+    "pricing.2.price": "",
+    "pricing.2.period": "",
     "pricing.2.model": "🧠 DeepSeek V4 incluido",
     "pricing.2.desc": "Para el negocio en crecimiento que necesita más canales y capacidad.",
     "pricing.2.features": [
@@ -129,10 +129,10 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Panel de control",
       "Soporte prioritario",
     ],
-    "pricing.2.cta": "Empezar",
+    "pricing.2.cta": "Contactar",
     "pricing.3.name": "Pro",
-    "pricing.3.price": "299 €",
-    "pricing.3.period": "/mes",
+    "pricing.3.price": "",
+    "pricing.3.period": "",
     "pricing.3.model": "🧠 DeepSeek V4 incluido",
     "pricing.3.desc": "Para empresas que necesitan capacidad total y atención dedicada.",
     "pricing.3.features": [
@@ -147,10 +147,10 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.3.cta": "Contactar",
     "pricing.badge": "🏆 Más popular",
     "pricing.upgrades.title": "🚀 Mejora tu modelo",
-    "pricing.upgrades.desc": "Elige el modelo que prefieras. Disponible como añadido a cualquier plan de pago.",
+    "pricing.upgrades.desc": "Elige el modelo que prefieras. Disponible como añadido a cualquier plan.",
     "pricing.upgrades.options": [
-      "DeepSeek V4 · +5$/mes",
-      "Claude Sonnet · +15$/mes",
+      "DeepSeek V4",
+      "Claude Sonnet",
     ],
 
     /* Chatbot Demo */
@@ -185,7 +185,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Sí. PickAIChat es un hub de agentes escalable. Puedes tener un agente para WhatsApp, otro para email marketing, otro para gestión de pedidos… Todos trabajan juntos desde un solo panel. Contrata solo los que necesites.",
     "faq.5.q": "¿Cuánto cuesta mantenerlo?",
     "faq.5.a":
-      "El plan mensual incluye hosting, mantenimiento y actualizaciones. No hay costes ocultos ni sorpresas. Precios desde 79€/mes.",
+      "El plan mensual incluye hosting, mantenimiento y actualizaciones. Sin costes ocultos ni sorpresas. Cada plan se adapta a tus necesidades.",
 
     /* Contact */
     "contact.section": "// Empieza ahora",
@@ -194,7 +194,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Cuéntanos qué necesitas y te enviamos un plan personalizado en menos de 24 horas. Sin compromiso, sin tarjeta de crédito.",
     "contact.bullet1": "Sin tarjeta de crédito para empezar",
     "contact.bullet2": "Configuración en 24 horas",
-    "contact.bullet3": "Agente AI desde 79€/mes — prueba 7 días gratis",
+    "contact.bullet3": "Agente AI asequible — prueba 7 días gratis",
     "contact.form.name": "Nombre",
     "contact.form.namePlaceholder": "Tu nombre",
     "contact.form.email": "Email",
@@ -236,12 +236,12 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     /* Meta */
     "meta.title": "PickAIChat — Hub de Agentes AI para WhatsApp y tu negocio",
     "meta.description":
-      "Hub de agentes AI para WhatsApp, web y email. Automatiza tu negocio 24/7 con el agente multi-herramienta más económico del mercado. Configuración en 24 horas.",
+      "Hub de agentes AI para WhatsApp, web y email. Automatiza tu negocio 24/7 con AI asequible. Configuración en 24 horas.",
     "meta.ogTitle": "PickAIChat — Hub de Agentes AI para tu Negocio",
     "meta.ogDescription":
-      "Tu negocio automatizado al instante. El agente AI más económico del mercado.",
+      "Tu negocio automatizado al instante. AI asequible para cada negocio.",
     "meta.twitterDescription":
-      "Tu negocio automatizado al instante con el agente AI más económico del mercado.",
+      "Tu negocio automatizado al instante con AI asequible para cada negocio.",
   },
 
   en: {
@@ -253,16 +253,16 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "nav.cta": "Get Started",
 
     /* Hero */
-    "hero.badge": "⚡ Try 7 days free · AI agent from €79/mo",
+    "hero.badge": "⚡ Try 7 days free · affordable AI for your business",
     "hero.title": "PickAIChat — The AI Agent Hub for Your Business",
     "hero.subtitle":
-      "One agent or many. Scale as you grow. Automate WhatsApp, email, CRM and more — $1.",
-    "hero.subtitle.highlight": "with fixed pricing from €79/mo.",
+      "One agent or many. Scale as you grow. Automate WhatsApp, email, CRM and more.",
+    "hero.subtitle.highlight": "no fixed prices, contact us.",
     "hero.description":
-      "PickAIChat is an AI agent hub that automates your business 24/7: replies on WhatsApp, manages orders, syncs with your CRM, sends emails, and more. All from a single panel, for less than the price of a coffee a day.",
+      "PickAIChat is an AI agent hub that automates your business 24/7: replies on WhatsApp, manages orders, syncs with your CRM, sends emails, and more. Affordable AI, without complicated contracts.",
     "hero.motto": "Hire a human, get an AI that delivers.",
     "hero.cta.try": "Try the Agent",
-    "hero.cta.pricing": "See Pricing",
+    "hero.cta.pricing": "Contact Us",
     "hero.cta.whatsapp": "Connect with WhatsApp",
 
     /* Features */
@@ -325,7 +325,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.section": "// Pricing",
     "pricing.heading": "Plans for every business",
     "pricing.subtitle":
-      "Start free with OpenRouter models. Upgrade when you need more capacity or better models.",
+      "Every business is different. Tell us what you need and we'll build a custom plan.",
     "pricing.0.name": "Free",
     "pricing.0.price": "$0",
     "pricing.0.period": "/mo",
@@ -342,8 +342,8 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.trial.desc": "No credit card needed. Full WhatsApp + web agent. Setup in 24h.",
     "pricing.trial.cta": "Try Free",
     "pricing.1.name": "Starter",
-    "pricing.1.price": "€79",
-    "pricing.1.period": "/mo",
+    "pricing.1.price": "",
+    "pricing.1.period": "",
     "pricing.1.model": "🧠 DeepSeek V4 included",
     "pricing.1.desc": "For freelancers and small shops wanting their first professional AI agent.",
     "pricing.1.features": [
@@ -354,10 +354,10 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Daily activity summary",
       "Email support",
     ],
-    "pricing.1.cta": "Get Started",
+    "pricing.1.cta": "Contact Us",
     "pricing.2.name": "Business",
-    "pricing.2.price": "€149",
-    "pricing.2.period": "/mo",
+    "pricing.2.price": "",
+    "pricing.2.period": "",
     "pricing.2.model": "🧠 DeepSeek V4 included",
     "pricing.2.desc": "For growing businesses needing more channels and capacity.",
     "pricing.2.features": [
@@ -369,10 +369,10 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Dashboard",
       "Priority support",
     ],
-    "pricing.2.cta": "Get Started",
+    "pricing.2.cta": "Contact Us",
     "pricing.3.name": "Pro",
-    "pricing.3.price": "€299",
-    "pricing.3.period": "/mo",
+    "pricing.3.price": "",
+    "pricing.3.period": "",
     "pricing.3.model": "🧠 DeepSeek V4 included",
     "pricing.3.desc": "For companies needing full capacity and dedicated attention.",
     "pricing.3.features": [
@@ -387,10 +387,10 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.3.cta": "Contact Us",
     "pricing.badge": "🏆 Most popular",
     "pricing.upgrades.title": "🚀 Upgrade your model",
-    "pricing.upgrades.desc": "Pick the model you prefer. Available as an add-on to any paid plan.",
+    "pricing.upgrades.desc": "Pick the model you prefer. Available as an add-on to any plan.",
     "pricing.upgrades.options": [
-      "DeepSeek V4 · +$5/mo",
-      "Claude Sonnet · +$15/mo",
+      "DeepSeek V4",
+      "Claude Sonnet",
     ],
 
     /* Chatbot Demo */
@@ -425,7 +425,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Yes. PickAIChat is a scalable agent hub. You can have one agent for WhatsApp, another for email marketing, another for order management… They all work together from a single panel. Only pay for what you need.",
     "faq.5.q": "How much does it cost to maintain?",
     "faq.5.a":
-      "The monthly plan includes hosting, maintenance, and updates. No hidden costs or surprises. Pricing from €79/month.",
+      "The monthly plan includes hosting, maintenance, and updates. No hidden costs or surprises. Every plan is tailored to your needs.",
 
     /* Contact */
     "contact.section": "// Start now",
@@ -434,7 +434,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Tell us what you need and we'll send you a custom plan in under 24 hours. No commitment, no credit card.",
     "contact.bullet1": "No credit card to start",
     "contact.bullet2": "Setup in 24 hours",
-    "contact.bullet3": "AI agent from €79/month — try 7 days free",
+    "contact.bullet3": "Affordable AI agent — try 7 days free",
     "contact.form.name": "Name",
     "contact.form.namePlaceholder": "Your name",
     "contact.form.email": "Email",
@@ -476,12 +476,12 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     /* Meta */
     "meta.title": "PickAIChat — AI Agent Hub for WhatsApp & Your Business",
     "meta.description":
-      "AI agent hub for WhatsApp, web, and email. Automate your business 24/7 with the most affordable multi-tool agent on the market. Setup in 24 hours.",
+      "AI agent hub for WhatsApp, web, and email. Automate your business 24/7 with affordable AI. Setup in 24 hours.",
     "meta.ogTitle": "PickAIChat — AI Agent Hub for Your Business",
     "meta.ogDescription":
-      "Your business automated instantly. The most affordable AI agent on the market.",
+      "Your business automated instantly. Affordable AI for every business.",
     "meta.twitterDescription":
-      "Your business automated instantly with the most affordable AI agent on the market.",
+      "Your business automated instantly with affordable AI for every business.",
   },
 };
 

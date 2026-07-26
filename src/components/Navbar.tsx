@@ -2,7 +2,9 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
-import { SignInButton, UserButton, Show } from "@clerk/tanstack-react-start";
+import { SignInButton, UserButton, Show, useUser } from "@clerk/tanstack-react-start";
+
+const ADMIN_EMAIL = "guillermopickman@gmail.com";
 
 function scrollToHash(hash: string) {
   const el = document.getElementById(hash);
@@ -13,7 +15,9 @@ function scrollToHash(hash: string) {
 
 export function Navbar() {
   const { t, lang, setLang } = useLanguage();
+  const { user } = useUser();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const isAdmin = user?.primaryEmailAddress?.emailAddress === ADMIN_EMAIL;
 
   const NAV_LINKS = [
     { label: t("nav.features"), to: "/", hash: "features" },
@@ -92,6 +96,14 @@ export function Navbar() {
               >
                 Mail
               </Link>
+              {isAdmin && (
+                <Link
+                  to="/admin"
+                  className="rounded-lg border border-magenta/40 px-3 py-1.5 text-xs font-semibold text-magenta transition hover:border-magenta hover:bg-magenta/10"
+                >
+                  Admin
+                </Link>
+              )}
               <UserButton />
             </div>
           </Show>
@@ -179,6 +191,15 @@ export function Navbar() {
                   >
                     Mail
                   </Link>
+                  {isAdmin && (
+                    <Link
+                      to="/admin"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex-1 rounded-lg border border-magenta/40 px-3 py-1.5 text-center text-xs font-semibold text-magenta transition hover:border-magenta hover:bg-magenta/10"
+                    >
+                      Admin
+                    </Link>
+                  )}
                   <UserButton />
                 </div>
               </Show>

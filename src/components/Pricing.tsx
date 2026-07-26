@@ -80,6 +80,7 @@ export function Pricing() {
                   </p>
                 </div>
 
+                {t(`pricing.${key}.price`) && (
                 <div className="mb-4">
                   <span className="text-4xl font-bold text-foreground">
                     {t(`pricing.${key}.price`)}
@@ -90,6 +91,7 @@ export function Pricing() {
                     </span>
                   )}
                 </div>
+              )}
 
                 {/* Model info */}
                 <div className="mb-6 rounded-lg border border-border/50 bg-muted/30 p-3 text-xs text-muted-foreground">
