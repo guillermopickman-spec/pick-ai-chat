@@ -25,6 +25,7 @@ export function ChatUI() {
     loading,
     createConversation,
     deleteConversation,
+    renameConversation,
     switchConversation,
     addMessage,
   } = useConversations(userEmail);
