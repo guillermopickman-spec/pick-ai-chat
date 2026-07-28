@@ -9,7 +9,7 @@ export function Hero() {
   const { t } = useLanguage();
 
   return (
-    <section className="relative min-h-[90vh] flex flex-col overflow-hidden px-4 pt-16 py-12 sm:py-16 lg:py-20">
+    <section className="relative min-h-[90vh] flex flex-col overflow-hidden px-4 pt-20 py-12 sm:py-16 lg:py-20">
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
