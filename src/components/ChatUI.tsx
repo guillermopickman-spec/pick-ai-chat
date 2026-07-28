@@ -1,3 +1,4 @@
+// v1.0.3 - fix renameConversation bug
 import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useUser } from "@clerk/tanstack-react-start";
 import { useConversations, type Message } from "@/hooks/useConversations";
@@ -11,6 +12,7 @@ import {
   PanelLeftOpen,
   PanelLeftClose,
   Loader2,
+  Sparkles,
 } from "lucide-react";
 
 export function ChatUI() {
@@ -58,12 +60,8 @@ export function ChatUI() {
     setIsTyping(true);
 
     try {
-      const { reply, title } = await sendToHermesBot(text, convId, userEmail ?? "");
+      const { reply } = await sendToHermesBot(text, convId, userEmail ?? "");
       addMessage("assistant", reply, convId);
-      // Update title from server if provided
-      if (title) {
-        renameConversation(convId, title);
-      }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Something went wrong";
       addMessage("assistant", `Error: ${msg}`);
