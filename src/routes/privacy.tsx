@@ -1,78 +1,41 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
-import { Navbar } from "@/components/Navbar";
+import { createFileRoute } from "@tanstack/react-router";
 
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
       { title: "Privacy Policy — PickAIChat" },
-      { name: "description", content: "Privacy Policy for PickAIChat AI agent services." },
+      { name: "description", content: "PickAIChat Privacy Policy" },
     ],
   }),
-  component: PrivacyPage,
+  component: Page,
 });
 
-function PrivacyPage() {
+function Page() {
   return (
-    <>
-      <Navbar />
-      <main className="mx-auto max-w-3xl px-4 py-24">
-        <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">Privacy Policy</h1>
-        <p className="mt-2 text-sm text-muted-foreground">Last updated: July 2026</p>
-
-        <div className="mt-10 space-y-6 text-sm leading-relaxed text-muted-foreground sm:text-base">
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">1. Information We Collect</h2>
-            <p className="mt-2">
-              When you use PickAIChat, we collect: your name, email address, phone number (WhatsApp),
-              business information you provide, and messages exchanged through the AI agent.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">2. How We Use Your Information</h2>
-            <p className="mt-2">
-              We use your information to: provide and maintain the AI agent service, improve
-              our AI models, communicate with you about your account, and send relevant updates.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">3. Data Storage & Security</h2>
-            <p className="mt-2">
-              Your data is stored on secure servers within the EU. We implement industry-standard
-              security measures to protect your information. We do not sell your data to third parties.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">4. Third-Party Services</h2>
-            <p className="mt-2">
-              PickAIChat uses third-party services including OpenAI/OpenRouter for AI processing,
-              Resend for email delivery, and WhatsApp/Telegram as messaging platforms. Each service
-              has its own privacy policy governing data handling.
-            </p>
-          </section>
-
-          <section>
-            <h2 className="text-lg font-semibold text-foreground">5. Contact</h2>
-            <p className="mt-2">
-              For privacy-related inquiries, contact us at{" "}
-              <a href="mailto:hello@pickaichat.com" className="text-magenta hover:underline">
-                hello@pickaichat.com
-              </a>.
-            </p>
-          </section>
-        </div>
-
-        <div className="mt-12">
-          <Link
-            to="/"
-            className="text-sm text-magenta hover:underline"
-          >
-            ← Back to home
-          </Link>
-        </div>
-      </main>
-    </>
+    <div className="mx-auto max-w-3xl px-4 py-20">
+      <h1 className="mb-8 text-3xl font-bold">Privacy Policy</h1>
+      <p className="mb-4 text-muted-foreground">Last updated: July 28, 2026</p>
+      <div className="space-y-4 text-muted-foreground">
+        <p>
+          PickAIChat ("we," "our," or "us") is committed to protecting your privacy. This Privacy Policy explains how we collect, use, and safeguard your information when you use our service.
+        </p>
+        <h2 className="text-xl font-semibold text-foreground">Information We Collect</h2>
+        <p>
+          When you sign in, we collect your email address and display name via Google OAuth authentication. We use Clerk, a third-party authentication provider, to manage this securely.
+        </p>
+        <h2 className="text-xl font-semibold text-foreground">How We Use Your Information</h2>
+        <p>
+          We use your information solely to provide and improve our service, including AI-powered chat functionality, email management, and account administration.
+        </p>
+        <h2 className="text-xl font-semibold text-foreground">Data Security</h2>
+        <p>
+          We implement industry-standard security measures to protect your data. Authentication is handled by Clerk, which is SOC 2 compliant and GDPR-ready.
+        </p>
+        <h2 className="text-xl font-semibold text-foreground">Contact</h2>
+        <p>
+          For questions about this policy, contact guillermopickman@gmail.com.
+        </p>
+      </div>
+    </div>
   );
 }
