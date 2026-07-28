@@ -179,7 +179,9 @@ export function useConversations(user: string | null) {
         content,
         timestamp: Date.now(),
       };
-      const updated = conversations.map((c) => {
+      // Read fresh conversations from localStorage to avoid stale closure
+      const current = loadLocalConversations();
+      const updated = current.map((c) => {
         if (c.id !== targetId) return c;
         const messages = [...c.messages, msg];
         const title = c.messages.length === 0 ? generateTitle(content) : c.title;
@@ -187,7 +189,7 @@ export function useConversations(user: string | null) {
       });
       persist(updated, targetId);
     },
-    [conversations, activeId, persist],
+    [activeId, persist],
   );
 
   return {
