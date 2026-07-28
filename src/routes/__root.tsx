@@ -107,7 +107,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
 function RootShell({ children }: { children: ReactNode }) {
   return (
-    <ClerkProvider signInUrl="/sign-in">
+    <ClerkProvider
+      signInUrl="/sign-in"
+    >
       <LanguageProvider>
         <RootShellInner>{children}</RootShellInner>
       </LanguageProvider>
@@ -118,11 +120,11 @@ function RootShell({ children }: { children: ReactNode }) {
 function RootShellInner({ children }: { children: ReactNode }) {
   const { lang } = useLanguage();
   return (
-    <html lang={lang}>
-      <head>
+    <html lang={lang} suppressHydrationWarning>
+      <head suppressHydrationWarning>
         <HeadContent />
       </head>
-      <body>
+      <body suppressHydrationWarning>
         {children}
         <Scripts />
       </body>

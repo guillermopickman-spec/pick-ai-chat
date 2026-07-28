@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, useEffect, type ReactNode } from "react";
 import { type Lang, t as translate } from "./i18n";
 
 interface LanguageContextType {
@@ -25,7 +25,15 @@ function detectLanguage(): Lang {
 }
 
 export function LanguageProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(detectLanguage);
+  const [lang, setLangState] = useState<Lang>("es");
+
+  // After hydration, detect the actual browser language
+  useEffect(() => {
+    const detected = detectLanguage();
+    if (detected !== "es") {
+      setLangState(detected);
+    }
+  }, []);
 
   const setLang = (next: Lang) => {
     setLangState(next);

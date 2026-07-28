@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Link } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
-import { SignInButton, UserButton, Show, useUser } from "@clerk/tanstack-react-start";
+import { useUser, useClerk } from "@clerk/tanstack-react-start";
 
 const ADMIN_EMAIL = "guillermopickman@gmail.com";
 
@@ -15,7 +15,8 @@ function scrollToHash(hash: string) {
 
 export function Navbar() {
   const { t, lang, setLang } = useLanguage();
-  const { user } = useUser();
+  const { user, isLoaded, isSignedIn } = useUser();
+  const clerk = useClerk();
   const [mobileOpen, setMobileOpen] = useState(false);
   const isAdmin = user?.primaryEmailAddress?.emailAddress === ADMIN_EMAIL;
 
@@ -25,6 +26,10 @@ export function Navbar() {
     { label: t("nav.pricing"), to: "/", hash: "pricing" },
     { label: t("nav.faq"), to: "/", hash: "faq" },
   ];
+
+  const handleSignIn = () => {
+    clerk.redirectToSignIn();
+  };
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur">
@@ -82,7 +87,7 @@ export function Navbar() {
             </button>
           </div>
 
-          <Show when="signed-in">
+          {isLoaded && isSignedIn ? (
             <div className="flex items-center gap-2">
               <Link
                 to="/chat"
@@ -104,16 +109,21 @@ export function Navbar() {
                   Admin
                 </Link>
               )}
-              <UserButton />
+              <button
+                onClick={() => clerk.signOut()}
+                className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-red-500 hover:text-red-500"
+              >
+                Sign Out
+              </button>
             </div>
-          </Show>
-          <Show when="signed-out">
-            <SignInButton>
-              <span className="inline-block cursor-pointer rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta">
-                Sign In
-              </span>
-            </SignInButton>
-          </Show>
+          ) : (
+            <button
+              onClick={handleSignIn}
+              className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+            >
+              Sign In
+            </button>
+          )}
 
           <Link
             to="/contact"
@@ -175,7 +185,7 @@ export function Navbar() {
             </div>
             {/* Mobile auth buttons */}
             <div className="border-t border-border pt-3">
-              <Show when="signed-in">
+              {isLoaded && isSignedIn ? (
                 <div className="flex items-center gap-2">
                   <Link
                     to="/chat"
@@ -200,19 +210,21 @@ export function Navbar() {
                       Admin
                     </Link>
                   )}
-                  <UserButton />
-                </div>
-              </Show>
-              <Show when="signed-out">
-                <SignInButton>
-                  <span
-                    onClick={() => setMobileOpen(false)}
-                    className="block w-full cursor-pointer rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                  <button
+                    onClick={() => { setMobileOpen(false); clerk.signOut(); }}
+                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-red-500 hover:text-red-500"
                   >
-                    Sign In
-                  </span>
-                </SignInButton>
-              </Show>
+                    Sign Out
+                  </button>
+                </div>
+              ) : (
+                <button
+                  onClick={() => { setMobileOpen(false); handleSignIn(); }}
+                  className="w-full rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                >
+                  Sign In
+                </button>
+              )}
             </div>
             <Link
               to="/contact"
