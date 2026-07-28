@@ -109,9 +109,9 @@ export function Navbar() {
           </Show>
           <Show when="signed-out">
             <SignInButton mode="modal">
-              <button className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta">
+              <span className="inline-block cursor-pointer rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta">
                 Sign In
-              </button>
+              </span>
             </SignInButton>
           </Show>
 
@@ -205,12 +205,12 @@ export function Navbar() {
               </Show>
               <Show when="signed-out">
                 <SignInButton mode="modal">
-                  <button
+                  <span
                     onClick={() => setMobileOpen(false)}
-                    className="w-full rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                    className="block w-full cursor-pointer rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
                   >
                     Sign In
-                  </button>
+                  </span>
                 </SignInButton>
               </Show>
             </div>
