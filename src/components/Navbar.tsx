@@ -108,7 +108,7 @@ export function Navbar() {
             </div>
           </Show>
           <Show when="signed-out">
-            <SignInButton mode="modal">
+            <SignInButton>
               <span className="inline-block cursor-pointer rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta">
                 Sign In
               </span>
@@ -204,7 +204,7 @@ export function Navbar() {
                 </div>
               </Show>
               <Show when="signed-out">
-                <SignInButton mode="modal">
+                <SignInButton>
                   <span
                     onClick={() => setMobileOpen(false)}
                     className="block w-full cursor-pointer rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
