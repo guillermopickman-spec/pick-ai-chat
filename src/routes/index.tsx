@@ -8,7 +8,6 @@ import { Pricing } from "@/components/Pricing";
 import { DemoChat } from "@/components/DemoChat";
 import { FAQ } from "@/components/FAQ";
 import { ContactSection } from "@/components/Contact";
-import { WhatsAppButton } from "@/components/WhatsAppButton";
 import { About } from "@/components/About";
 
 export const Route = createFileRoute("/")({
@@ -63,7 +62,6 @@ function LandingPage() {
         <Pricing />
         <FAQ />
         <ContactSection />
-        <WhatsAppButton />
       </main>
     </>
   );

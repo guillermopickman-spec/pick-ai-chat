@@ -2,7 +2,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { DEFAULT_SETTINGS, sendChatMessage } from "@/utils/api";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { MessageSquare, X, Send, Loader2 } from "lucide-react";
+import { MessageSquare, Send, Loader2 } from "lucide-react";
 
 const MAX_MESSAGES = 10;
 const SESSION_KEY = "pickaichat.widget-session.v1";
@@ -55,8 +55,7 @@ function saveSession(msgs: WidgetMessage[]) {
   }
 }
 
-export function ChatWidget() {
-  const [open, setOpen] = useState(false);
+export function ChatWidget({ open }: { open: boolean }) {
   const [messages, setMessages] = useState<WidgetMessage[]>(loadSession);
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
@@ -120,17 +119,8 @@ export function ChatWidget() {
 
   return (
     <>
-      {/* Toggle button */}
-      <button
-        onClick={() => setOpen(!open)}
-        className="fixed bottom-5 left-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-magenta text-white shadow-lg shadow-magenta/30 transition hover:brightness-110 hover:shadow-xl hover:shadow-magenta/40"
-      >
-        {open ? <X size={20} /> : <MessageSquare size={20} />}
-      </button>
-
-      {/* Chat panel */}
       {open && (
-        <div className="fixed bottom-20 left-5 z-50 flex w-80 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl shadow-black/40 sm:w-96">
+        <div className="fixed bottom-24 right-6 z-50 flex w-80 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl shadow-black/40 sm:w-96">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border bg-card px-3 py-2.5">
             <div className="flex items-center gap-2">
