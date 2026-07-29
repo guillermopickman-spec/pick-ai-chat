@@ -120,7 +120,7 @@ export function ChatWidget({ open }: { open: boolean }) {
   return (
     <>
       {open && (
-        <div className="fixed bottom-24 left-5 z-50 flex w-80 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl shadow-black/40 sm:w-96">
+        <div className="fixed bottom-24 right-20 z-50 flex w-80 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl shadow-black/40 sm:w-96">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border bg-card px-3 py-2.5">
             <div className="flex items-center gap-2">
