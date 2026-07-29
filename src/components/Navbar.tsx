@@ -1,31 +1,35 @@
 import { useState } from "react";
-import { Link } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 import { useUser, useClerk } from "@clerk/tanstack-react-start";
 
 const ADMIN_EMAIL = "guillermopickman@gmail.com";
 
-function scrollToHash(hash: string) {
-  const el = document.getElementById(hash);
-  if (el) {
-    el.scrollIntoView({ behavior: "smooth", block: "start" });
-  }
-}
-
 export function Navbar() {
   const { t, lang, setLang } = useLanguage();
   const { user, isLoaded, isSignedIn } = useUser();
   const clerk = useClerk();
   const [mobileOpen, setMobileOpen] = useState(false);
+  const location = useLocation();
+  const isHome = location.pathname === "/";
   const isAdmin = user?.primaryEmailAddress?.emailAddress === ADMIN_EMAIL;
 
   const NAV_LINKS = [
-    { label: t("nav.features"), to: "/", hash: "features" },
-    { label: t("nav.demo"), to: "/", hash: "chatbot" },
-    { label: t("nav.pricing"), to: "/", hash: "pricing" },
-    { label: t("nav.faq"), to: "/", hash: "faq" },
+    { label: t("nav.features"), hash: "features" },
+    { label: t("nav.demo"), hash: "demo" },
+    { label: t("nav.pricing"), hash: "pricing" },
+    { label: t("nav.faq"), hash: "faq" },
   ];
+
+  function handleNavClick(hash: string) {
+    if (isHome) {
+      const el = document.getElementById(hash);
+      if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else {
+      window.location.href = `/#${hash}`;
+    }
+  }
 
   const handleSignIn = () => {
     clerk.redirectToSignIn();
@@ -56,7 +60,7 @@ export function Navbar() {
           {NAV_LINKS.map((link) => (
             <button
               key={link.hash}
-              onClick={() => scrollToHash(link.hash)}
+              onClick={() => handleNavClick(link.hash)}
               className="text-sm text-muted-foreground transition hover:text-foreground"
             >
               {link.label}
@@ -162,7 +166,7 @@ export function Navbar() {
                 key={link.hash}
                 onClick={() => {
                   setMobileOpen(false);
-                  scrollToHash(link.hash);
+                  handleNavClick(link.hash);
                 }}
                 className="text-left text-sm text-muted-foreground transition hover:text-foreground"
               >

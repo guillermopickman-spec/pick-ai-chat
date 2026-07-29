@@ -4,6 +4,7 @@ import {
   Link,
   createRootRouteWithContext,
   useRouter,
+  useLocation,
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
@@ -137,13 +138,15 @@ function RootShellInner({ children }: { children: ReactNode }) {
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   const [chatOpen, setChatOpen] = useState(false);
+  const location = useLocation();
+  const isTryPage = location.pathname === "/try";
 
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <Footer />
       <PwaAuthGuard />
-      <ChatWidget open={chatOpen} />
+      {!isTryPage && <ChatWidget open={chatOpen} />}
       <WhatsAppButton chatOpen={chatOpen} onChatToggle={() => setChatOpen(v => !v)} />
     </QueryClientProvider>
   );

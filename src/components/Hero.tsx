@@ -1,5 +1,6 @@
 import { useLanguage } from "../lib/LanguageProvider";
 import { DemoChat } from "./DemoChat";
+import { Link } from "@tanstack/react-router";
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -69,13 +70,13 @@ export function Hero() {
           </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row">
-            <button
-              onClick={() => scrollTo("chatbot")}
+            <Link
+              to="/try"
               className="group inline-flex items-center justify-center rounded-lg bg-magenta px-6 py-3 text-sm font-semibold text-primary-foreground transition hover:brightness-110 hover:shadow-[0_0_32px_-4px_var(--magenta-glow)]"
             >
               {t("hero.cta.try")}
               <span className="ml-2 transition group-hover:translate-x-0.5">→</span>
-            </button>
+            </Link>
             <button
               onClick={() => scrollTo("pricing")}
               className="inline-flex items-center justify-center rounded-lg border border-border bg-card/60 px-6 py-3 text-sm font-semibold text-foreground backdrop-blur transition hover:border-magenta/60 hover:text-magenta"
