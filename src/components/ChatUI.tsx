@@ -4,6 +4,8 @@ import { useUser } from "@clerk/tanstack-react-start";
 import { useConversations, type Message } from "@/hooks/useConversations";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { sendToHermesBot } from "@/utils/api";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import {
   Plus,
   MessageSquare,
@@ -250,7 +252,69 @@ function MessageBubble({ message }: { message: Message }) {
             : "rounded-tl-sm bg-accent/50 text-foreground"
         }`}
       >
-        {message.content}
+        {isUser ? (
+          message.content
+        ) : (
+          <Markdown
+            remarkPlugins={[remarkGfm]}
+            components={{
+              // Style tables
+              table: ({ children }) => (
+                <div className="my-2 overflow-x-auto">
+                  <table className="min-w-full border-collapse text-sm">
+                    {children}
+                  </table>
+                </div>
+              ),
+              th: ({ children }) => (
+                <th className="border border-border px-3 py-1.5 text-left font-semibold bg-accent/30">
+                  {children}
+                </th>
+              ),
+              td: ({ children }) => (
+                <td className="border border-border px-3 py-1.5">{children}</td>
+              ),
+              // Style code blocks
+              code: ({ className, children, ...props }) => {
+                const isInline = !className;
+                return isInline ? (
+                  <code className="rounded bg-accent/50 px-1.5 py-0.5 text-xs font-mono" {...props}>
+                    {children}
+                  </code>
+                ) : (
+                  <pre className="my-2 overflow-x-auto rounded-lg bg-accent/30 p-3 text-xs font-mono">
+                    <code className={className} {...props}>
+                      {children}
+                    </code>
+                  </pre>
+                );
+              },
+              // Style lists
+              ul: ({ children }) => (
+                <ul className="my-1 list-disc pl-5 space-y-0.5">{children}</ul>
+              ),
+              ol: ({ children }) => (
+                <ol className="my-1 list-decimal pl-5 space-y-0.5">{children}</ol>
+              ),
+              // Style headings
+              h1: ({ children }) => <h1 className="my-2 text-base font-bold">{children}</h1>,
+              h2: ({ children }) => <h2 className="my-2 text-sm font-bold">{children}</h2>,
+              h3: ({ children }) => <h3 className="my-1.5 text-sm font-semibold">{children}</h3>,
+              // Style paragraphs
+              p: ({ children }) => <p className="my-1 last:mb-0">{children}</p>,
+              // Style links
+              a: ({ children, href }) => (
+                <a href={href} target="_blank" rel="noopener noreferrer" className="underline text-magenta hover:brightness-110">
+                  {children}
+                </a>
+              ),
+              // Style horizontal rules
+              hr: () => <hr className="my-3 border-border" />,
+            }}
+          >
+            {message.content}
+          </Markdown>
+        )}
       </div>
     </div>
   );
