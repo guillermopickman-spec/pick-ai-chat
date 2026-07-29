@@ -90,7 +90,7 @@ export function Hero() {
           <div className="relative">
             <div
               aria-hidden
-              className="absolute -inset-4 rounded-2xl opacity-30 blur-xl"
+              className="absolute -inset-4 rounded-2xl opacity-30 blur-xl pointer-events-none"
               style={{ background: "var(--magenta)" }}
             />
             <DemoChat compact />
