@@ -18,9 +18,10 @@ export const MODEL_OPTIONS = [
 export async function sendChatMessage(
   settings: ChatSettings,
   userMessage: string,
+  systemPrompt?: string,
 ): Promise<string> {
   const result = await chatWithAI({
-    data: { message: userMessage, model: settings.model },
+    data: { message: userMessage, model: settings.model, systemPrompt },
   });
 
   if (!result.success) {

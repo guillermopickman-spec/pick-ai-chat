@@ -1,5 +1,5 @@
 import { useLanguage } from "../lib/LanguageProvider";
-import { Chatbot } from "./Chatbot";
+import { DemoChat } from "./DemoChat";
 
 function scrollTo(id: string) {
   document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -93,7 +93,7 @@ export function Hero() {
               className="absolute -inset-4 rounded-2xl opacity-30 blur-xl"
               style={{ background: "var(--magenta)" }}
             />
-            <Chatbot compact />
+            <DemoChat compact />
           </div>
         </div>
       </div>

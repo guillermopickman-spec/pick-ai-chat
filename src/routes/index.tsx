@@ -5,7 +5,7 @@ import { Features } from "@/components/Features";
 import { SocialProof } from "@/components/SocialProof";
 import { HowItWorks } from "@/components/HowItWorks";
 import { Pricing } from "@/components/Pricing";
-import { Chatbot } from "@/components/Chatbot";
+import { DemoChat } from "@/components/DemoChat";
 import { FAQ } from "@/components/FAQ";
 import { ContactSection } from "@/components/Contact";
 import { WhatsAppButton } from "@/components/WhatsAppButton";
@@ -57,8 +57,8 @@ function LandingPage() {
         <HowItWorks />
         <About />
         {/* Standalone chatbot — visible on mobile (hidden on desktop since it's already in Hero) */}
-        <div className="lg:hidden">
-          <Chatbot />
+        <div id="chatbot" className="lg:hidden">
+          <DemoChat />
         </div>
         <Pricing />
         <FAQ />
