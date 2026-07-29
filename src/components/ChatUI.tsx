@@ -89,7 +89,7 @@ export function ChatUI() {
           <button
             onClick={() => {
               createConversation();
-              setSidebarOpen(true);
+              setSidebarOpen(false);
             }}
             className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-foreground transition hover:border-magenta hover:text-magenta"
           >
@@ -122,7 +122,10 @@ export function ChatUI() {
                     ? "bg-magenta/10 text-magenta"
                     : "text-muted-foreground hover:bg-accent/50 hover:text-foreground"
                 }`}
-                onClick={() => switchConversation(conv.id)}
+                onClick={() => {
+              switchConversation(conv.id);
+              setSidebarOpen(false);
+            }}
               >
                 <MessageSquare size={14} className="shrink-0" />
                 <span className="flex-1 truncate">{conv.title}</span>
