@@ -60,8 +60,11 @@ export function ChatUI() {
     setIsTyping(true);
 
     try {
-      const { reply } = await sendToHermesBot(text, convId, userEmail ?? "");
+      const { reply, title } = await sendToHermesBot(text, convId, userEmail ?? "");
       addMessage("assistant", reply, convId);
+      if (title) {
+        renameConversation(convId, title);
+      }
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Something went wrong";
       addMessage("assistant", `Error: ${msg}`);
