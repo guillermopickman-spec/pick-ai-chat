@@ -123,14 +123,14 @@ export function ChatWidget() {
       {/* Toggle button */}
       <button
         onClick={() => setOpen(!open)}
-        className="fixed bottom-5 right-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-magenta text-white shadow-lg shadow-magenta/30 transition hover:brightness-110 hover:shadow-xl hover:shadow-magenta/40"
+        className="fixed bottom-5 left-5 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-magenta text-white shadow-lg shadow-magenta/30 transition hover:brightness-110 hover:shadow-xl hover:shadow-magenta/40"
       >
         {open ? <X size={20} /> : <MessageSquare size={20} />}
       </button>
 
       {/* Chat panel */}
       {open && (
-        <div className="fixed bottom-20 right-5 z-50 flex w-80 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl shadow-black/40 sm:w-96">
+        <div className="fixed bottom-20 left-5 z-50 flex w-80 flex-col overflow-hidden rounded-xl border border-border bg-card shadow-2xl shadow-black/40 sm:w-96">
           {/* Header */}
           <div className="flex items-center justify-between border-b border-border bg-card px-3 py-2.5">
             <div className="flex items-center gap-2">
