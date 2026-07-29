@@ -96,7 +96,8 @@ export function ChatWidget({ open }: { open: boolean }) {
 
     setIsTyping(true);
     try {
-      const reply = await sendChatMessage(DEFAULT_SETTINGS, text, SYSTEM_PROMPT);
+      const history = messages.map(m => ({ role: m.role, content: m.content }));
+      const reply = await sendChatMessage(DEFAULT_SETTINGS, text, SYSTEM_PROMPT, history);
       const assistantMsg: WidgetMessage = { id: generateId(), role: "assistant", content: reply };
       const final = [...updated, assistantMsg];
       setMessages(final);

@@ -19,9 +19,14 @@ export async function sendChatMessage(
   settings: ChatSettings,
   userMessage: string,
   systemPrompt?: string,
+  history?: Array<{ role: "user" | "assistant"; content: string }>,
 ): Promise<string> {
+  const messages = [
+    ...(history || []),
+    { role: "user" as const, content: userMessage },
+  ];
   const result = await chatWithAI({
-    data: { message: userMessage, model: settings.model, systemPrompt },
+    data: { messages, model: settings.model, systemPrompt },
   });
 
   if (!result.success) {

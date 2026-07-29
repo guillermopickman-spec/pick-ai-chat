@@ -120,10 +120,14 @@ export function TryChat() {
     let id = activeId;
     if (!id) { createConversation(); return; }
 
+    // Build conversation history before adding the new message
+    const prevMsgs = conversations.find(c => c.id === id)?.messages || [];
+    const history = prevMsgs.map(m => ({ role: m.role, content: m.content }));
+
     addMsg("user", text);
     setIsTyping(true);
     try {
-      const reply = await sendChatMessage(DEFAULT_SETTINGS, text, SYSTEM_PROMPT);
+      const reply = await sendChatMessage(DEFAULT_SETTINGS, text, SYSTEM_PROMPT, history);
       addMsg("assistant", reply);
     } catch {
       addMsg("assistant", "Something went wrong. Please try again.");

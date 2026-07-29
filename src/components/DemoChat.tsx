@@ -115,7 +115,8 @@ export function DemoChat({ compact }: { compact?: boolean }) {
     setIsTyping(true);
 
     try {
-      const reply = await sendChatMessage(DEFAULT_SETTINGS, text, SYSTEM_PROMPT);
+      const history = messages.map(m => ({ role: m.role, content: m.content }));
+      const reply = await sendChatMessage(DEFAULT_SETTINGS, text, SYSTEM_PROMPT, history);
       const assistantMsg: DemoMessage = {
         id: generateId(),
         role: "assistant",

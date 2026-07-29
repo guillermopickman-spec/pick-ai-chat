@@ -9,9 +9,9 @@ const SYSTEM_PROMPT =
 
 export const chatWithAI = createServerFn({ method: "POST" })
   .validator((data: unknown) => {
-    const d = data as { message?: string; model?: string; systemPrompt?: string };
+    const d = data as { messages?: Array<{ role: string; content: string }>; model?: string; systemPrompt?: string };
     return {
-      message: (d.message || "").trim(),
+      messages: d.messages || [],
       model: d.model || "openrouter/free",
       systemPrompt: d.systemPrompt,
     };
@@ -26,11 +26,11 @@ export const chatWithAI = createServerFn({ method: "POST" })
       };
     }
 
-    if (!data.message) {
-      return { success: false as const, error: "Message is required" };
-    }
-
     const systemPrompt = data.systemPrompt || SYSTEM_PROMPT;
+    const messages = [
+      { role: "system" as const, content: systemPrompt },
+      ...data.messages,
+    ];
 
     const res = await fetch("https://openrouter.ai/api/v1/chat/completions", {
       method: "POST",
@@ -42,10 +42,7 @@ export const chatWithAI = createServerFn({ method: "POST" })
       },
       body: JSON.stringify({
         model: data.model,
-        messages: [
-          { role: "system", content: systemPrompt },
-          { role: "user", content: data.message },
-        ],
+        messages,
       }),
     });
 
