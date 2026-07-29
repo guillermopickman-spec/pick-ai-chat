@@ -2,6 +2,8 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { DEFAULT_SETTINGS, sendChatMessage } from "@/utils/api";
 import { useIsMobile } from "@/hooks/use-mobile";
+import Markdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { Send, Loader2 } from "lucide-react";
 
 const MAX_MESSAGES = 10;
@@ -202,7 +204,48 @@ export function DemoChat({ compact }: { compact?: boolean }) {
                     : "rounded-tl-sm bg-accent text-foreground"
                 }`}
               >
-                {msg.content}
+                {msg.role === "user" ? (
+                  msg.content
+                ) : (
+                  <Markdown
+                    remarkPlugins={[remarkGfm]}
+                    components={{
+                      table: ({ children }) => (
+                        <div className="my-1 overflow-x-auto">
+                          <table className="min-w-full border-collapse text-xs">{children}</table>
+                        </div>
+                      ),
+                      th: ({ children }) => (
+                        <th className="border border-border px-2 py-1 text-left font-semibold bg-accent/50">{children}</th>
+                      ),
+                      td: ({ children }) => (
+                        <td className="border border-border px-2 py-1">{children}</td>
+                      ),
+                      code: ({ className, children, ...props }) => {
+                        const isInline = !className;
+                        return isInline ? (
+                          <code className="rounded bg-accent/50 px-1 py-0.5 text-xs font-mono" {...props}>{children}</code>
+                        ) : (
+                          <pre className="my-1 overflow-x-auto rounded-lg bg-accent/50 p-2 text-xs font-mono">
+                            <code className={className} {...props}>{children}</code>
+                          </pre>
+                        );
+                      },
+                      ul: ({ children }) => <ul className="my-1 list-disc pl-4 space-y-0.5">{children}</ul>,
+                      ol: ({ children }) => <ol className="my-1 list-decimal pl-4 space-y-0.5">{children}</ol>,
+                      h1: ({ children }) => <h1 className="my-1 text-sm font-bold">{children}</h1>,
+                      h2: ({ children }) => <h2 className="my-1 text-sm font-bold">{children}</h2>,
+                      h3: ({ children }) => <h3 className="my-1 text-xs font-semibold">{children}</h3>,
+                      p: ({ children }) => <p className="my-0.5 last:mb-0">{children}</p>,
+                      a: ({ children, href }) => (
+                        <a href={href} target="_blank" rel="noopener noreferrer" className="underline text-magenta hover:brightness-110">{children}</a>
+                      ),
+                      hr: () => <hr className="my-2 border-border" />,
+                    }}
+                  >
+                    {msg.content}
+                  </Markdown>
+                )}
               </div>
             </div>
           ))
