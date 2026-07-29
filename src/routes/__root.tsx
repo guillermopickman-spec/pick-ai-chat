@@ -143,9 +143,6 @@ function RootComponent() {
 
   // Prevent browser scroll restoration — handle manually
   useEffect(() => {
-    // Disable browser's built-in scroll memory
-    history.scrollRestoration = "manual";
-
     // Handle hash scroll or scroll to top
     const hash = window.location.hash.slice(1);
     if (hash) {
@@ -156,6 +153,7 @@ function RootComponent() {
       }, 100);
       return () => clearTimeout(timer);
     }
+    // Scroll to top on fresh page loads (no hash)
     window.scrollTo(0, 0);
   }, [location.pathname]);
 
