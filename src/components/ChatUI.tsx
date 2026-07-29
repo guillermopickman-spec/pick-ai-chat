@@ -4,6 +4,7 @@ import { useUser } from "@clerk/tanstack-react-start";
 import { useConversations, type Message } from "@/hooks/useConversations";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { sendToHermesBot } from "@/utils/api";
+import { useIsMobile } from "@/hooks/use-mobile";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
@@ -37,6 +38,15 @@ export function ChatUI() {
   const [isTyping, setIsTyping] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
   const scrollRef = useRef<HTMLDivElement>(null);
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const isMobile = useIsMobile();
+
+  // Auto-focus the input when switching conversations
+  useEffect(() => {
+    // Small delay to wait for render on mobile
+    const timer = setTimeout(() => inputRef.current?.focus(), 100);
+    return () => clearTimeout(timer);
+  }, [activeId]);
 
   useEffect(() => {
     const el = scrollRef.current;
@@ -91,7 +101,7 @@ export function ChatUI() {
           <button
             onClick={() => {
               createConversation();
-              setSidebarOpen(false);
+              if (isMobile) setSidebarOpen(false);
             }}
             className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-foreground transition hover:border-magenta hover:text-magenta"
           >
@@ -126,7 +136,7 @@ export function ChatUI() {
                 }`}
                 onClick={() => {
               switchConversation(conv.id);
-              setSidebarOpen(false);
+              if (isMobile) setSidebarOpen(false);
             }}
               >
                 <MessageSquare size={14} className="shrink-0" />
@@ -207,6 +217,7 @@ export function ChatUI() {
           <form onSubmit={handleSubmit} className="mx-auto flex max-w-3xl items-end gap-2">
             <div className="relative flex-1">
               <textarea
+                ref={inputRef}
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 onKeyDown={handleKeyDown}
