@@ -23,6 +23,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "hero.cta.try": "Probar el Agente",
     "hero.cta.pricing": "Contactar",
     "hero.cta.whatsapp": "Conectar con WhatsApp",
+    "hero.cta.models": "Ver modelos",
 
     /* Features */
     "features.section": "// Qué hace",
@@ -292,6 +293,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "hero.cta.try": "Try the Agent",
     "hero.cta.pricing": "Contact Us",
     "hero.cta.whatsapp": "Connect with WhatsApp",
+    "hero.cta.models": "See models",
 
     /* Features */
     "features.section": "// What it does",

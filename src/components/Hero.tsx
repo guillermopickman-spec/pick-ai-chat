@@ -90,7 +90,7 @@ export function Hero() {
               onClick={() => scrollTo("technology")}
               className="text-xs text-muted-foreground/60 transition hover:text-magenta"
             >
-              See models →
+              {t("hero.cta.models")}
             </button>
           </div>
         </div>

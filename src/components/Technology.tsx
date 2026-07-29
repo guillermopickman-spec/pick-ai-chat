@@ -1,12 +1,13 @@
+import { useState } from "react";
 import { Scan, Sliders, Rocket } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 
 const MODELS = [
-  { key: "0", provider: "anthropic" },
-  { key: "1", provider: "openai" },
-  { key: "2", provider: "anthropic" },
-  { key: "3", provider: "deepseek" },
-  { key: "4", provider: "qwen" },
+  { key: "0", provider: "anthropic", initials: "An" },
+  { key: "1", provider: "openai", initials: "OA" },
+  { key: "2", provider: "anthropic", initials: "An" },
+  { key: "3", provider: "deepseek", initials: "DS" },
+  { key: "4", provider: "qwen", initials: "Qw" },
 ] as const;
 
 const STEPS = [
@@ -24,12 +25,31 @@ const MODEL_LOGOS: Record<string, string> = {
 
 const PRICE_COLORS: Record<string, string> = {
   "$": "text-green-400",
-  "$$": "text-yellow-400",
-  "$$$": "text-red-400",
+  "$$": "text-foreground",
+  "$$$": "text-amber-400",
 };
 
+function ModelLogo({ provider, initials }: { provider: string; initials: string }) {
+  const [errored, setErrored] = useState(false);
+  if (errored) {
+    return (
+      <span className="flex h-7 w-7 items-center justify-center rounded-full bg-muted text-[10px] font-bold text-muted-foreground">
+        {initials}
+      </span>
+    );
+  }
+  return (
+    <img
+      src={MODEL_LOGOS[provider]}
+      alt={provider}
+      className="h-7 w-7 rounded-full"
+      onError={() => setErrored(true)}
+    />
+  );
+}
+
 export function Technology() {
-  const { t, lang } = useLanguage();
+  const { t } = useLanguage();
 
   return (
     <section id="technology" className="relative px-4 py-24 sm:py-32">
@@ -53,18 +73,13 @@ export function Technology() {
             {t("tech.models.title")}
           </h3>
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
-            {MODELS.map(({ key, provider }) => (
+            {MODELS.map(({ key, provider, initials }) => (
               <div
                 key={key}
                 className="group relative flex flex-col rounded-xl border border-border bg-card p-5 transition hover:border-magenta/50 hover:-translate-y-0.5"
               >
                 <div className="mb-3 flex items-center gap-3">
-                  <img
-                    src={MODEL_LOGOS[provider]}
-                    alt={provider}
-                    className="h-7 w-7 rounded-full"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
-                  />
+                  <ModelLogo provider={provider} initials={initials} />
                   <span className="text-sm font-semibold text-foreground">
                     {t(`tech.model.${key}.name`)}
                   </span>
@@ -72,14 +87,34 @@ export function Technology() {
                 <div className="mb-2 text-xs text-muted-foreground">
                   {t(`tech.model.${key}.tag`)}
                 </div>
-                <div className={`text-lg font-bold ${PRICE_COLORS[t(`tech.model.${key}.price`)] || "text-foreground"}`}>
-                  {t(`tech.model.${key}.price`)}
+                <div className="flex items-center gap-2">
+                  <div className={`text-lg font-bold ${PRICE_COLORS[t(`tech.model.${key}.price`)] || "text-foreground"}`}>
+                    {t(`tech.model.${key}.price`)}
+                  </div>
+                  {key === "4" && (
+                    <span className="rounded-full bg-green-500/15 px-2 py-0.5 text-[10px] font-semibold text-green-400">
+                      Free
+                    </span>
+                  )}
                 </div>
                 <div className="mt-2 text-xs leading-relaxed text-muted-foreground/70">
                   {t(`tech.model.${key}.desc`)}
                 </div>
               </div>
             ))}
+          </div>
+
+          {/* Price legend */}
+          <div className="mt-6 flex flex-wrap items-center justify-center gap-4 text-xs text-muted-foreground/60">
+            <span className="inline-flex items-center gap-1">
+              <span className="text-base font-bold text-green-400">$</span> Affordable
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <span className="text-base font-bold text-foreground">$$</span> Premium
+            </span>
+            <span className="inline-flex items-center gap-1">
+              <span className="text-base font-bold text-amber-400">$$$</span> Top tier
+            </span>
           </div>
         </div>
 
