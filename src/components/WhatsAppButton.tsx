@@ -2,7 +2,7 @@ import { MessageCircle, Mail, MessageSquare, X } from "lucide-react";
 
 const WHATSAPP_NUMBER = "34640325994";
 const WHATSAPP_MSG = "Hola%2C+quiero+informaci%C3%B3n+sobre+PickAIChat";
-const EMAIL = "guillermopickman@gmail.com";
+const EMAIL = "hello@pickaichat.com";
 const EMAIL_SUBJECT = "Quiero información sobre PickAIChat";
 
 export function WhatsAppButton({
