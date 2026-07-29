@@ -27,7 +27,6 @@ export function ChatUI() {
     loading,
     createConversation,
     deleteConversation,
-    renameConversation,
     switchConversation,
     addMessage,
   } = useConversations(userEmail);
@@ -61,10 +60,8 @@ export function ChatUI() {
 
     try {
       const { reply, title } = await sendToHermesBot(text, convId, userEmail ?? "");
-      addMessage("assistant", reply, convId);
-      if (title) {
-        renameConversation(convId, title);
-      }
+      // Pass the AI-generated title so it's set atomically with the message
+      addMessage("assistant", reply, convId, title);
     } catch (err) {
       const msg = err instanceof Error ? err.message : "Something went wrong";
       addMessage("assistant", `Error: ${msg}`);

@@ -170,7 +170,7 @@ export function useConversations(user: string | null) {
   }, []);
 
   const addMessage = useCallback(
-    (role: "user" | "assistant", content: string, convId?: string) => {
+    (role: "user" | "assistant", content: string, convId?: string, titleOverride?: string) => {
       const targetId = convId ?? activeId;
       if (!targetId) return;
       const msg: Message = {
@@ -184,7 +184,8 @@ export function useConversations(user: string | null) {
       const updated = current.map((c) => {
         if (c.id !== targetId) return c;
         const messages = [...c.messages, msg];
-        const title = c.messages.length === 0 ? generateTitle(content) : c.title;
+        // Use API-provided title for new conversations, otherwise keep existing
+        const title = titleOverride ?? (c.messages.length === 0 ? generateTitle(content) : c.title);
         return { ...c, messages, title, updatedAt: Date.now() };
       });
       persist(updated, targetId);
