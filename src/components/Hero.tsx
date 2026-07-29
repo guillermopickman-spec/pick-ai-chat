@@ -84,6 +84,15 @@ export function Hero() {
               {t("hero.cta.pricing")}
             </button>
           </div>
+
+          <div className="mt-4 flex justify-center">
+            <button
+              onClick={() => scrollTo("technology")}
+              className="text-xs text-muted-foreground/60 transition hover:text-magenta"
+            >
+              See models →
+            </button>
+          </div>
         </div>
 
         {/* Right: Chatbot demo on desktop */}

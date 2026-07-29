@@ -3,12 +3,12 @@ import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
 import { Features } from "@/components/Features";
 import { SocialProof } from "@/components/SocialProof";
-import { HowItWorks } from "@/components/HowItWorks";
 import { Pricing } from "@/components/Pricing";
 import { DemoChat } from "@/components/DemoChat";
 import { FAQ } from "@/components/FAQ";
 import { ContactSection } from "@/components/Contact";
 import { About } from "@/components/About";
+import { Technology } from "@/components/Technology";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -51,15 +51,15 @@ function LandingPage() {
       <Navbar />
       <main className="min-h-screen bg-background text-foreground">
         <Hero />
-        <Features />
-        <SocialProof />
-        <HowItWorks />
-        <About />
-        {/* Standalone chatbot — visible on mobile (hidden on desktop since it's already in Hero) */}
-        <div id="demo" className="lg:hidden">
+        {/* Demo chat on mobile (desktop shows it in Hero) */}
+        <div className="lg:hidden">
           <DemoChat />
         </div>
+        <Features />
+        <Technology />
+        <SocialProof />
         <Pricing />
+        <About />
         <FAQ />
         <ContactSection />
       </main>
