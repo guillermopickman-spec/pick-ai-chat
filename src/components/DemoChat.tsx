@@ -4,7 +4,7 @@ import { DEFAULT_SETTINGS, sendChatMessage } from "@/utils/api";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import { Send, Loader2 } from "lucide-react";
+import { Send, Loader2, RotateCcw } from "lucide-react";
 
 const MAX_MESSAGES = 10;
 const SESSION_KEY = "pickaichat.demo-session.v1";
@@ -164,9 +164,20 @@ export function DemoChat({ compact }: { compact?: boolean }) {
             {t("chatbot.heading") || "Try PickAIChat"}
           </span>
         </div>
-        <span className="text-[11px] text-muted-foreground">
-          {messages.filter((m) => m.role === "user").length}/{MAX_MESSAGES} free
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="text-[11px] text-muted-foreground">
+            {messages.filter((m) => m.role === "user").length}/{MAX_MESSAGES} free
+          </span>
+          {messages.length > 0 && (
+            <button
+              onClick={handleReload}
+              className="flex h-5 w-5 items-center justify-center rounded text-muted-foreground/50 transition hover:text-foreground hover:bg-accent"
+              title="Reset chat"
+            >
+              <RotateCcw size={11} />
+            </button>
+          )}
+        </div>
       </div>
 
       {/* Messages */}
