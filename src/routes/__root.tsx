@@ -141,6 +141,24 @@ function RootComponent() {
   const location = useLocation();
   const isTryPage = location.pathname === "/try";
 
+  // Prevent browser scroll restoration — handle manually
+  useEffect(() => {
+    // Disable browser's built-in scroll memory
+    history.scrollRestoration = "manual";
+
+    // Handle hash scroll or scroll to top
+    const hash = window.location.hash.slice(1);
+    if (hash) {
+      // Wait a tick for the DOM to settle, then scroll to the hash element
+      const timer = setTimeout(() => {
+        const el = document.getElementById(hash);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+      return () => clearTimeout(timer);
+    }
+    window.scrollTo(0, 0);
+  }, [location.pathname]);
+
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />

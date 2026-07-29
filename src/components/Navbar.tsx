@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link, useLocation, useNavigate } from "@tanstack/react-router";
+import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 import { useUser, useClerk } from "@clerk/tanstack-react-start";
@@ -12,7 +12,6 @@ export function Navbar() {
   const clerk = useClerk();
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const navigate = useNavigate();
   const isHome = location.pathname === "/";
   const isAdmin = user?.primaryEmailAddress?.emailAddress === ADMIN_EMAIL;
 
@@ -27,7 +26,7 @@ export function Navbar() {
       const el = document.getElementById(hash);
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     } else {
-      navigate({ to: "/", hash });
+      window.location.href = `/#${hash}`;
     }
   }
 
