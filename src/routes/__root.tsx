@@ -7,12 +7,13 @@ import {
   HeadContent,
   Scripts,
 } from "@tanstack/react-router";
-import { useEffect, type ReactNode } from "react";
+import { useEffect, useState, type ReactNode } from "react";
 import { ClerkProvider, useAuth } from "@clerk/tanstack-react-start";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Footer } from "../components/Footer";
+import { ChatWidget } from "../components/ChatWidget";
 import { WhatsAppButton } from "../components/WhatsAppButton";
 import { LanguageProvider, useLanguage } from "../lib/LanguageProvider";
 
@@ -135,13 +136,15 @@ function RootShellInner({ children }: { children: ReactNode }) {
 
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
+  const [chatOpen, setChatOpen] = useState(false);
 
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <Footer />
       <PwaAuthGuard />
-      <WhatsAppButton />
+      <ChatWidget open={chatOpen} />
+      <WhatsAppButton chatOpen={chatOpen} onChatToggle={() => setChatOpen(v => !v)} />
     </QueryClientProvider>
   );
 }

@@ -56,7 +56,7 @@ function LandingPage() {
         <HowItWorks />
         <About />
         {/* Standalone chatbot — visible on mobile (hidden on desktop since it's already in Hero) */}
-        <div id="demo" className="lg:hidden">
+        <div id="chatbot" className="lg:hidden">
           <DemoChat />
         </div>
         <Pricing />
