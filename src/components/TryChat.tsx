@@ -235,6 +235,13 @@ export function TryChat() {
           <form onSubmit={handleSubmit} className="mx-auto flex max-w-3xl items-end gap-2">
             <div className="relative flex-1">
               <textarea ref={inputRef} value={input} onChange={e => setInput(e.target.value)}
+                onKeyDown={e => {
+                  if (e.key === "Enter" && !e.shiftKey) {
+                    e.preventDefault();
+                    const form = (e.target as HTMLElement).closest("form");
+                    form?.requestSubmit();
+                  }
+                }}
                 placeholder={limitReached ? "Limit reached — try a new chat" : t("chatbot.placeholder") || "Ask about PickAIChat..."}
                 rows={1} disabled={limitReached && !activeConv?.messages.length}
                 className="min-h-[44px] w-full resize-none rounded-xl border border-border bg-background px-4 py-3 pr-12 text-sm text-foreground placeholder:text-muted-foreground outline-none transition focus:border-magenta focus:ring-1 focus:ring-magenta/30"
