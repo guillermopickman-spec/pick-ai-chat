@@ -17,7 +17,6 @@ export function Navbar() {
 
   const NAV_LINKS = [
     { label: t("nav.features"), hash: "features" },
-    { label: t("nav.demo"), hash: "demo" },
     { label: t("nav.pricing"), hash: "pricing" },
     { label: t("nav.faq"), hash: "faq" },
   ];
@@ -126,7 +125,7 @@ export function Navbar() {
               to="/try"
               className="rounded-lg border border-magenta/40 px-3 py-1.5 text-xs font-semibold text-magenta transition hover:border-magenta hover:bg-magenta/10"
             >
-              Try
+              Try Free
             </Link>
             <button
               onClick={handleSignIn}

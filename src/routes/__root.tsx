@@ -147,7 +147,7 @@ function RootComponent() {
       <Footer />
       <PwaAuthGuard />
       {!isTryPage && <ChatWidget open={chatOpen} />}
-      <WhatsAppButton chatOpen={chatOpen} onChatToggle={() => setChatOpen(v => !v)} />
+      <WhatsAppButton chatOpen={chatOpen} onChatToggle={() => setChatOpen(v => !v)} hideChatToggle={isTryPage} />
     </QueryClientProvider>
   );
 }
