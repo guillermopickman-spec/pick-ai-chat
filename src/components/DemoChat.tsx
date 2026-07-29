@@ -155,7 +155,7 @@ export function DemoChat({ compact }: { compact?: boolean }) {
       }`}
     >
       {/* Header */}
-      <div className="flex items-center justify-between border-b border-border bg-background/60 px-4 py-2.5">
+      <div className="flex items-center justify-between border-b border-border bg-card px-4 py-2.5">
         <div className="flex items-center gap-2">
           <div className="flex h-2 w-2 rounded-full bg-terminal shadow-[0_0_6px_var(--terminal)]" />
           <span className="text-xs font-semibold text-foreground">
@@ -198,8 +198,8 @@ export function DemoChat({ compact }: { compact?: boolean }) {
               <div
                 className={`max-w-[85%] rounded-2xl px-3 py-2 text-sm leading-relaxed ${
                   msg.role === "user"
-                    ? "rounded-tr-sm bg-magenta/90 text-white"
-                    : "rounded-tl-sm bg-accent/50 text-foreground"
+                    ? "rounded-tr-sm bg-magenta text-white"
+                    : "rounded-tl-sm bg-accent text-foreground"
                 }`}
               >
                 {msg.content}
@@ -213,7 +213,7 @@ export function DemoChat({ compact }: { compact?: boolean }) {
             <div className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-magenta/20 text-[10px] font-semibold text-magenta">
               AI
             </div>
-            <div className="rounded-2xl rounded-tl-sm bg-accent/50 px-3 py-2">
+            <div className="rounded-2xl rounded-tl-sm bg-accent px-3 py-2">
               <span className="inline-flex gap-1">
                 <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-magenta/60" style={{ animationDelay: "0ms" }} />
                 <span className="h-1.5 w-1.5 animate-bounce rounded-full bg-magenta/60" style={{ animationDelay: "150ms" }} />
@@ -252,7 +252,7 @@ export function DemoChat({ compact }: { compact?: boolean }) {
       {/* Input */}
       <form
         onSubmit={handleSubmit}
-        className="flex items-stretch gap-2 border-t border-border bg-background/60 p-3"
+        className="flex items-stretch gap-2 border-t border-border bg-card p-3"
       >
         <input
           ref={inputRef}
