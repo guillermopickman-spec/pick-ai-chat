@@ -52,7 +52,7 @@ export function Technology() {
   const { t } = useLanguage();
 
   return (
-    <section id="technology" className="relative px-4 py-24 sm:py-32">
+    <section id="technology" className="relative scroll-mt-16 px-4 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
         {/* Section header */}
         <div className="mb-16 text-center">

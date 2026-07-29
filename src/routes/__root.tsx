@@ -141,18 +141,6 @@ function RootComponent() {
   const location = useLocation();
   const isTryPage = location.pathname === "/try";
 
-  // Handle hash scrolling on navigation
-  useEffect(() => {
-    const hash = window.location.hash.slice(1);
-    if (hash) {
-      const timer = setTimeout(() => {
-        const el = document.getElementById(hash);
-        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
-      }, 100);
-      return () => clearTimeout(timer);
-    }
-  }, [location.pathname, location.hash]);
-
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />

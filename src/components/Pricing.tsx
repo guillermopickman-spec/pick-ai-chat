@@ -12,7 +12,7 @@ export function Pricing() {
   const { t, lang } = useLanguage();
 
   return (
-    <section id="pricing" className="relative px-4 py-24 sm:py-32">
+    <section id="pricing" className="relative scroll-mt-16 px-4 py-24 sm:py-32">
       <div className="mx-auto max-w-6xl">
         <div className="mb-16 text-center">
           <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
