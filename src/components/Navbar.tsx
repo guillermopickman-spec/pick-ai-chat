@@ -117,12 +117,20 @@ export function Navbar() {
               </button>
             </div>
           ) : (
+            <>
+            <Link
+              to="/try"
+              className="rounded-lg border border-magenta/40 px-3 py-1.5 text-xs font-semibold text-magenta transition hover:border-magenta hover:bg-magenta/10"
+            >
+              Try
+            </Link>
             <button
               onClick={handleSignIn}
               className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
             >
               Sign In
             </button>
+            </>
           )}
 
           <Link

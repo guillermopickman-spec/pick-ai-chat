@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as TryRouteImport } from './routes/try'
 import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as MailRouteImport } from './routes/mail'
@@ -18,6 +19,11 @@ import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
 
+const TryRoute = TryRouteImport.update({
+  id: '/try',
+  path: '/try',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const TermsRoute = TermsRouteImport.update({
   id: '/terms',
   path: '/terms',
@@ -67,6 +73,7 @@ export interface FileRoutesByFullPath {
   '/mail': typeof MailRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/try': typeof TryRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRoutesByTo {
@@ -77,6 +84,7 @@ export interface FileRoutesByTo {
   '/mail': typeof MailRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/try': typeof TryRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRoutesById {
@@ -88,6 +96,7 @@ export interface FileRoutesById {
   '/mail': typeof MailRoute
   '/privacy': typeof PrivacyRoute
   '/terms': typeof TermsRoute
+  '/try': typeof TryRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRouteTypes {
@@ -100,6 +109,7 @@ export interface FileRouteTypes {
     | '/mail'
     | '/privacy'
     | '/terms'
+    | '/try'
     | '/sign-in/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -110,6 +120,7 @@ export interface FileRouteTypes {
     | '/mail'
     | '/privacy'
     | '/terms'
+    | '/try'
     | '/sign-in/$'
   id:
     | '__root__'
@@ -120,6 +131,7 @@ export interface FileRouteTypes {
     | '/mail'
     | '/privacy'
     | '/terms'
+    | '/try'
     | '/sign-in/$'
   fileRoutesById: FileRoutesById
 }
@@ -131,11 +143,19 @@ export interface RootRouteChildren {
   MailRoute: typeof MailRoute
   PrivacyRoute: typeof PrivacyRoute
   TermsRoute: typeof TermsRoute
+  TryRoute: typeof TryRoute
   SignInSplatRoute: typeof SignInSplatRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/try': {
+      id: '/try'
+      path: '/try'
+      fullPath: '/try'
+      preLoaderRoute: typeof TryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/terms': {
       id: '/terms'
       path: '/terms'
@@ -203,6 +223,7 @@ const rootRouteChildren: RootRouteChildren = {
   MailRoute: MailRoute,
   PrivacyRoute: PrivacyRoute,
   TermsRoute: TermsRoute,
+  TryRoute: TryRoute,
   SignInSplatRoute: SignInSplatRoute,
 }
 export const routeTree = rootRouteImport

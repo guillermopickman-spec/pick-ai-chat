@@ -13,6 +13,7 @@ import { ClerkProvider, useAuth } from "@clerk/tanstack-react-start";
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { Footer } from "../components/Footer";
+import { ChatWidget } from "../components/ChatWidget";
 import { LanguageProvider, useLanguage } from "../lib/LanguageProvider";
 
 function NotFoundComponent() {
@@ -140,6 +141,7 @@ function RootComponent() {
       <Outlet />
       <Footer />
       <PwaAuthGuard />
+      <ChatWidget />
     </QueryClientProvider>
   );
 }
