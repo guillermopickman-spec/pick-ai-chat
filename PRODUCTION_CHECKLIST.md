@@ -29,8 +29,8 @@
 ## ⚠️ IMPORTANT — Visitors Will Notice
 
 - [x] **❓ FAQ page** — ✅ all 6 questions visible (mirrors homepage)
-- [ ] **💲 Clear pricing** — 3 of 4 plans say "Contact Us" with no visible prices
-- [ ] **🎮 Working chat demo** — textbox exists but send button is disabled
+- [x] **💲 Clear pricing** — ✅ Starter $29, Business $79, Pro $199
+- [x] **🎮 Working chat demo** — ✅ functional (button enables when you type)
 - [ ] **🔐 Post-login experience** — what happens after sign-in? Is there a dashboard?
 - [ ] **🌐 ES content** — check if Spanish version is complete
 - [ ] **🌐 EN content** — check if English version is complete

@@ -4,7 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 import { useUser, useClerk } from "@clerk/tanstack-react-start";
 
-const ADMIN_EMAIL = "guillermopickman@gmail.com";
+const ADMIN_EMAIL = "pickaichat@gmail.com";
 
 export function Navbar() {
   const { t, lang, setLang } = useLanguage();
@@ -101,6 +101,12 @@ export function Navbar() {
 
           {isLoaded && isSignedIn ? (
             <div className="flex items-center gap-2">
+              <Link
+                to="/dashboard"
+                className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+              >
+                Dashboard
+              </Link>
               <Link
                 to="/chat"
                 className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
@@ -211,6 +217,13 @@ export function Navbar() {
             <div className="border-t border-border pt-3">
               {isLoaded && isSignedIn ? (
                 <div className="flex items-center gap-2">
+                  <Link
+                    to="/dashboard"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                  >
+                    Dashboard
+                  </Link>
                   <Link
                     to="/chat"
                     onClick={() => setMobileOpen(false)}

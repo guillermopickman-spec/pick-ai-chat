@@ -13,7 +13,7 @@ import {
   type ServerStatus, type Client, type StatsResponse,
 } from "@/lib/admin-api";
 
-const ADMIN_EMAIL = "guillermopickman@gmail.com";
+const ADMIN_EMAIL = "pickaichat@gmail.com";
 
 const protectAdmin = createServerFn().handler(async () => {
   const { userId, sessionClaims } = await auth();
