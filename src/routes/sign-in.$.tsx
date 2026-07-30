@@ -14,13 +14,7 @@ export const Route = createFileRoute("/sign-in/$")({
 function SignInPage() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-background px-4">
-      <SignIn
-        appearance={{
-          elements: {
-            socialButtons: "hidden",
-          },
-        }}
-      />
+      <SignIn />
     </div>
   );
 }
