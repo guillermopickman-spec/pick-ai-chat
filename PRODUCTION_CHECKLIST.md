@@ -28,7 +28,7 @@
 
 ## ⚠️ IMPORTANT — Visitors Will Notice
 
-- [ ] **❓ FAQ page** — empty (heading without actual questions)
+- [x] **❓ FAQ page** — ✅ all 6 questions visible (mirrors homepage)
 - [ ] **💲 Clear pricing** — 3 of 4 plans say "Contact Us" with no visible prices
 - [ ] **🎮 Working chat demo** — textbox exists but send button is disabled
 - [ ] **🔐 Post-login experience** — what happens after sign-in? Is there a dashboard?

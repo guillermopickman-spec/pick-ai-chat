@@ -22,7 +22,7 @@ export function About() {
               <div className="relative h-72 w-72 overflow-hidden rounded-2xl border border-border sm:h-80 sm:w-80">
                 <img
                   src="/logo/logo-only-400.webp"
-                  alt="Guillermo"
+                  alt="Guillermo Pickman"
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
