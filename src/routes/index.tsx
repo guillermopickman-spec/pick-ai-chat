@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect } from "react";
 import { Hero } from "@/components/Hero";
 import { Navbar } from "@/components/Navbar";
 import { Features } from "@/components/Features";
@@ -46,6 +47,22 @@ export const Route = createFileRoute("/")({
 });
 
 function LandingPage() {
+  // Restore scroll position on page refresh
+  useEffect(() => {
+    const saved = sessionStorage.getItem("pickaichat_scroll");
+    if (saved) {
+      const pos = parseInt(saved, 10);
+      sessionStorage.removeItem("pickaichat_scroll");
+      // Retry with delays to wait for content to render
+      [50, 200, 500].forEach((ms) => setTimeout(() => window.scrollTo(0, pos), ms));
+    }
+    const handleBeforeUnload = () => {
+      sessionStorage.setItem("pickaichat_scroll", window.scrollY.toString());
+    };
+    window.addEventListener("beforeunload", handleBeforeUnload);
+    return () => window.removeEventListener("beforeunload", handleBeforeUnload);
+  }, []);
+
   return (
     <>
       <Navbar />
