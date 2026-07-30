@@ -17,10 +17,14 @@ export function Navbar() {
   const isAdmin = user?.primaryEmailAddress?.emailAddress === ADMIN_EMAIL;
 
   const NAV_LINKS = [
-    { label: t("nav.features"), hash: "features" },
-    { label: t("nav.pricing"), hash: "pricing" },
-    { label: t("nav.faq"), hash: "faq" },
+    { label: t("nav.features"), hash: "features", path: "/features" },
+    { label: t("nav.pricing"), hash: "pricing", path: "/pricing" },
+    { label: t("nav.faq"), hash: "faq", path: "/faq" },
   ];
+
+  function isActive(path: string) {
+    return location.pathname === path;
+  }
 
   function handleNavClick(hash: string) {
     if (isHome) {
@@ -61,7 +65,11 @@ export function Navbar() {
             <button
               key={link.hash}
               onClick={() => handleNavClick(link.hash)}
-              className="text-sm text-muted-foreground transition hover:text-foreground"
+              className={`text-sm transition ${
+                !isHome && isActive(link.path)
+                  ? "text-foreground font-semibold"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
             >
               {link.label}
             </button>
@@ -168,7 +176,11 @@ export function Navbar() {
                   setMobileOpen(false);
                   handleNavClick(link.hash);
                 }}
-                className="text-left text-sm text-muted-foreground transition hover:text-foreground"
+                className={`text-left text-sm transition ${
+                  !isHome && isActive(link.path)
+                    ? "text-foreground font-semibold"
+                    : "text-muted-foreground hover:text-foreground"
+                }`}
               >
                 {link.label}
               </button>

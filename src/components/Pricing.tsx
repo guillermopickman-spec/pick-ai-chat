@@ -3,7 +3,12 @@ import { useLanguage } from "../lib/LanguageProvider";
 import { translations } from "../lib/i18n";
 
 function scrollTo(id: string) {
-  document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  const isHome = window.location.pathname === "/";
+  if (isHome) {
+    document.getElementById(id)?.scrollIntoView({ behavior: "smooth", block: "start" });
+  } else {
+    window.location.href = `/${id}`;
+  }
 }
 
 const PLANS = ["1", "2", "3"];
