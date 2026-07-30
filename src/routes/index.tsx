@@ -53,8 +53,8 @@ function LandingPage() {
     if (saved) {
       const pos = parseInt(saved, 10);
       sessionStorage.removeItem("pickaichat_scroll");
-      // Retry with delays to wait for content to render
-      [50, 200, 500].forEach((ms) => setTimeout(() => window.scrollTo(0, pos), ms));
+      // Single scroll after content renders
+      setTimeout(() => window.scrollTo(0, pos), 50);
     }
     const handleBeforeUnload = () => {
       sessionStorage.setItem("pickaichat_scroll", window.scrollY.toString());
