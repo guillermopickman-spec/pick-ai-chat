@@ -32,9 +32,7 @@ function Page() {
           We implement industry-standard security measures to protect your data. Authentication is handled by Clerk, which is SOC 2 compliant and GDPR-ready.
         </p>
         <h2 className="text-xl font-semibold text-foreground">Contact</h2>
-        <p>
-          For questions about this policy, contact guillermopickman@gmail.com.
-        </p>
+        <p>For questions about this policy, contact contact@pickaichat.com.</p>
       </div>
     </div>
   );

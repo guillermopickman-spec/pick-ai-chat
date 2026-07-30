@@ -21,8 +21,8 @@
 
 ## ❌ CRITICAL — Legal Requirements (Must Have Before Launch)
 
-- [ ] **📄 Privacy Policy** — currently 404
-- [ ] **📄 Terms of Service** — currently 404
+- [x] **📄 Privacy Policy** — ✅ live at `/privacy`
+- [x] **📄 Terms of Service** — ✅ live at `/terms`
 
 ---
 

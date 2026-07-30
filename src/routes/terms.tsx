@@ -32,9 +32,7 @@ function Page() {
           The Service is provided "as is" without warranties of any kind. We are not liable for damages arising from your use of the Service.
         </p>
         <h2 className="text-xl font-semibold text-foreground">Contact</h2>
-        <p>
-          For questions, contact guillermopickman@gmail.com.
-        </p>
+        <p>For questions, contact contact@pickaichat.com.</p>
       </div>
     </div>
   );

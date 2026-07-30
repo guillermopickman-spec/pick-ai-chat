@@ -223,7 +223,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "contact.form.na": "N/A",
 
     /* Footer */
-    "footer.built": "Built by Guillermo Pickman —",
+    "footer.built": "Built by Guillermo —",
     "footer.role": "3D Character Artist & AI Engineer",
     "footer.made": "© 2026 PickAIChat. Hecho en Sevilla.",
 
@@ -492,7 +492,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "contact.form.na": "N/A",
 
     /* Footer */
-    "footer.built": "Built by Guillermo Pickman —",
+    "footer.built": "Built by Guillermo —",
     "footer.role": "3D Character Artist & AI Engineer",
     "footer.made": "© 2026 PickAIChat. Made in Seville.",
 
