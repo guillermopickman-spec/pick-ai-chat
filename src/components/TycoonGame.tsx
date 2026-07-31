@@ -182,6 +182,7 @@ export function TycoonGame() {
   const [selectedBld, setSelectedBld] = useState<{ id: string; icon: string; label: string; desc: string; x: number; y: number } | null>(null);
   const selectedBldRef = useRef(selectedBld);
   selectedBldRef.current = selectedBld;
+  const touchStartRef = useRef<{ x: number; y: number; t: number; dist?: number } | null>(null);
 
   // ── Load / init state ──
   useEffect(() => {
@@ -307,7 +308,43 @@ export function TycoonGame() {
   // ── Re-draw on state change ──
   useEffect(() => { draw(); }, [draw]);
 
-  // ── Canvas event handlers ──
+  // ── Hit-test helper (tap / click) ──
+  const hitTestBuilding = useCallback((cx: number, cy: number) => {
+    const state = stateRef.current;
+    for (const [id, b] of Object.entries(state.buildings)) {
+      if (!b.built) continue;
+      const { x: bx, y: by } = tileToScreen(b.tileX, b.tileY, 0);
+      const sw = TILE_W / 2;
+      const sh = TILE_H / 2;
+      const height = Math.max(30, (b.cost || 0) / 10 + 30);
+      if (cx > bx - sw && cx < bx + sw && cy > by - height - sh && cy < by + sh) return id;
+    }
+    return null;
+  }, []);
+
+  const handleSelect = useCallback((id: string | null, px: number, py: number) => {
+    if (!id) { setSelectedBld(null); return; }
+    const b = stateRef.current.buildings[id];
+    if (!b) return;
+    if (selectedBld?.id === id) { setSelectedBld(null); return; }
+    setSelectedBld({
+      id, icon: b.icon, label: b.label, desc: b.desc,
+      x: Math.min(px + 14, window.innerWidth - 280),
+      y: Math.min(py + 14, window.innerHeight - 180),
+    });
+  }, [selectedBld]);
+
+  const screenToCanvas = useCallback((sx: number, sy: number) => {
+    const rect = canvasRef.current?.getBoundingClientRect();
+    if (!rect) return { mx: 0, my: 0 };
+    const cam = camRef.current;
+    return {
+      mx: (sx - rect.left - cam.x) / cam.zoom,
+      my: (sy - rect.top - cam.y) / cam.zoom,
+    };
+  }, []);
+
+  // ── Mouse handlers ──
   const onMouseDown = useCallback((e: React.MouseEvent) => {
     panningRef.current = true;
     panStartRef.current = { x: e.clientX - camRef.current.x, y: e.clientY - camRef.current.y };
@@ -326,6 +363,58 @@ export function TycoonGame() {
     return () => window.removeEventListener("mouseup", up);
   }, []);
 
+  const onClick = useCallback((e: React.MouseEvent) => {
+    const { mx, my } = screenToCanvas(e.clientX, e.clientY);
+    const id = hitTestBuilding(mx, my);
+    handleSelect(id, e.clientX, e.clientY);
+  }, [screenToCanvas, hitTestBuilding, handleSelect]);
+
+  // ── Touch handlers ──
+  const onTouchStart = useCallback((e: React.TouchEvent) => {
+    if (e.touches.length === 1) {
+      const t = e.touches[0];
+      touchStartRef.current = { x: t.clientX - camRef.current.x, y: t.clientY - camRef.current.y, t: Date.now() };
+      panningRef.current = true;
+    } else if (e.touches.length === 2) {
+      // Pinch start
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      touchStartRef.current = { x: 0, y: 0, t: Date.now(), dist: Math.sqrt(dx * dx + dy * dy) };
+    }
+  }, []);
+
+  const onTouchMove = useCallback((e: React.TouchEvent) => {
+    e.preventDefault();
+    if (e.touches.length === 1 && touchStartRef.current && touchStartRef.current.dist === undefined) {
+      const t = e.touches[0];
+      camRef.current.x = t.clientX - touchStartRef.current.x;
+      camRef.current.y = t.clientY - touchStartRef.current.y;
+      touchStartRef.current.t = 0; // moved = not a tap
+      draw();
+    } else if (e.touches.length === 2 && touchStartRef.current?.dist) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      const newDist = Math.sqrt(dx * dx + dy * dy);
+      const dz = newDist / touchStartRef.current.dist;
+      camRef.current.zoom = Math.min(2.5, Math.max(0.4, camRef.current.zoom * dz));
+      touchStartRef.current.dist = newDist;
+      touchStartRef.current.t = 0;
+      draw();
+    }
+  }, [draw]);
+
+  const onTouchEnd = useCallback((e: React.TouchEvent) => {
+    panningRef.current = false;
+    // Tap detection: short touch, no movement
+    if (touchStartRef.current && touchStartRef.current.t !== 0 && Date.now() - touchStartRef.current.t < 300) {
+      const t = e.changedTouches[0];
+      const { mx, my } = screenToCanvas(t.clientX, t.clientY);
+      const id = hitTestBuilding(mx, my);
+      handleSelect(id, t.clientX, t.clientY);
+    }
+    touchStartRef.current = null;
+  }, [screenToCanvas, hitTestBuilding, handleSelect]);
+
   // Wheel zoom — use native listener with { passive: false } to prevent page scroll
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -339,41 +428,6 @@ export function TycoonGame() {
     canvas.addEventListener("wheel", onWheelNative, { passive: false });
     return () => canvas.removeEventListener("wheel", onWheelNative);
   }, [draw]);
-
-  const onClick = useCallback((e: React.MouseEvent) => {
-    const rect = canvasRef.current?.getBoundingClientRect();
-    if (!rect) return;
-    const cam = camRef.current;
-    const mx = (e.clientX - rect.left - cam.x) / cam.zoom;
-    const my = (e.clientY - rect.top - cam.y) / cam.zoom;
-    const state = stateRef.current;
-
-    for (const [id, b] of Object.entries(state.buildings)) {
-      if (!b.built) continue;
-      const { x: bx, y: by } = tileToScreen(b.tileX, b.tileY, 0);
-      const sw = TILE_W / 2;
-      const sh = TILE_H / 2;
-      const height = Math.max(30, (b.cost || 0) / 10 + 30);
-      if (mx > bx - sw && mx < bx + sw && my > by - height - sh && my < by + sh) {
-        // Toggle: if clicking the same building, close it
-        if (selectedBld?.id === id) {
-          setSelectedBld(null);
-        } else {
-          setSelectedBld({
-            id,
-            icon: b.icon,
-            label: b.label,
-            desc: b.desc,
-            x: Math.min(e.clientX + 14, window.innerWidth - 280),
-            y: Math.min(e.clientY + 14, window.innerHeight - 180),
-          });
-        }
-        return;
-      }
-    }
-    // Clicked empty space — deselect
-    setSelectedBld(null);
-  }, [selectedBld]);
 
   // ── Build action ──
   const canBuild = useCallback((id: string) => {
@@ -425,10 +479,13 @@ export function TycoonGame() {
       {/* Canvas */}
       <canvas
         ref={canvasRef}
-        style={{ display: "block", flex: 1, cursor: "grab" }}
+        style={{ display: "block", flex: 1, cursor: "grab", touchAction: "none" }}
         onMouseDown={onMouseDown}
         onMouseMove={onMouseMove}
         onClick={onClick}
+        onTouchStart={onTouchStart}
+        onTouchMove={onTouchMove}
+        onTouchEnd={onTouchEnd}
       />
 
       {/* Building tooltip — stays open until closed */}
