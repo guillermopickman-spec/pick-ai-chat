@@ -306,7 +306,7 @@ export function TycoonGame() {
   }, [save]);
 
   // ── Re-draw on state change ──
-  useEffect(() => { draw(); }, [draw]);
+  useEffect(() => { draw(); }, [draw, selectedBld]);
 
   // ── Hit-test helper (tap / click) ──
   const hitTestBuilding = useCallback((cx: number, cy: number) => {
