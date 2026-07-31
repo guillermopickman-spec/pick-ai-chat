@@ -153,6 +153,11 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "DeepSeek V4",
       "Claude Sonnet",
     ],
+    "pricing.addons.title": "📱 Extras disponibles",
+    "pricing.addons.desc": "Añade canales y funcionalidades extra a tu plan.",
+    "pricing.addons.options": [
+      "WhatsApp Business — 9 €/mes adicional",
+    ],
 
     /* Chatbot Demo */
     "chatbot.section": "// Demo en vivo",
@@ -162,7 +167,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "chatbot.config": "Configurar",
     "chatbot.channel": "canal:",
     "chatbot.thinking": "pickaichat está pensando",
-    "chatbot.placeholder": "Enviar como $1…",
+    "chatbot.placeholder": "Escribe un mensaje…",
     "chatbot.send": "Enviar",
 
     /* FAQ */
@@ -422,6 +427,11 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "DeepSeek V4",
       "Claude Sonnet",
     ],
+    "pricing.addons.title": "📱 Available add-ons",
+    "pricing.addons.desc": "Add extra channels and features to your plan.",
+    "pricing.addons.options": [
+      "WhatsApp Business — $9/mo extra",
+    ],
 
     /* Chatbot Demo */
     "chatbot.section": "// Live Demo",
@@ -431,7 +441,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "chatbot.config": "Configure",
     "chatbot.channel": "channel:",
     "chatbot.thinking": "pickaichat is thinking",
-    "chatbot.placeholder": "Send as $1…",
+    "chatbot.placeholder": "Type a message…",
     "chatbot.send": "Send",
 
     /* FAQ */
