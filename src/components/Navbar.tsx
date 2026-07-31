@@ -108,6 +108,12 @@ export function Navbar() {
                 Dashboard
               </Link>
               <Link
+                to="/tycoon"
+                className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-green-500 hover:text-green-500"
+              >
+                🏢 Tycoon
+              </Link>
+              <Link
                 to="/chat"
                 className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
               >
@@ -223,6 +229,13 @@ export function Navbar() {
                     className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
                   >
                     Dashboard
+                  </Link>
+                  <Link
+                    to="/tycoon"
+                    onClick={() => setMobileOpen(false)}
+                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-green-500 hover:text-green-500"
+                  >
+                    🏢 Tycoon
                   </Link>
                   <Link
                     to="/chat"
