@@ -37,13 +37,25 @@ export async function sendChatMessage(
 }
 
 /**
- * Hermes API base URL — configurable via VITE_HERMES_API_URL env var.
- * Default: test endpoint on RackNerd VPS.
- * For production (Jose): set to "https://mail.come2ireland.com/api/webchat"
+ * Hermes API base URL — configurable per user via localStorage or env var.
+ * Each user connects to their own Hermes agent.
+ * Default: "https://mail.pickaichat.com"
  */
-const HERMES_API_URL =
-  import.meta.env.VITE_HERMES_API_URL ||
-  "https://mail.pickaichat.com";
+const DEFAULT_HERMES_URL = "https://mail.pickaichat.com";
+
+function getUserHermesUrl(user: string): string {
+  try {
+    const custom = localStorage.getItem(`hermes_url_${user}`);
+    if (custom) return custom;
+  } catch {}
+  return import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL;
+}
+
+export function setUserHermesUrl(user: string, url: string) {
+  try {
+    localStorage.setItem(`hermes_url_${user}`, url);
+  } catch {}
+}
 
 export interface ConversationSummary {
   id: string;
@@ -77,7 +89,8 @@ export async function sendToHermesBot(
   conversationId: string,
   user: string,
 ): Promise<{ reply: string; title?: string }> {
-  const res = await fetch(`${HERMES_API_URL}/api/webchat`, {
+  const baseUrl = getUserHermesUrl(user);
+  const res = await fetch(`${baseUrl}/api/webchat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
@@ -100,8 +113,9 @@ export async function sendToHermesBot(
  * List all conversations for a user.
  */
 export async function fetchConversations(user: string): Promise<ConversationSummary[]> {
+  const baseUrl = getUserHermesUrl(user);
   const res = await fetch(
-    `${HERMES_API_URL}/api/conversations?user=${encodeURIComponent(user)}`,
+    `${baseUrl}/api/conversations?user=${encodeURIComponent(user)}`,
   );
   if (!res.ok) throw new Error(`Failed to fetch conversations (${res.status})`);
   const data = await res.json();
@@ -115,8 +129,9 @@ export async function getConversation(
   user: string,
   convId: string,
 ): Promise<ConversationDetail | null> {
+  const baseUrl = getUserHermesUrl(user);
   const res = await fetch(
-    `${HERMES_API_URL}/api/conversations/${encodeURIComponent(convId)}?user=${encodeURIComponent(user)}`,
+    `${baseUrl}/api/conversations/${encodeURIComponent(convId)}?user=${encodeURIComponent(user)}`,
   );
   if (res.status === 404) return null;
   if (!res.ok) throw new Error(`Failed to fetch conversation (${res.status})`);
@@ -130,8 +145,9 @@ export async function deleteConversationApi(
   user: string,
   convId: string,
 ): Promise<void> {
+  const baseUrl = getUserHermesUrl(user);
   const res = await fetch(
-    `${HERMES_API_URL}/api/conversations/${encodeURIComponent(convId)}?user=${encodeURIComponent(user)}`,
+    `${baseUrl}/api/conversations/${encodeURIComponent(convId)}?user=${encodeURIComponent(user)}`,
     { method: "DELETE" },
   );
   if (!res.ok && res.status !== 404) {
