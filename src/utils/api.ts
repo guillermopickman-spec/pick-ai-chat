@@ -37,24 +37,19 @@ export async function sendChatMessage(
 }
 
 /**
- * Hermes API base URL — configurable per user via localStorage or env var.
+ * Hermes API base URL — configured per user via a simple mapping.
  * Each user connects to their own Hermes agent.
  * Default: "https://mail.pickaichat.com"
  */
 const DEFAULT_HERMES_URL = "https://mail.pickaichat.com";
 
-function getUserHermesUrl(user: string): string {
-  try {
-    const custom = localStorage.getItem(`hermes_url_${user}`);
-    if (custom) return custom;
-  } catch {}
-  return import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL;
-}
+/** Map user emails to their Hermes agent URLs */
+const USER_AGENT_URLS: Record<string, string> = {
+  "josewilson95@gmail.com": "https://mail.come2ireland.com",
+};
 
-export function setUserHermesUrl(user: string, url: string) {
-  try {
-    localStorage.setItem(`hermes_url_${user}`, url);
-  } catch {}
+function getUserHermesUrl(user: string): string {
+  return USER_AGENT_URLS[user] || import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL;
 }
 
 export interface ConversationSummary {
