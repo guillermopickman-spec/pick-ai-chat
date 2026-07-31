@@ -3,7 +3,7 @@ import { useEffect, useRef, useState, type FormEvent } from "react";
 import { useUser } from "@clerk/tanstack-react-start";
 import { useConversations, type Message } from "@/hooks/useConversations";
 import { useLanguage } from "@/lib/LanguageProvider";
-import { sendToHermesBot, setUserHermesUrl } from "@/utils/api";
+import { sendToHermesBot } from "@/utils/api";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -16,9 +16,6 @@ import {
   PanelLeftClose,
   Loader2,
   Sparkles,
-  Settings,
-  Save,
-  X,
 } from "lucide-react";
 
 export function ChatUI() {
@@ -40,20 +37,9 @@ export function ChatUI() {
   const [input, setInput] = useState("");
   const [isTyping, setIsTyping] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
-  const [showSettings, setShowSettings] = useState(false);
-  const [hermesUrl, setHermesUrl] = useState(() => {
-    try { return localStorage.getItem(`hermes_url_${userEmail}`) || ""; } catch { return ""; }
-  });
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const isMobile = useIsMobile();
-
-  function saveHermesUrl() {
-    if (userEmail && hermesUrl.trim()) {
-      setUserHermesUrl(userEmail, hermesUrl.trim());
-      setShowSettings(false);
-    }
-  }
 
   // Auto-focus the input when switching conversations
   useEffect(() => {
@@ -123,46 +109,12 @@ export function ChatUI() {
             {t("chatbot.newChat") || "New chat"}
           </button>
           <button
-            onClick={() => setShowSettings(!showSettings)}
-            className="rounded p-1 text-muted-foreground hover:text-foreground"
-            title="Configure your Hermes agent URL"
-          >
-            <Settings size={16} />
-          </button>
-          <button
             onClick={() => setSidebarOpen(false)}
             className="rounded p-1 text-muted-foreground hover:text-foreground"
           >
             <PanelLeftClose size={16} />
           </button>
         </div>
-
-        {/* Hermes URL settings */}
-        {showSettings && (
-          <div className="border-b border-border p-3">
-            <label className="mb-1 block text-xs font-medium text-muted-foreground">
-              Your Hermes Agent URL
-            </label>
-            <div className="flex gap-2">
-              <input
-                type="text"
-                value={hermesUrl}
-                onChange={(e) => setHermesUrl(e.target.value)}
-                placeholder="https://your-agent.com"
-                className="flex-1 rounded-lg border border-border bg-background px-3 py-1.5 text-xs text-foreground outline-none focus:border-magenta"
-              />
-              <button
-                onClick={saveHermesUrl}
-                className="rounded-lg bg-magenta px-2 py-1.5 text-xs font-semibold text-primary-foreground hover:brightness-110"
-              >
-                <Save size={14} />
-              </button>
-            </div>
-            <p className="mt-1 text-[10px] text-muted-foreground">
-              Points to your Hermes agent's API (e.g. https://ip:port). The agent must expose /api/webchat.
-            </p>
-          </div>
-        )}
 
         <div className="flex-1 overflow-y-auto p-2">
           {loading ? (
