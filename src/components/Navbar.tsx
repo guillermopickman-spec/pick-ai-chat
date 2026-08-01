@@ -15,6 +15,10 @@ export function Navbar() {
   const router = useRouter();
   const isHome = location.pathname === "/";
   const isAdmin = user?.primaryEmailAddress?.emailAddress === ADMIN_EMAIL;
+  // Paid users are manually appointed via Clerk publicMetadata.plan = "paid"
+  // (automated once the payment system lands). Controls which chat route to use.
+  const isPaid = (user?.publicMetadata as { plan?: string } | undefined)?.plan === "paid";
+  const chatHref = isPaid ? "/chat" : "/free-chat";
 
   const NAV_LINKS = [
     { label: t("nav.features"), hash: "features", path: "/features" },
@@ -114,7 +118,7 @@ export function Navbar() {
                 🏢 Tycoon
               </Link>
               <Link
-                to="/chat"
+                to={chatHref}
                 className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
               >
                 Chat
@@ -238,7 +242,7 @@ export function Navbar() {
                     🏢 Tycoon
                   </Link>
                   <Link
-                    to="/chat"
+                    to={chatHref}
                     onClick={() => setMobileOpen(false)}
                     className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
                   >

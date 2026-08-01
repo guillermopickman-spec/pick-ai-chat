@@ -272,6 +272,7 @@ function Dashboard() {
   const { t, lang } = useLanguage();
   const isES = lang === "es";
   const { user } = useUser();
+  const isPaid = (user?.publicMetadata as { plan?: string } | undefined)?.plan === "paid";
   const email = user?.primaryEmailAddress?.emailAddress ?? "";
   const [onboarding, setOnboarding] = useState<OnboardingData | null>(null);
 
@@ -354,7 +355,7 @@ function Dashboard() {
         </h2>
         <div className="grid gap-4 sm:grid-cols-2">
           <Link
-            to="/chat"
+            to={isPaid ? "/chat" : "/free-chat"}
             className="group flex items-center gap-4 rounded-xl border border-border bg-card p-5 transition hover:border-magenta/40 hover:-translate-y-0.5"
           >
             <div className="flex h-12 w-12 items-center justify-center rounded-lg bg-magenta/10 text-magenta group-hover:bg-magenta/20 transition">

@@ -15,6 +15,7 @@ import { Route as TermsRouteImport } from './routes/terms'
 import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as PricingRouteImport } from './routes/pricing'
 import { Route as MailRouteImport } from './routes/mail'
+import { Route as FreeChatRouteImport } from './routes/free-chat'
 import { Route as FeaturesRouteImport } from './routes/features'
 import { Route as FaqRouteImport } from './routes/faq'
 import { Route as DashboardRouteImport } from './routes/dashboard'
@@ -52,6 +53,11 @@ const PricingRoute = PricingRouteImport.update({
 const MailRoute = MailRouteImport.update({
   id: '/mail',
   path: '/mail',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FreeChatRoute = FreeChatRouteImport.update({
+  id: '/free-chat',
+  path: '/free-chat',
   getParentRoute: () => rootRouteImport,
 } as any)
 const FeaturesRoute = FeaturesRouteImport.update({
@@ -103,6 +109,7 @@ export interface FileRoutesByFullPath {
   '/dashboard': typeof DashboardRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
+  '/free-chat': typeof FreeChatRoute
   '/mail': typeof MailRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -119,6 +126,7 @@ export interface FileRoutesByTo {
   '/dashboard': typeof DashboardRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
+  '/free-chat': typeof FreeChatRoute
   '/mail': typeof MailRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -136,6 +144,7 @@ export interface FileRoutesById {
   '/dashboard': typeof DashboardRoute
   '/faq': typeof FaqRoute
   '/features': typeof FeaturesRoute
+  '/free-chat': typeof FreeChatRoute
   '/mail': typeof MailRoute
   '/pricing': typeof PricingRoute
   '/privacy': typeof PrivacyRoute
@@ -154,6 +163,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/faq'
     | '/features'
+    | '/free-chat'
     | '/mail'
     | '/pricing'
     | '/privacy'
@@ -170,6 +180,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/faq'
     | '/features'
+    | '/free-chat'
     | '/mail'
     | '/pricing'
     | '/privacy'
@@ -186,6 +197,7 @@ export interface FileRouteTypes {
     | '/dashboard'
     | '/faq'
     | '/features'
+    | '/free-chat'
     | '/mail'
     | '/pricing'
     | '/privacy'
@@ -203,6 +215,7 @@ export interface RootRouteChildren {
   DashboardRoute: typeof DashboardRoute
   FaqRoute: typeof FaqRoute
   FeaturesRoute: typeof FeaturesRoute
+  FreeChatRoute: typeof FreeChatRoute
   MailRoute: typeof MailRoute
   PricingRoute: typeof PricingRoute
   PrivacyRoute: typeof PrivacyRoute
@@ -254,6 +267,13 @@ declare module '@tanstack/react-router' {
       path: '/mail'
       fullPath: '/mail'
       preLoaderRoute: typeof MailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/free-chat': {
+      id: '/free-chat'
+      path: '/free-chat'
+      fullPath: '/free-chat'
+      preLoaderRoute: typeof FreeChatRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/features': {
@@ -323,6 +343,7 @@ const rootRouteChildren: RootRouteChildren = {
   DashboardRoute: DashboardRoute,
   FaqRoute: FaqRoute,
   FeaturesRoute: FeaturesRoute,
+  FreeChatRoute: FreeChatRoute,
   MailRoute: MailRoute,
   PricingRoute: PricingRoute,
   PrivacyRoute: PrivacyRoute,

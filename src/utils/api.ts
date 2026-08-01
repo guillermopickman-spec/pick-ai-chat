@@ -15,6 +15,10 @@ export const MODEL_OPTIONS = [
   "deepseek/deepseek-v4-flash:free",
 ];
 
+/**
+ * Free chat — stateless OpenRouter call. History is NOT sent (the free
+ * backend is a plain echo chat; only locally-stored threads persist for display).
+ */
 export async function sendChatMessage(
   settings: ChatSettings,
   userMessage: string,
@@ -37,43 +41,15 @@ export async function sendChatMessage(
 }
 
 /**
- * Hermes API base URL — configured per user via a simple mapping.
- * Each user connects to their own Hermes agent.
- * Default: "https://mail.pickaichat.com"
+ * Hermes webchat base URL.
+ * The web chat talks DIRECTLY to the platform Hermes agent. It must NOT be
+ * routed by email — that is a separate engine (Wilson -> IONOS).
+ * Override per-deployment via VITE_HERMES_API_URL.
  */
 const DEFAULT_HERMES_URL = "https://mail.pickaichat.com";
 
-/** Map user emails to their Hermes agent URLs */
-const USER_AGENT_URLS: Record<string, string> = {
-  "josewilson95@gmail.com": "https://mail.come2ireland.com",
-};
-
-/** Admin-only override — allows switching target agent for testing */
-let overrideHermesUrl: string | null = null;
-
-export function setOverrideHermesUrl(url: string | null) {
-  overrideHermesUrl = url;
-}
-
-export function getOverrideHermesUrl(): string | null {
-  return overrideHermesUrl;
-}
-
-export function getAgentOptions(): { label: string; url: string }[] {
-  const options: { label: string; url: string }[] = [
-    { label: "Default", url: import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL },
-  ];
-  for (const [email, url] of Object.entries(USER_AGENT_URLS)) {
-    const name = email.split("@")[0].replace(/[._]/g, " ");
-    const label = `${name.charAt(0).toUpperCase() + name.slice(1)} (${email})`;
-    options.push({ label, url });
-  }
-  return options;
-}
-
-function getUserHermesUrl(user: string): string {
-  if (overrideHermesUrl) return overrideHermesUrl;
-  return USER_AGENT_URLS[user] || import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL;
+function hermesBaseUrl(): string {
+  return import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL;
 }
 
 export interface ConversationSummary {
@@ -100,15 +76,24 @@ export interface MessageItem {
   timestamp: number;
 }
 
+export type ChatHistoryItem = {
+  role: "user" | "assistant";
+  content: string;
+};
+
 /**
- * Send a message to the webchat API and persist the conversation.
+ * Send a message to the Hermes webchat API.
+ * Sends the FULL prior thread history so the agent can follow the conversation
+ * (Layer 1 of two-layer remembrance). `systemPrompt` steers Layer-1/Layer-2 phrasing.
  */
 export async function sendToHermesBot(
   message: string,
   conversationId: string,
   user: string,
+  history: ChatHistoryItem[] = [],
+  systemPrompt?: string,
 ): Promise<{ reply: string; title?: string }> {
-  const baseUrl = getUserHermesUrl(user);
+  const baseUrl = hermesBaseUrl();
   const res = await fetch(`${baseUrl}/api/webchat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
@@ -116,6 +101,8 @@ export async function sendToHermesBot(
       message,
       conversation_id: conversationId,
       user,
+      history,
+      system_prompt: systemPrompt,
     }),
   });
 
@@ -129,10 +116,10 @@ export async function sendToHermesBot(
 }
 
 /**
- * List all conversations for a user.
+ * List all conversations for a user (server-backed, paid side).
  */
 export async function fetchConversations(user: string): Promise<ConversationSummary[]> {
-  const baseUrl = getUserHermesUrl(user);
+  const baseUrl = hermesBaseUrl();
   const res = await fetch(
     `${baseUrl}/api/conversations?user=${encodeURIComponent(user)}`,
   );
@@ -142,13 +129,13 @@ export async function fetchConversations(user: string): Promise<ConversationSumm
 }
 
 /**
- * Get full conversation with messages.
+ * Get full conversation with messages (server-backed, paid side).
  */
 export async function getConversation(
   user: string,
   convId: string,
 ): Promise<ConversationDetail | null> {
-  const baseUrl = getUserHermesUrl(user);
+  const baseUrl = hermesBaseUrl();
   const res = await fetch(
     `${baseUrl}/api/conversations/${encodeURIComponent(convId)}?user=${encodeURIComponent(user)}`,
   );
@@ -158,13 +145,13 @@ export async function getConversation(
 }
 
 /**
- * Delete a conversation.
+ * Delete a conversation (server-backed, paid side).
  */
 export async function deleteConversationApi(
   user: string,
   convId: string,
 ): Promise<void> {
-  const baseUrl = getUserHermesUrl(user);
+  const baseUrl = hermesBaseUrl();
   const res = await fetch(
     `${baseUrl}/api/conversations/${encodeURIComponent(convId)}?user=${encodeURIComponent(user)}`,
     { method: "DELETE" },
