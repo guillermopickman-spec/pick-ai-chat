@@ -44,17 +44,56 @@ export interface Conversation {
   updatedAt: number;
 }
 
-const HERMES_SYSTEM_PROMPT = `You are PickAIChat, an AI assistant for a paying user.
+const HERMES_BASE_PROMPT = `You are PickAIChat, an AI assistant for a paying user.
 
 Two kinds of context reach you:
 
-1. IN-THREAD HISTORY: If the history field contains earlier messages from THIS chat, treat them as what the user said in this same conversation. If the user asks about something already stated here, answer directly from that history (e.g. "You just said Rex"). Do not claim you "remember" it from elsewhere — it is right here in the thread.
+1. IN-THREAD HISTORY: The conversation transcript below (under "CURRENT CONVERSATION SO FAR") is THIS chat. Treat it as what the user literally just said in this same conversation. If the user asks about something already stated here, answer directly from that transcript (e.g. "You just said Rex"). Do not claim you "remember" it from elsewhere — it is right here in the thread.
 
-2. YOUR LONG-TERM MEMORY: You also retain facts the user has shared across sessions. If a question cannot be answered from the in-thread history, fall back to your memory. When you answer from memory, say so explicitly and confirm with the user (e.g. "From what I remember, your dog's name is Rex — is that right?"). Never present a memory-based answer as if it were just stated in this chat.
+2. YOUR LONG-TERM MEMORY: You also retain facts the user has shared across sessions. If a question cannot be answered from the in-thread transcript, fall back to your memory. When you answer from memory, say so explicitly and confirm with the user (e.g. "From what I remember, your dog's name is Rex — is that right?"). Never present a memory-based answer as if it were just stated in this chat.
 
-3. IF UNSURE: If you have no in-thread history for it and no confident memory of it, say plainly that you don't know. Do not invent facts.
+3. IF UNSURE: If you have no in-thread transcript for it and no confident memory of it, say plainly that you don't know. Do not invent facts.
 
 Always be concise and friendly.`;
+
+/**
+ * Build the full system prompt for Hermes.
+ * Folds the in-thread transcript directly into the prompt (so the model can't
+ * ignore a side `history` field), and auto-compacts it when it gets too long:
+ * older turns are collapsed into a short summary, only the recent turns stay
+ * verbatim. Silent — the user never sees or triggers this.
+ */
+const MAX_VERBATIM_TURNS = 12; // keep last N turns word-for-word
+const COMPACT_AFTER_CHARS = 4000; // if transcript exceeds this, compact
+
+function buildHermesPrompt(history: { role: ChatRole; content: string }[]): string {
+  if (history.length === 0) return HERMES_BASE_PROMPT;
+
+  const transcript = history
+    .map((m) => `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`)
+    .join("\n");
+
+  if (transcript.length <= COMPACT_AFTER_CHARS) {
+    return `${HERMES_BASE_PROMPT}\n\nCURRENT CONVERSATION SO FAR:\n${transcript}`;
+  }
+
+  // Auto-compact: summarize everything except the last MAX_VERBATIM_TURNS.
+  const recent = history.slice(-MAX_VERBATIM_TURNS);
+  const older = history.slice(0, -MAX_VERBATIM_TURNS);
+  const olderSummary = older
+    .map((m) => `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`)
+    .join(" | ");
+  const recentTranscript = recent
+    .map((m) => `${m.role === "user" ? "User" : "Assistant"}: ${m.content}`)
+    .join("\n");
+
+  return (
+    `${HERMES_BASE_PROMPT}\n\n` +
+    `EARLIER PART OF THIS CONVERSATION (condensed summary):\n` +
+    `${olderSummary}\n\n` +
+    `CURRENT CONVERSATION SO FAR (recent turns):\n${recentTranscript}`
+  );
+}
 
 function summaryToConversation(s: ConversationSummary): Conversation {
   return {
@@ -206,7 +245,7 @@ export function useChatSession(opts: {
       convId,
       user ?? "",
       history,
-      HERMES_SYSTEM_PROMPT,
+      buildHermesPrompt(history),
       agentUrl ?? undefined,
     );
     return reply;
