@@ -147,7 +147,9 @@ function RootComponent() {
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
-      <Footer />
+      <div className="hidden md:block">
+        <Footer />
+      </div>
       <PwaAuthGuard />
       {!hideFloaters && <ChatWidget open={chatOpen} />}
       <WhatsAppButton chatOpen={chatOpen} onChatToggle={() => setChatOpen(v => !v)} hideChatToggle={hideFloaters} hideFloaters={hideFloaters} />
