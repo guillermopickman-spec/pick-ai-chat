@@ -122,10 +122,9 @@ export function useChatSession(opts: {
 
   // ── Load ────────────────────────────────────────────────────────────────
   useEffect(() => {
-    if (initialized.current) return;
-    initialized.current = true;
-
     if (mode === "free") {
+      if (initialized.current) return;
+      initialized.current = true;
       const local = listFreeConversations();
       setConversations(local);
       const saved = getFreeActiveId();
@@ -134,9 +133,15 @@ export function useChatSession(opts: {
       return;
     }
 
-    // mode === "hermes"
+    // mode === "hermes": must wait for the Clerk user to be available.
+    // On a hard reload Clerk loads async, so user may be null on first paint —
+    // don't load with an empty user, and re-run once the real user arrives.
+    if (!user) return;
+    if (initialized.current) return;
+    initialized.current = true;
+
     setLoading(true);
-    fetchConversations(user ?? "")
+    fetchConversations(user)
       .then((summaries) => {
         const convs = summaries.map(summaryToConversation);
         setConversations(convs);
@@ -146,11 +151,6 @@ export function useChatSession(opts: {
       })
       .catch((err) => {
         console.error("Failed to load conversations from server:", err);
-        const local = listFreeConversations();
-        setConversations(local);
-        const saved = localStorage.getItem("pickaichat.active-conversation.v1");
-        if (saved && local.find((c) => c.id === saved)) setActiveId(saved);
-        else if (local.length > 0) setActiveId(local[0].id);
       })
       .finally(() => setLoading(false));
   }, [mode, user]);
