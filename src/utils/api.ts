@@ -131,6 +131,10 @@ export type ChatHistoryItem = {
  * Send a message to the Hermes webchat API.
  * Sends the FULL prior thread history so the agent can follow the conversation
  * (Layer 1 of two-layer remembrance). `systemPrompt` steers Layer-1/Layer-2 phrasing.
+ *
+ * `persist` (default true): when true, uses /api/webchat (conversation saved on
+ * the server). When false (admin testing a client), uses /api/chat which replies
+ * WITHOUT saving — so the admin's test messages never land in the client's history.
  */
 export async function sendToHermesBot(
   message: string,
@@ -139,9 +143,11 @@ export async function sendToHermesBot(
   history: ChatHistoryItem[] = [],
   systemPrompt?: string,
   baseUrl?: string,
+  persist: boolean = true,
 ): Promise<{ reply: string; title?: string }> {
   const url = baseUrl || resolveHermesUrl(user);
-  const res = await fetch(`${url}/api/webchat`, {
+  const endpoint = persist ? "/api/webchat" : "/api/chat";
+  const res = await fetch(`${url}${endpoint}`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({

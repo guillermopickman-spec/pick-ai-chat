@@ -39,6 +39,11 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
   const currentAgentLabel =
     agentOptions.find((o) => o.url === (overrideAgentUrl || agentOptions[0]?.url))
       ?.label || "Default";
+  // Admin testing a client's agent (not the platform default) -> label + no server save.
+  const testClientLabel =
+    isAdmin && mode === "hermes" && overrideAgentUrl && overrideAgentUrl !== agentOptions[0]?.url
+      ? currentAgentLabel
+      : null;
 
   const {
     conversations,
@@ -50,7 +55,7 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
     switchConversation,
     addMessage,
     send,
-  } = useChatSession({ mode, user: userEmail, agentUrl: overrideAgentUrl });
+  } = useChatSession({ mode, user: userEmail, agentUrl: overrideAgentUrl, testClientLabel });
 
   const [input, setInput] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);

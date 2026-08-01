@@ -112,8 +112,10 @@ export function useChatSession(opts: {
   mode: "hermes" | "free";
   user: string | null;
   agentUrl?: string | null;
+  /** When admin is testing a client's agent: label for the conversation + disable server save. */
+  testClientLabel?: string | null;
 }) {
-  const { mode, user, agentUrl } = opts;
+  const { mode, user, agentUrl, testClientLabel } = opts;
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -173,7 +175,7 @@ export function useChatSession(opts: {
   const createConversation = useCallback(() => {
     const conv: Conversation = {
       id: newMessageId(),
-      title: "New chat",
+      title: testClientLabel ? `Test · ${testClientLabel}` : "New chat",
       messages: [],
       createdAt: Date.now(),
       updatedAt: Date.now(),
@@ -183,7 +185,7 @@ export function useChatSession(opts: {
   }, [conversations, persist]);
 
   const deleteConversation = useCallback((id: string) => {
-    if (mode === "hermes" && user) {
+    if (mode === "hermes" && user && !testClientLabel) {
       deleteConversationApi(user, id).catch((err) =>
         console.error("Failed to delete conversation on server:", err),
       );
@@ -191,7 +193,7 @@ export function useChatSession(opts: {
     const filtered = conversations.filter((c) => c.id !== id);
     const nextActive = id === activeId ? (filtered[0]?.id ?? null) : activeId;
     persist(filtered, nextActive);
-  }, [conversations, activeId, persist, mode, user]);
+  }, [conversations, activeId, persist, mode, user, testClientLabel]);
 
   const switchConversation = useCallback((id: string) => {
     if (mode === "free") setFreeActiveId(id);
@@ -271,6 +273,7 @@ export function useChatSession(opts: {
       return reply;
     }
 
+    const isTest = !!testClientLabel;
     const hermesMessage = buildHermesMessage(text, history);
     const { reply } = await sendToHermesBot(
       hermesMessage,
@@ -279,9 +282,10 @@ export function useChatSession(opts: {
       history,
       HERMES_BASE_PROMPT,
       agentUrl ?? undefined,
+      !isTest, // test mode: don't persist to the client's server history
     );
     return reply;
-  }, [conversations, mode, user, agentUrl]);
+  }, [conversations, mode, user, agentUrl, testClientLabel]);
 
   return {
     conversations,
