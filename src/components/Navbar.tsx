@@ -170,6 +170,7 @@ export function Navbar() {
 
           <Link
             to="/contact"
+            search={{ upgrade: false }}
             className="rounded-lg bg-magenta px-4 py-2 text-sm font-semibold text-primary-foreground transition hover:brightness-110"
           >
             {t("nav.cta")}
@@ -289,6 +290,7 @@ export function Navbar() {
             </div>
             <Link
               to="/contact"
+              search={{ upgrade: false }}
               onClick={() => setMobileOpen(false)}
               className="mt-1 rounded-lg bg-magenta px-4 py-2 text-center text-sm font-semibold text-primary-foreground transition hover:brightness-110"
             >

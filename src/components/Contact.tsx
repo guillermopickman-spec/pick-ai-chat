@@ -47,16 +47,18 @@ function validate(values: FormState, t: (key: string, ...args: string[]) => stri
 export function ContactForm({
   onSubmitted,
   buttonClassName,
+  defaultMessage,
 }: {
   onSubmitted?: () => void;
   buttonClassName?: string;
+  defaultMessage?: string;
 }) {
   const { t } = useLanguage();
   const [values, setValues] = useState<FormState>({
     name: "",
     email: "",
     company: "",
-    message: "",
+    message: defaultMessage ?? "",
   });
   const [errors, setErrors] = useState<FormErrors>({});
   const [sending, setSending] = useState(false);

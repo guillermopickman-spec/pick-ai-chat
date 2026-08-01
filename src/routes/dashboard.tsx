@@ -381,6 +381,7 @@ function Dashboard() {
               ) : (
                 <Link
                   to="/contact"
+                  search={{ upgrade: true }}
                   className="mt-1 inline-block rounded-full bg-accent/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground transition hover:text-magenta"
                 >
                   {isES ? "Gratis · Mejorar" : "Free · Upgrade"}

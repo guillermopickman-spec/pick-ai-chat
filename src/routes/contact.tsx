@@ -3,6 +3,9 @@ import { Navbar } from "@/components/Navbar";
 import { ContactForm } from "@/components/Contact";
 
 export const Route = createFileRoute("/contact")({
+  validateSearch: (search: Record<string, unknown>) => ({
+    upgrade: search.upgrade === "1",
+  }),
   head: () => ({
     meta: [
       { title: "Contact — PickAIChat" },
@@ -31,6 +34,9 @@ export const Route = createFileRoute("/contact")({
 });
 
 function ContactRoute() {
+  const { upgrade } = Route.useSearch();
+  const upgradeMessage =
+    "Hi! I'd like to upgrade to the paid chat plan. Please send me the payment details (bank/PayPal) and I'll pay, then activate my account.";
   return (
     <>
       <Navbar />
@@ -48,7 +54,7 @@ function ContactRoute() {
         </div>
 
         <div className="mx-auto mt-10 max-w-2xl">
-          <ContactForm />
+          <ContactForm defaultMessage={upgrade ? upgradeMessage : undefined} />
         </div>
       </main>
     </>
