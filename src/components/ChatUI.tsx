@@ -1,9 +1,9 @@
 // v1.0.3 - fix renameConversation bug
-import { useEffect, useRef, useState, type FormEvent } from "react";
+import { useEffect, useRef, useState, useMemo, type FormEvent } from "react";
 import { useUser } from "@clerk/tanstack-react-start";
 import { useConversations, type Message } from "@/hooks/useConversations";
 import { useLanguage } from "@/lib/LanguageProvider";
-import { sendToHermesBot } from "@/utils/api";
+import { sendToHermesBot, getAgentOptions, setOverrideHermesUrl, getOverrideHermesUrl } from "@/utils/api";
 import { useIsMobile } from "@/hooks/use-mobile";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -35,11 +35,19 @@ export function ChatUI() {
   } = useConversations(userEmail);
 
   const [input, setInput] = useState("");
-  const [isTyping, setIsTyping] = useState(false);
   const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [isTyping, setIsTyping] = useState(false);
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLTextAreaElement>(null);
   const isMobile = useIsMobile();
+
+  // ── Admin agent switcher ──
+  const isAdmin = userEmail === "pickaichat@gmail.com";
+  const agentOptions = useMemo(() => isAdmin ? getAgentOptions() : [], [isAdmin]);
+  const [showAgentMenu, setShowAgentMenu] = useState(false);
+  const currentAgent = getOverrideHermesUrl()
+    ? agentOptions.find(o => o.url === getOverrideHermesUrl())?.label || "Custom"
+    : "Default";
 
   // Auto-focus the input when switching conversations
   useEffect(() => {
@@ -167,6 +175,41 @@ export function ChatUI() {
             >
               <PanelLeftOpen size={16} />
             </button>
+          )}
+          {/* Admin agent switcher */}
+          {isAdmin && (
+            <div className="relative">
+              <button
+                onClick={() => setShowAgentMenu(v => !v)}
+                className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1 text-[11px] font-medium text-muted-foreground hover:border-magenta/30 hover:text-foreground transition"
+              >
+                <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: currentAgent === "Default" ? "#34d399" : "#a78bfa" }} />
+                {currentAgent}
+                <svg width="10" height="10" viewBox="0 0 10 10" fill="none" stroke="currentColor" strokeWidth="1.5"><path d="M2 3.5l3 3 3-3"/></svg>
+              </button>
+              {showAgentMenu && (
+                <>
+                  <div className="fixed inset-0 z-10" onClick={() => setShowAgentMenu(false)} />
+                  <div className="absolute left-0 top-full z-20 mt-1 w-56 rounded-lg border border-border bg-background py-1 shadow-lg">
+                    {agentOptions.map(opt => (
+                      <button
+                        key={opt.url}
+                        onClick={() => {
+                          setOverrideHermesUrl(opt.url === agentOptions[0].url ? null : opt.url);
+                          setShowAgentMenu(false);
+                        }}
+                        className={`flex w-full items-center gap-2 px-3 py-1.5 text-left text-xs transition hover:bg-accent/50 ${
+                          opt.url === (getOverrideHermesUrl() || agentOptions[0].url) ? "text-magenta font-semibold" : "text-muted-foreground"
+                        }`}
+                      >
+                        <span className="inline-block h-2 w-2 rounded-full" style={{ backgroundColor: opt.label === "Default" ? "#34d399" : "#a78bfa" }} />
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           )}
           <span className="text-sm font-medium text-foreground truncate">
             {activeConversation?.title || "PickAIChat"}

@@ -48,7 +48,31 @@ const USER_AGENT_URLS: Record<string, string> = {
   "josewilson95@gmail.com": "https://mail.come2ireland.com",
 };
 
+/** Admin-only override — allows switching target agent for testing */
+let overrideHermesUrl: string | null = null;
+
+export function setOverrideHermesUrl(url: string | null) {
+  overrideHermesUrl = url;
+}
+
+export function getOverrideHermesUrl(): string | null {
+  return overrideHermesUrl;
+}
+
+export function getAgentOptions(): { label: string; url: string }[] {
+  const options: { label: string; url: string }[] = [
+    { label: "Default", url: import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL },
+  ];
+  for (const [email, url] of Object.entries(USER_AGENT_URLS)) {
+    const name = email.split("@")[0].replace(/[._]/g, " ");
+    const label = `${name.charAt(0).toUpperCase() + name.slice(1)} (${email})`;
+    options.push({ label, url });
+  }
+  return options;
+}
+
 function getUserHermesUrl(user: string): string {
+  if (overrideHermesUrl) return overrideHermesUrl;
   return USER_AGENT_URLS[user] || import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL;
 }
 
