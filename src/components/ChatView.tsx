@@ -256,7 +256,7 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
               Free · Upgrade
             </Link>
           )}
-          {mode === "hermes" && agentOptions.length > 0 && (
+          {mode === "hermes" && !isMobile && agentOptions.length > 0 && (
             <div className="relative ml-auto">
               <button
                 type="button"
