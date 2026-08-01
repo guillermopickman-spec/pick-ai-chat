@@ -11,6 +11,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import {
   fetchConversations,
+  getConversation,
   deleteConversationApi,
   sendToHermesBot,
   sendChatMessage,
@@ -197,6 +198,34 @@ export function useChatSession(opts: {
     else localStorage.setItem("pickaichat.active-conversation.v1", id);
     setActiveId(id);
   }, [mode]);
+
+  // Hermes mode: when the active conversation changes, load its message bodies
+  // from the server (summaries only carry titles, not messages).
+  useEffect(() => {
+    if (mode !== "hermes" || !activeId || !user) return;
+    let cancelled = false;
+    getConversation(user, activeId)
+      .then((detail) => {
+        if (cancelled || !detail) return;
+        const msgs: Message[] = (detail.messages ?? []).map((m) => ({
+          id: m.id ?? newMessageId(),
+          role: m.role === "assistant" ? "assistant" : "user",
+          content: m.content ?? "",
+          timestamp: m.timestamp ?? Date.now(),
+        }));
+        setConversations((prev) =>
+          prev.map((c) =>
+            c.id === activeId
+              ? { ...c, messages: msgs, title: detail.title ?? c.title }
+              : c,
+          ),
+        );
+      })
+      .catch((err) => console.error("Failed to load messages:", err));
+    return () => {
+      cancelled = true;
+    };
+  }, [activeId, mode, user]);
 
   const addMessage = useCallback((
     role: ChatRole,
