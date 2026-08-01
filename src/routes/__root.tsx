@@ -141,14 +141,16 @@ function RootComponent() {
   const [chatOpen, setChatOpen] = useState(false);
   const location = useLocation();
   const isTryPage = location.pathname === "/try";
+  const isChatPage = location.pathname === "/chat" || location.pathname === "/free-chat";
+  const hideFloaters = isTryPage || isChatPage;
 
   return (
     <QueryClientProvider client={queryClient}>
       <Outlet />
       <Footer />
       <PwaAuthGuard />
-      {!isTryPage && <ChatWidget open={chatOpen} />}
-      <WhatsAppButton chatOpen={chatOpen} onChatToggle={() => setChatOpen(v => !v)} hideChatToggle={isTryPage} />
+      {!hideFloaters && <ChatWidget open={chatOpen} />}
+      <WhatsAppButton chatOpen={chatOpen} onChatToggle={() => setChatOpen(v => !v)} hideChatToggle={hideFloaters} hideFloaters={hideFloaters} />
     </QueryClientProvider>
   );
 }
