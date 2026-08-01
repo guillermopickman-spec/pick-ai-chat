@@ -26,6 +26,9 @@ import {
   setFreeActiveId,
   newMessageId,
   generateFreeTitle,
+  loadTrash,
+  saveTrash,
+  type TrashEntry,
 } from "@/lib/freeStore";
 
 export type ChatRole = "user" | "assistant";
@@ -118,6 +121,7 @@ export function useChatSession(opts: {
   const { mode, user, agentUrl, testClientLabel } = opts;
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
+  const [trash, setTrash] = useState<TrashEntry[]>(() => loadTrash());
   const [loading, setLoading] = useState(false);
   const initialized = useRef(false);
   const convIdRef = useRef<string | null>(null);
@@ -185,15 +189,48 @@ export function useChatSession(opts: {
   }, [conversations, persist]);
 
   const deleteConversation = useCallback((id: string) => {
-    if (mode === "hermes" && user && !testClientLabel) {
-      deleteConversationApi(user, id).catch((err) =>
-        console.error("Failed to delete conversation on server:", err),
-      );
-    }
+    const conv = conversations.find((c) => c.id === id);
+    if (!conv) return;
+    // Soft-delete: move to trash (local) instead of erasing. Server delete
+    // only happens on permanent purge / delete-forever.
+    const entry: TrashEntry = {
+      conv,
+      deletedAt: Date.now(),
+      mode,
+      user,
+    };
+    const trash = loadTrash().filter((e) => e.conv.id !== id);
+    trash.unshift(entry);
+    saveTrash(trash);
+    setTrash(trash);
+
     const filtered = conversations.filter((c) => c.id !== id);
     const nextActive = id === activeId ? (filtered[0]?.id ?? null) : activeId;
     persist(filtered, nextActive);
-  }, [conversations, activeId, persist, mode, user, testClientLabel]);
+  }, [conversations, activeId, persist, mode, user]);
+
+  const restoreConversation = useCallback((id: string) => {
+    const trash = loadTrash();
+    const entry = trash.find((e) => e.conv.id === id);
+    if (!entry) return;
+    const remaining = trash.filter((e) => e.conv.id !== id);
+    saveTrash(remaining);
+    setTrash(remaining);
+    persist([entry.conv, ...conversations], entry.conv.id);
+  }, [conversations, persist]);
+
+  const purgeTrashEntry = useCallback((id: string) => {
+    const trash = loadTrash();
+    const entry = trash.find((e) => e.conv.id === id);
+    if (entry && entry.mode === "hermes" && entry.user && !testClientLabel) {
+      deleteConversationApi(entry.user, id).catch((err) =>
+        console.error("Failed to delete conversation on server:", err),
+      );
+    }
+    const remaining = trash.filter((e) => e.conv.id !== id);
+    saveTrash(remaining);
+    setTrash(remaining);
+  }, [testClientLabel]);
 
   const switchConversation = useCallback((id: string) => {
     if (mode === "free") setFreeActiveId(id);
@@ -292,8 +329,11 @@ export function useChatSession(opts: {
     activeConversation,
     activeId,
     loading,
+    trash,
     createConversation,
     deleteConversation,
+    restoreConversation,
+    purgeTrashEntry,
     switchConversation,
     addMessage,
     send,

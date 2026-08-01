@@ -50,8 +50,11 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
     activeConversation,
     activeId,
     loading,
+    trash,
     createConversation,
     deleteConversation,
+    restoreConversation,
+    purgeTrashEntry,
     switchConversation,
     addMessage,
     send,
@@ -178,6 +181,37 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
             ))
           )}
         </div>
+
+        {/* Trash */}
+        {trash.length > 0 && (
+          <div className="border-t border-border p-2">
+            <p className="px-1 pb-1 text-[10px] font-medium uppercase tracking-wide text-muted-foreground/60">
+              Trash ({trash.length})
+            </p>
+            <div className="max-h-40 space-y-1 overflow-y-auto">
+              {trash.map((entry) => (
+                <div
+                  key={entry.conv.id}
+                  className="group flex items-center gap-2 rounded-lg px-2 py-1.5 text-xs text-muted-foreground"
+                >
+                  <span className="flex-1 truncate">{entry.conv.title}</span>
+                  <button
+                    onClick={() => restoreConversation(entry.conv.id)}
+                    className="shrink-0 rounded px-1.5 py-0.5 text-magenta transition hover:bg-magenta/10"
+                  >
+                    Restore
+                  </button>
+                  <button
+                    onClick={() => purgeTrashEntry(entry.conv.id)}
+                    className="shrink-0 rounded px-1.5 py-0.5 text-destructive transition hover:bg-destructive/10"
+                  >
+                    Delete
+                  </button>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
       </aside>
 
       {/* Mobile drawer backdrop */}

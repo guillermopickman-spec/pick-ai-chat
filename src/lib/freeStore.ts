@@ -56,3 +56,38 @@ export function generateFreeTitle(content: string): string {
 }
 
 export type { Conversation, Message };
+
+// ── Trash (soft-delete with restore window) ──────────────────────────────
+const TRASH_KEY = "pickaichat.trash.v1";
+const TRASH_TTL_MS = 7 * 24 * 60 * 60 * 1000; // 7 days
+
+export interface TrashEntry {
+  conv: Conversation;
+  deletedAt: number;
+  mode: "hermes" | "free";
+  user: string | null;
+}
+
+export function loadTrash(): TrashEntry[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem(TRASH_KEY);
+    if (!raw) return [];
+    const all = JSON.parse(raw) as TrashEntry[];
+    const now = Date.now();
+    // Drop entries older than the TTL.
+    const fresh = all.filter((e) => now - e.deletedAt < TRASH_TTL_MS);
+    if (fresh.length !== all.length) saveTrash(fresh);
+    return fresh;
+  } catch {
+    return [];
+  }
+}
+
+export function saveTrash(entries: TrashEntry[]): void {
+  try {
+    localStorage.setItem(TRASH_KEY, JSON.stringify(entries));
+  } catch {
+    /* ignore */
+  }
+}
