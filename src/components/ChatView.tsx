@@ -6,6 +6,7 @@ import { useUser } from "@clerk/tanstack-react-start";
 import { useChatSession, type Message } from "@/hooks/useChatSession";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { Link } from "@tanstack/react-router";
 import { getAgentOptions, setOverrideHermesUrl, getOverrideHermesUrl } from "@/utils/api";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
@@ -184,9 +185,12 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
             {activeConversation?.title || "PickAIChat"}
           </span>
           {mode === "free" && (
-            <span className="ml-auto rounded-full bg-accent/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
-              Free
-            </span>
+            <Link
+              to="/contact"
+              className="ml-auto rounded-full bg-accent/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground transition hover:border-magenta/30 hover:text-magenta"
+            >
+              Free · Upgrade
+            </Link>
           )}
           {mode === "hermes" && agentOptions.length > 0 && (
             <div className="relative ml-auto">
