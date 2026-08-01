@@ -28,9 +28,11 @@ export const Route = createFileRoute("/chat")({
 
 function ChatRoute() {
   return (
-    <div className="flex min-h-screen flex-col bg-background">
-      <Navbar />
-      <main className="flex-1 pt-16">
+    <div className="flex h-[100dvh] flex-col overflow-hidden bg-background">
+      <div className="hidden md:block">
+        <Navbar />
+      </div>
+      <main className="flex-1 overflow-hidden">
         <ChatView mode="hermes" />
       </main>
     </div>

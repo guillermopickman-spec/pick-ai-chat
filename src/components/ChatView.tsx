@@ -103,12 +103,18 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
   }
 
   return (
-    <div className="flex h-[calc(100vh-4rem)] overflow-hidden">
-      {/* Sidebar */}
+    <div className="flex h-[100dvh] overflow-hidden">
+      {/* Sidebar — desktop: push-in panel. mobile: overlay drawer. */}
       <aside
-        className={`flex flex-col border-r border-border bg-background/50 transition-all duration-200 ${
-          sidebarOpen ? "w-64" : "w-0 overflow-hidden"
-        }`}
+        className={
+          isMobile
+            ? `fixed inset-y-0 left-0 z-40 flex w-72 flex-col border-r border-border bg-background shadow-xl transition-transform duration-200 ${
+                sidebarOpen ? "translate-x-0" : "-translate-x-full"
+              }`
+            : `flex flex-col border-r border-border bg-background/50 transition-all duration-200 ${
+                sidebarOpen ? "w-64" : "w-0 overflow-hidden"
+              }`
+        }
       >
         <div className="flex items-center justify-between border-b border-border p-3">
           <button
@@ -169,17 +175,35 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
         </div>
       </aside>
 
+      {/* Mobile drawer backdrop */}
+      {isMobile && sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/40"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
+
       {/* Main chat area */}
       <div className="flex flex-1 flex-col">
         {/* Top bar */}
         <div className="flex items-center gap-2 border-b border-border px-4 py-2.5">
-          {!sidebarOpen && (
+          {isMobile ? (
             <button
               onClick={() => setSidebarOpen(true)}
               className="rounded p-1 text-muted-foreground hover:text-foreground"
+              aria-label="Open conversations"
             >
-              <PanelLeftOpen size={16} />
+              <PanelLeftOpen size={18} />
             </button>
+          ) : (
+            !sidebarOpen && (
+              <button
+                onClick={() => setSidebarOpen(true)}
+                className="rounded p-1 text-muted-foreground hover:text-foreground"
+              >
+                <PanelLeftOpen size={16} />
+              </button>
+            )
           )}
           <span className="text-sm font-medium text-foreground truncate">
             {activeConversation?.title || "PickAIChat"}
@@ -279,7 +303,7 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
         </div>
 
         {/* Input area */}
-        <div className="border-t border-border bg-background/50 px-4 py-3">
+        <div className="border-t border-border bg-background/50 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
           <form onSubmit={handleSubmit} className="mx-auto flex max-w-3xl items-end gap-2">
             <div className="relative flex-1">
               <textarea
