@@ -257,7 +257,7 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
             </Link>
           )}
           {mode === "hermes" && !isMobile && agentOptions.length > 0 && (
-            <div className="relative ml-auto">
+            <div className="relative ml-auto hidden md:block">
               <button
                 type="button"
                 onClick={() => setShowAgentMenu((v) => !v)}
