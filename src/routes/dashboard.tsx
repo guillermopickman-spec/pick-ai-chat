@@ -374,6 +374,18 @@ function Dashboard() {
               <p className="text-xs text-muted-foreground">
                 {isES ? "Conversa con tu agente AI" : "Chat with your AI agent"}
               </p>
+              {canUsePaidChat ? (
+                <span className="mt-1 inline-block rounded-full bg-green-500/15 px-2 py-0.5 text-[10px] font-medium text-green-600">
+                  {isES ? "Plan de pago" : "Paid plan"}
+                </span>
+              ) : (
+                <Link
+                  to="/contact"
+                  className="mt-1 inline-block rounded-full bg-accent/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground transition hover:text-magenta"
+                >
+                  {isES ? "Gratis · Mejorar" : "Free · Upgrade"}
+                </Link>
+              )}
             </div>
             <ChevronRight size={18} className="ml-auto text-muted-foreground" />
           </Link>
