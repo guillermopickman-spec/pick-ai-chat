@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { Link, useLocation, useRouter } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
-import { useLanguage } from "../lib/LanguageProvider";
+import { useLanguage } from "@/lib/LanguageProvider";
 import { useUser, useClerk } from "@clerk/tanstack-react-start";
+import { getClientAgentUrl } from "@/utils/api";
 
 const ADMIN_EMAIL = "pickaichat@gmail.com";
 
@@ -20,7 +21,10 @@ export function Navbar() {
   // Hermes chat for testing/admin purposes.
   const canUsePaidChat =
     isAdmin ||
-    (user?.publicMetadata as { plan?: string } | undefined)?.plan === "paid";
+    (user?.publicMetadata as { plan?: string } | undefined)?.plan === "paid" ||
+    (user?.primaryEmailAddress?.emailAddress
+      ? getClientAgentUrl(user.primaryEmailAddress.emailAddress) !== undefined
+      : false);
   const chatHref = canUsePaidChat ? "/chat" : "/free-chat";
 
   const NAV_LINKS = [

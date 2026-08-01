@@ -6,6 +6,7 @@ import { useUser } from "@clerk/tanstack-react-start";
 import { useChatSession, type Message } from "@/hooks/useChatSession";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { useIsMobile } from "@/hooks/use-mobile";
+import { getAgentOptions, setOverrideHermesUrl, getOverrideHermesUrl } from "@/utils/api";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
@@ -16,13 +17,27 @@ import {
   PanelLeftOpen,
   PanelLeftClose,
   Loader2,
+  ChevronDown,
 } from "lucide-react";
+
+const ADMIN_EMAIL = "pickaichat@gmail.com";
 
 export function ChatView({ mode }: { mode: "hermes" | "free" }) {
   const { user } = useUser();
   const userEmail = user?.primaryEmailAddress?.emailAddress ?? null;
   const { t } = useLanguage();
   const isMobile = useIsMobile();
+  const isAdmin = userEmail === ADMIN_EMAIL;
+
+  // ── Admin bot selector (Hermes mode only) ──
+  const agentOptions = isAdmin && mode === "hermes" ? getAgentOptions() : [];
+  const [overrideAgentUrl, setOverrideAgentUrl] = useState<string | null>(
+    getOverrideHermesUrl(),
+  );
+  const [showAgentMenu, setShowAgentMenu] = useState(false);
+  const currentAgentLabel =
+    agentOptions.find((o) => o.url === (overrideAgentUrl || agentOptions[0]?.url))
+      ?.label || "Default";
 
   const {
     conversations,
@@ -34,7 +49,7 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
     switchConversation,
     addMessage,
     send,
-  } = useChatSession({ mode, user: userEmail });
+  } = useChatSession({ mode, user: userEmail, agentUrl: overrideAgentUrl });
 
   const [input, setInput] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
@@ -172,6 +187,51 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
             <span className="ml-auto rounded-full bg-accent/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
               Free
             </span>
+          )}
+          {mode === "hermes" && agentOptions.length > 0 && (
+            <div className="relative ml-auto">
+              <button
+                type="button"
+                onClick={() => setShowAgentMenu((v) => !v)}
+                className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1 text-[11px] font-medium text-muted-foreground transition hover:border-magenta/30 hover:text-foreground"
+              >
+                <span
+                  className="inline-block h-2 w-2 rounded-full"
+                  style={{ backgroundColor: overrideAgentUrl ? "#a78bfa" : "#34d399" }}
+                />
+                {currentAgentLabel}
+                <ChevronDown size={12} />
+              </button>
+              {showAgentMenu && (
+                <>
+                  <div
+                    className="fixed inset-0 z-10"
+                    onClick={() => setShowAgentMenu(false)}
+                  />
+                  <div className="absolute right-0 z-20 mt-1 w-56 overflow-hidden rounded-lg border border-border bg-card shadow-lg">
+                    {agentOptions.map((opt) => (
+                      <button
+                        key={opt.url}
+                        type="button"
+                        onClick={() => {
+                          const isDefault = opt.url === agentOptions[0].url;
+                          setOverrideAgentUrl(isDefault ? null : opt.url);
+                          setOverrideHermesUrl(isDefault ? null : opt.url);
+                          setShowAgentMenu(false);
+                        }}
+                        className={`block w-full px-3 py-2 text-left text-[11px] transition hover:bg-accent/50 ${
+                          (overrideAgentUrl || agentOptions[0].url) === opt.url
+                            ? "text-magenta font-semibold"
+                            : "text-muted-foreground"
+                        }`}
+                      >
+                        {opt.label}
+                      </button>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
           )}
         </div>
 

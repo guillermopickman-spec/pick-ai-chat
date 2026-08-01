@@ -5,6 +5,7 @@ import { useUser } from "@clerk/tanstack-react-start";
 import { useState, useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { useLanguage } from "@/lib/LanguageProvider";
+import { getClientAgentUrl } from "@/utils/api";
 import {
   MessageSquare, Sparkles, Bot, ArrowRight, Check,
   Store, Utensils, Stethoscope, Laptop, Building2,
@@ -274,7 +275,10 @@ function Dashboard() {
   const { user } = useUser();
   const canUsePaidChat =
     user?.primaryEmailAddress?.emailAddress === "pickaichat@gmail.com" ||
-    (user?.publicMetadata as { plan?: string } | undefined)?.plan === "paid";
+    (user?.publicMetadata as { plan?: string } | undefined)?.plan === "paid" ||
+    (user?.primaryEmailAddress?.emailAddress
+      ? getClientAgentUrl(user.primaryEmailAddress.emailAddress) !== undefined
+      : false);
   const email = user?.primaryEmailAddress?.emailAddress ?? "";
   const [onboarding, setOnboarding] = useState<OnboardingData | null>(null);
 

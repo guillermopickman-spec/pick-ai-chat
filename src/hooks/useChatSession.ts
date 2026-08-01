@@ -69,8 +69,9 @@ function summaryToConversation(s: ConversationSummary): Conversation {
 export function useChatSession(opts: {
   mode: "hermes" | "free";
   user: string | null;
+  agentUrl?: string | null;
 }) {
-  const { mode, user } = opts;
+  const { mode, user, agentUrl } = opts;
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
@@ -206,9 +207,10 @@ export function useChatSession(opts: {
       user ?? "",
       history,
       HERMES_SYSTEM_PROMPT,
+      agentUrl ?? undefined,
     );
     return reply;
-  }, [conversations, mode, user]);
+  }, [conversations, mode, user, agentUrl]);
 
   return {
     conversations,

@@ -52,6 +52,52 @@ function hermesBaseUrl(): string {
   return import.meta.env.VITE_HERMES_API_URL || DEFAULT_HERMES_URL;
 }
 
+/**
+ * Per-client webchat routing. Each client with their own Hermes agent is
+ * mapped here by login email. This is WEBCHAT ONLY — it is NOT the email
+ * auto-reply engine (Wilson -> IONOS). The two must never be entangled.
+ */
+const WEBCHAT_AGENT_URLS: Record<string, string> = {
+  "josewilson95@gmail.com": "https://mail.come2ireland.com",
+};
+
+/** Resolve the per-client webchat URL for a logged-in user (or undefined). */
+export function getClientAgentUrl(user: string): string | undefined {
+  return WEBCHAT_AGENT_URLS[user];
+}
+
+/** Admin-only agent override (for testing any client's agent). */
+const OVERRIDE_KEY = "pickaichat.agent-override";
+export function setOverrideHermesUrl(url: string | null) {
+  if (url) localStorage.setItem(OVERRIDE_KEY, url);
+  else localStorage.removeItem(OVERRIDE_KEY);
+}
+export function getOverrideHermesUrl(): string | null {
+  return localStorage.getItem(OVERRIDE_KEY);
+}
+
+/** Selectable agents for the admin dropdown. */
+export function getAgentOptions(): { label: string; url: string }[] {
+  const options = [{ label: "Default", url: hermesBaseUrl() }];
+  for (const [email, url] of Object.entries(WEBCHAT_AGENT_URLS)) {
+    const name = email.split("@")[0].replace(/[._]/g, " ");
+    options.push({ label: `${name.charAt(0).toUpperCase() + name.slice(1)} (${email})`, url });
+  }
+  return options;
+}
+
+/**
+ * Resolve the Hermes URL for a send:
+ *   1. admin override (if set)  -> else
+ *   2. per-client webchat URL for this user  -> else
+ *   3. platform default.
+ */
+export function resolveHermesUrl(user: string): string {
+  const override = getOverrideHermesUrl();
+  if (override) return override;
+  return WEBCHAT_AGENT_URLS[user] || hermesBaseUrl();
+}
+
 export interface ConversationSummary {
   id: string;
   title: string;
@@ -92,9 +138,10 @@ export async function sendToHermesBot(
   user: string,
   history: ChatHistoryItem[] = [],
   systemPrompt?: string,
+  baseUrl?: string,
 ): Promise<{ reply: string; title?: string }> {
-  const baseUrl = hermesBaseUrl();
-  const res = await fetch(`${baseUrl}/api/webchat`, {
+  const url = baseUrl || resolveHermesUrl(user);
+  const res = await fetch(`${url}/api/webchat`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
