@@ -355,24 +355,22 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
         {/* Input area */}
         <div className="border-t border-border bg-background/50 px-4 py-3 pb-[calc(0.75rem+env(safe-area-inset-bottom))]">
           <form onSubmit={handleSubmit} className="mx-auto flex max-w-3xl items-end gap-2">
-            <div className="relative flex-1">
-              <textarea
-                ref={inputRef}
-                value={input}
-                onChange={(e) => setInput(e.target.value)}
-                onKeyDown={handleKeyDown}
-                placeholder={t("chatbot.placeholder") || "Type a message..."}
-                rows={1}
-                className="min-h-[44px] w-full resize-none rounded-xl border border-border bg-background px-4 py-3 pr-12 text-sm text-foreground placeholder:text-muted-foreground outline-none transition focus:border-magenta focus:ring-1 focus:ring-magenta/30"
-              />
-              <button
-                type="submit"
-                disabled={!input.trim() || isTyping}
-                className="absolute bottom-2 right-2 flex h-8 w-8 items-center justify-center rounded-lg bg-magenta text-white transition hover:brightness-110 disabled:opacity-40"
-              >
-                <Send size={14} />
-              </button>
-            </div>
+            <textarea
+              ref={inputRef}
+              value={input}
+              onChange={(e) => setInput(e.target.value)}
+              onKeyDown={handleKeyDown}
+              placeholder={t("chatbot.placeholder") || "Type a message..."}
+              rows={1}
+              className="min-h-[44px] w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition focus:border-magenta focus:ring-1 focus:ring-magenta/30"
+            />
+            <button
+              type="submit"
+              disabled={!input.trim() || isTyping}
+              className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-magenta text-white transition hover:brightness-110 disabled:opacity-40"
+            >
+              <Send size={16} />
+            </button>
           </form>
         </div>
       </div>
