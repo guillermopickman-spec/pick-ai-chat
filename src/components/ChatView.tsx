@@ -143,6 +143,49 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
           </button>
         </div>
 
+        {/* Agent selector (admin, desktop only — kept out of the chat view) */}
+        {mode === "hermes" && agentOptions.length > 0 && (
+          <div className="hidden border-b border-border p-3 md:block">
+            <button
+              type="button"
+              onClick={() => setShowAgentMenu((v) => !v)}
+              className="flex w-full items-center justify-between gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-[11px] font-medium text-muted-foreground transition hover:border-magenta/30 hover:text-foreground"
+            >
+              <span className="flex items-center gap-1.5 truncate">
+                <span
+                  className="inline-block h-2 w-2 shrink-0 rounded-full"
+                  style={{ backgroundColor: overrideAgentUrl ? "#a78bfa" : "#34d399" }}
+                />
+                {currentAgentLabel}
+              </span>
+              <ChevronDown size={12} />
+            </button>
+            {showAgentMenu && (
+              <div className="mt-1 overflow-hidden rounded-lg border border-border bg-background shadow-lg">
+                {agentOptions.map((opt) => (
+                  <button
+                    key={opt.url}
+                    type="button"
+                    onClick={() => {
+                      const isDefault = opt.url === agentOptions[0].url;
+                      setOverrideAgentUrl(isDefault ? null : opt.url);
+                      setOverrideHermesUrl(isDefault ? null : opt.url);
+                      setShowAgentMenu(false);
+                    }}
+                    className={`block w-full px-3 py-2 text-left text-[11px] transition hover:bg-accent/50 ${
+                      (overrideAgentUrl || agentOptions[0].url) === opt.url
+                        ? "text-magenta font-semibold"
+                        : "text-muted-foreground"
+                    }`}
+                  >
+                    {opt.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
         <div className="flex-1 overflow-y-auto p-2">
           {loading ? (
             <div className="flex items-center justify-center py-8">
@@ -255,51 +298,6 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
             >
               Free · Upgrade
             </Link>
-          )}
-          {mode === "hermes" && !isMobile && agentOptions.length > 0 && (
-            <div className="relative ml-auto hidden md:block">
-              <button
-                type="button"
-                onClick={() => setShowAgentMenu((v) => !v)}
-                className="flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1 text-[11px] font-medium text-muted-foreground transition hover:border-magenta/30 hover:text-foreground"
-              >
-                <span
-                  className="inline-block h-2 w-2 rounded-full"
-                  style={{ backgroundColor: overrideAgentUrl ? "#a78bfa" : "#34d399" }}
-                />
-                {currentAgentLabel}
-                <ChevronDown size={12} />
-              </button>
-              {showAgentMenu && (
-                <>
-                  <div
-                    className="fixed inset-0 z-10"
-                    onClick={() => setShowAgentMenu(false)}
-                  />
-                  <div className="absolute right-0 z-20 mt-1 w-56 overflow-hidden rounded-lg border border-border bg-card shadow-lg">
-                    {agentOptions.map((opt) => (
-                      <button
-                        key={opt.url}
-                        type="button"
-                        onClick={() => {
-                          const isDefault = opt.url === agentOptions[0].url;
-                          setOverrideAgentUrl(isDefault ? null : opt.url);
-                          setOverrideHermesUrl(isDefault ? null : opt.url);
-                          setShowAgentMenu(false);
-                        }}
-                        className={`block w-full px-3 py-2 text-left text-[11px] transition hover:bg-accent/50 ${
-                          (overrideAgentUrl || agentOptions[0].url) === opt.url
-                            ? "text-magenta font-semibold"
-                            : "text-muted-foreground"
-                        }`}
-                      >
-                        {opt.label}
-                      </button>
-                    ))}
-                  </div>
-                </>
-              )}
-            </div>
           )}
         </div>
 
