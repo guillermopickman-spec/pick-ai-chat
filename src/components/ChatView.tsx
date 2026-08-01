@@ -12,6 +12,7 @@ import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
   Plus,
+  Home,
   MessageSquare,
   Trash2,
   Send,
@@ -124,17 +125,27 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
               }`
         }
       >
-        <div className="flex items-center justify-between border-b border-border p-3">
-          <button
-            onClick={() => {
-              createConversation();
-              if (isMobile) setSidebarOpen(false);
-            }}
-            className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-foreground transition hover:border-magenta hover:text-magenta"
-          >
-            <Plus size={14} />
-            {t("chatbot.newChat") || "New chat"}
-          </button>
+        <div className="flex items-center justify-between gap-2 border-b border-border p-3">
+          <div className="flex items-center gap-2">
+            <Link
+              to="/"
+              onClick={() => isMobile && setSidebarOpen(false)}
+              className="flex h-8 w-8 items-center justify-center rounded-lg border border-border text-muted-foreground transition hover:border-magenta hover:text-magenta"
+              aria-label="Home"
+            >
+              <Home size={14} />
+            </Link>
+            <button
+              onClick={() => {
+                createConversation();
+                if (isMobile) setSidebarOpen(false);
+              }}
+              className="flex items-center gap-2 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-foreground transition hover:border-magenta hover:text-magenta"
+            >
+              <Plus size={14} />
+              New chat
+            </button>
+          </div>
           <button
             onClick={() => setSidebarOpen(false)}
             className="rounded p-1 text-muted-foreground hover:text-foreground"
@@ -256,8 +267,8 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
               Free · Upgrade
             </Link>
           )}
-          {mode === "hermes" && !isMobile && agentOptions.length > 0 && (
-            <div className="relative ml-auto hidden md:block">
+          {mode === "hermes" && agentOptions.length > 0 && (
+            <div className="relative ml-auto">
               <button
                 type="button"
                 onClick={() => setShowAgentMenu((v) => !v)}
@@ -363,9 +374,6 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
               </button>
             </div>
           </form>
-          <p className="mt-2 text-center text-[11px] text-muted-foreground">
-            PickAIChat may produce inaccurate information.
-          </p>
         </div>
       </div>
     </div>
