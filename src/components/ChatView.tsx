@@ -7,7 +7,7 @@ import { useChatSession, type Message } from "@/hooks/useChatSession";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "@tanstack/react-router";
-import { getAgentOptions, setOverrideHermesUrl, getOverrideHermesUrl } from "@/utils/api";
+import { getAgentOptions, setOverrideHermesUrl, getOverrideHermesUrl, isAdminEmail } from "@/utils/api";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
@@ -21,8 +21,6 @@ import {
   Loader2,
   ChevronDown,
 } from "lucide-react";
-
-const ADMIN_EMAIL = "pickaichat@gmail.com";
 
 export function ChatView({
   mode,
@@ -39,7 +37,7 @@ export function ChatView({
   const userEmail = impersonatedUser ?? user?.primaryEmailAddress?.emailAddress ?? null;
   const { t } = useLanguage();
   const isMobile = useIsMobile();
-  const isAdmin = userEmail === ADMIN_EMAIL;
+  const isAdmin = isAdminEmail(userEmail);
 
   // ── Admin bot selector (Hermes mode only) ──
   const agentOptions = isAdmin && mode === "hermes" ? getAgentOptions() : [];

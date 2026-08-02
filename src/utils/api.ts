@@ -1,5 +1,11 @@
 import { chatWithAI } from "@/lib/chat-server";
 
+/** Admin emails (both Guille's Google accounts). */
+export const ADMIN_EMAILS = ["pickaichat@gmail.com", "guillermopickman@gmail.com"];
+export function isAdminEmail(email: string | undefined | null): boolean {
+  return !!email && ADMIN_EMAILS.includes(email);
+}
+
 export interface ChatSettings {
   model: string;
 }

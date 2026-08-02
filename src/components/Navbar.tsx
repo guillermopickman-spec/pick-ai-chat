@@ -3,9 +3,7 @@ import { Link, useLocation, useRouter } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { useUser, useClerk } from "@clerk/tanstack-react-start";
-import { getClientAgentUrl } from "@/utils/api";
-
-const ADMIN_EMAIL = "pickaichat@gmail.com";
+import { getClientAgentUrl, isAdminEmail } from "@/utils/api";
 
 export function Navbar() {
   const { t, lang, setLang } = useLanguage();
@@ -15,7 +13,7 @@ export function Navbar() {
   const location = useLocation();
   const router = useRouter();
   const isHome = location.pathname === "/";
-  const isAdmin = user?.primaryEmailAddress?.emailAddress === ADMIN_EMAIL;
+  const isAdmin = isAdminEmail(user?.primaryEmailAddress?.emailAddress);
   // Paid users are manually appointed via Clerk publicMetadata.plan = "paid"
   // (automated once the payment system lands). Admins can always reach the
   // Hermes chat for testing/admin purposes.

@@ -3,6 +3,14 @@ import { auth } from "@clerk/tanstack-react-start/server";
 
 const ADMIN_EMAIL = "pickaichat@gmail.com";
 
+/** All emails treated as admin (both your Google accounts). */
+export const ADMIN_EMAILS = [ADMIN_EMAIL, "guillermopickman@gmail.com"];
+
+/** True if the given email is an admin account. */
+export function isAdminEmail(email: string | undefined | null): boolean {
+  return !!email && ADMIN_EMAILS.includes(email);
+}
+
 interface ClerkUser {
   id: string;
   email: string;
@@ -46,12 +54,12 @@ export const listClerkUsers = createServerFn({ method: "GET" }).handler(
   async () => {
     const { userId, sessionClaims } = await auth();
     const email = sessionClaims?.email as string | undefined;
-    if (!userId || email !== ADMIN_EMAIL) {
+    if (!userId || !isAdminEmail(email)) {
       throw new Error("Unauthorized");
     }
     const users = await getClerkUsers();
     // Sort: admins first, then by last sign-in desc.
-    const isAdmin = (e: string) => e === ADMIN_EMAIL || e === "guillermopickman@gmail.com";
+    const isAdmin = (e: string) => isAdminEmail(e);
     return users.sort((a, b) => {
       const aa = isAdmin(a.email) ? 1 : 0;
       const bb = isAdmin(b.email) ? 1 : 0;

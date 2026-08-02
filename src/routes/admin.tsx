@@ -12,15 +12,14 @@ import {
   fetchAdminStatus, fetchAdminClients, fetchAdminStats,
   type ServerStatus, type Client, type StatsResponse,
 } from "@/lib/admin-api";
-
-const ADMIN_EMAIL = "pickaichat@gmail.com";
+import { isAdminEmail } from "@/lib/admin-users";
 
 const protectAdmin = createServerFn().handler(async () => {
   const { userId, sessionClaims } = await auth();
   if (!userId) throw redirect({ to: "/" });
   // Also verify in the server fn
   const email = sessionClaims?.email as string | undefined;
-  if (email !== ADMIN_EMAIL) throw redirect({ to: "/" });
+  if (!isAdminEmail(email)) throw redirect({ to: "/" });
   return {};
 });
 
@@ -211,7 +210,7 @@ function AdminDashboard() {
   }, []);
 
   useEffect(() => {
-    if (isLoaded && user?.primaryEmailAddress?.emailAddress !== ADMIN_EMAIL) {
+    if (isLoaded && !isAdminEmail(user?.primaryEmailAddress?.emailAddress)) {
       router.navigate({ to: "/" });
       return;
     }
@@ -226,7 +225,7 @@ function AdminDashboard() {
   }, [autoRefresh, loadData]);
 
   // Guard: not admin
-  if (isLoaded && user?.primaryEmailAddress?.emailAddress !== ADMIN_EMAIL) {
+  if (isLoaded && !isAdminEmail(user?.primaryEmailAddress?.emailAddress)) {
     return null;
   }
 

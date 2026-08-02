@@ -5,16 +5,14 @@ import { useUser } from "@clerk/tanstack-react-start";
 import { useEffect, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { ChatView } from "@/components/ChatView";
-import { listClerkUsers } from "@/lib/admin-users";
+import { listClerkUsers, isAdminEmail } from "@/lib/admin-users";
 import { getClientAgentUrl } from "@/utils/api";
-
-const ADMIN_EMAIL = "pickaichat@gmail.com";
 
 export const Route = createFileRoute("/admin/users")({
   beforeLoad: async () => {
     const { userId, sessionClaims } = await auth();
     const email = sessionClaims?.email as string | undefined;
-    if (!userId || email !== ADMIN_EMAIL) throw redirect({ to: "/" });
+    if (!userId || !isAdminEmail(email)) throw redirect({ to: "/" });
   },
   head: () => ({
     meta: [
@@ -41,7 +39,7 @@ function AdminUsers() {
 
   useEffect(() => {
     if (!isLoaded) return;
-    if (user?.primaryEmailAddress?.emailAddress !== ADMIN_EMAIL) return;
+    if (!isAdminEmail(user?.primaryEmailAddress?.emailAddress)) return;
     listClerkUsers()
       .then(setUsers)
       .catch(() => setUsers([]))
@@ -49,7 +47,7 @@ function AdminUsers() {
   }, [isLoaded, user]);
 
   // Guard
-  if (isLoaded && user?.primaryEmailAddress?.emailAddress !== ADMIN_EMAIL) {
+  if (isLoaded && !isAdminEmail(user?.primaryEmailAddress?.emailAddress)) {
     return null;
   }
 
@@ -107,8 +105,7 @@ function AdminUsers() {
           ) : (
             <div className="mt-8 space-y-2">
               {users.map((u) => {
-                const isAdminUser =
-                  u.email === ADMIN_EMAIL || u.email === "guillermopickman@gmail.com";
+                const isAdminUser = isAdminEmail(u.email);
                 const hasAgent = !!getClientAgentUrl(u.email);
                 const lastSeen = u.last_sign_in_at
                   ? new Date(u.last_sign_in_at).toLocaleString()
