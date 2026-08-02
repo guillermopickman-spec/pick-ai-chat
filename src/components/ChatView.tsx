@@ -362,7 +362,7 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
               onKeyDown={handleKeyDown}
               placeholder={t("chatbot.placeholder") || "Type a message..."}
               rows={1}
-              className="min-h-[44px] w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-sm text-foreground placeholder:text-muted-foreground outline-none transition focus:border-magenta focus:ring-1 focus:ring-magenta/30"
+              className="min-h-[44px] w-full resize-none rounded-xl border border-border bg-background px-4 py-3 text-base text-foreground placeholder:text-muted-foreground outline-none transition focus:border-magenta focus:ring-1 focus:ring-magenta/30"
             />
             <button
               type="submit"
