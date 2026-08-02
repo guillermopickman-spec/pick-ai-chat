@@ -230,34 +230,34 @@ export function Navbar() {
               </button>
             </div>
             {/* Mobile auth buttons */}
-            <div className="border-t border-border pt-3">
+            <div className="flex flex-wrap gap-2 border-t border-border pt-3">
               {isLoaded && isSignedIn ? (
-                <div className="flex items-center gap-2">
+                <div className="flex w-full flex-wrap gap-2">
                   <Link
                     to="/dashboard"
                     onClick={() => setMobileOpen(false)}
-                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                    className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
                   >
                     Dashboard
                   </Link>
                   <Link
                     to="/tycoon"
                     onClick={() => setMobileOpen(false)}
-                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-green-500 hover:text-green-500"
+                    className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-green-500 hover:text-green-500"
                   >
                     🏢 Tycoon
                   </Link>
                   <Link
                     to={chatHref}
                     onClick={() => setMobileOpen(false)}
-                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                    className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
                   >
                     Chat
                   </Link>
                   <Link
                     to="/mail"
                     onClick={() => setMobileOpen(false)}
-                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                    className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
                   >
                     Mail
                   </Link>
@@ -265,14 +265,14 @@ export function Navbar() {
                     <Link
                       to="/admin/users"
                       onClick={() => setMobileOpen(false)}
-                      className="flex-1 rounded-lg border border-magenta/40 px-3 py-1.5 text-center text-xs font-semibold text-magenta transition hover:border-magenta hover:bg-magenta/10"
-                    >
+                      className="flex-none rounded-lg border border-magenta/40 px-3 py-1.5 text-center text-xs font-semibold text-magenta transition hover:border-magenta hover:bg-magenta/10"
+                      >
                       Admin
-                    </Link>
+                      </Link>
                   )}
                   <button
                     onClick={() => { setMobileOpen(false); clerk.signOut(); }}
-                    className="flex-1 rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-red-500 hover:text-red-500"
+                    className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-red-500 hover:text-red-500"
                   >
                     Sign Out
                   </button>

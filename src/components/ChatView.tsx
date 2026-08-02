@@ -2,7 +2,7 @@
 // /free-chat (OpenRouter, free). Identical aesthetics; backend chosen by `mode`.
 // v1.0.4 - two-layer Hermes remembrance + free mirror
 import { useEffect, useRef, useState, type FormEvent } from "react";
-import { useUser } from "@clerk/tanstack-react-start";
+import { useUser, useClerk } from "@clerk/tanstack-react-start";
 import { useChatSession, type Message } from "@/hooks/useChatSession";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { useIsMobile } from "@/hooks/use-mobile";
@@ -20,6 +20,7 @@ import {
   PanelLeftClose,
   Loader2,
   ChevronDown,
+  LogOut,
 } from "lucide-react";
 
 export function ChatView({
@@ -33,6 +34,7 @@ export function ChatView({
   impersonatedAgentUrl?: string | undefined;
 }) {
   const { user } = useUser();
+  const clerk = useClerk();
   // When impersonating, the whole session runs as the target user.
   const userEmail = impersonatedUser ?? user?.primaryEmailAddress?.emailAddress ?? null;
   const { t } = useLanguage();
@@ -326,6 +328,19 @@ export function ChatView({
                 </>
               )}
             </div>
+          )}
+
+          {/* Mobile sign-out — always visible in portrait (Navbar is hidden on mobile) */}
+          {isMobile && !isImpersonating && (
+            <button
+              type="button"
+              onClick={() => clerk.signOut()}
+              aria-label="Sign out"
+              className="ml-auto flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-[11px] font-medium text-muted-foreground transition hover:border-red-500 hover:text-red-500"
+            >
+              <LogOut size={14} />
+              Sign out
+            </button>
           )}
         </div>
 
