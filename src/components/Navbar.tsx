@@ -52,7 +52,7 @@ export function Navbar() {
 
   return (
     <header className="fixed top-0 left-0 right-0 z-50 border-b border-border bg-background/80 backdrop-blur">
-      <nav className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4">
+      <nav className="mx-auto flex min-h-16 max-w-6xl flex-wrap items-center justify-between gap-y-2 px-4">
         <Link
           to="/"
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
@@ -71,7 +71,7 @@ export function Navbar() {
         </Link>
 
         {/* Desktop nav */}
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden flex-wrap items-center justify-end gap-2 md:flex">
           {NAV_LINKS.map((link) => (
             <button
               key={link.hash}
@@ -86,7 +86,7 @@ export function Navbar() {
             </button>
           ))}
 
-          <div className="flex items-center gap-1 border-l border-border pl-4">
+          <div className="flex flex-wrap items-center justify-end gap-1 border-l border-border pl-4">
             <button
               onClick={() => setLang("es")}
               className={`rounded px-2 py-1 text-xs font-mono transition ${
@@ -138,7 +138,7 @@ export function Navbar() {
               </Link>
               {isAdmin && (
                 <Link
-                  to="/admin"
+                  to="/admin/users"
                   className="rounded-lg border border-magenta/40 px-3 py-1.5 text-xs font-semibold text-magenta transition hover:border-magenta hover:bg-magenta/10"
                 >
                   Admin
@@ -265,7 +265,7 @@ export function Navbar() {
                   </Link>
                   {isAdmin && (
                     <Link
-                      to="/admin"
+                      to="/admin/users"
                       onClick={() => setMobileOpen(false)}
                       className="flex-1 rounded-lg border border-magenta/40 px-3 py-1.5 text-center text-xs font-semibold text-magenta transition hover:border-magenta hover:bg-magenta/10"
                     >
