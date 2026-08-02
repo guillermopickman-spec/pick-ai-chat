@@ -28,7 +28,7 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
     id: "paypal",
     label: "PayPal",
     description: "Pay with your PayPal account (personal link)",
-    href: "", // TODO: e.g. https://paypal.me/guillermopickman
+    href: "https://paypal.me/gpg111", // TODO: e.g. https://paypal.me/guillermopickman
     highlight: true,
   },
   {
