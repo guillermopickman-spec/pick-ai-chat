@@ -150,6 +150,28 @@ export function Pricing() {
             ))}
           </div>
         </div>
+
+        {/* WhatsApp Add-on */}
+        {translations[lang]["pricing.addons.options"] && (
+        <div className="mx-auto mt-6 max-w-2xl rounded-2xl border border-border/70 bg-card/40 p-6 text-center">
+          <h3 className="mb-4 text-sm font-semibold uppercase tracking-wider text-muted-foreground">
+            {t("pricing.addons.title")}
+          </h3>
+          <p className="mb-6 text-sm text-muted-foreground">
+            {t("pricing.addons.desc")}
+          </p>
+          <div className="flex flex-wrap justify-center gap-4">
+            {(translations[lang]["pricing.addons.options"] as string[]).map((opt: string) => (
+              <div
+                key={opt}
+                className="rounded-lg border border-magenta/30 bg-magenta/5 px-5 py-3 text-sm font-medium"
+              >
+                {opt}
+              </div>
+            ))}
+          </div>
+        </div>
+        )}
       </div>
     </section>
   );

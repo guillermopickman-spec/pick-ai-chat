@@ -159,6 +159,11 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "WhatsApp Business — 9 €/mes adicional",
     ],
 
+    /* Payment methods */
+    "payment.title": "💳 Cómo pagar",
+    "payment.desc": "Sin empresa ni autónomo: paga con tu cuenta personal. Elige el método que prefieras.",
+    "payment.copied": "¡Copiado!",
+
     /* Chatbot Demo */
     "chatbot.section": "// Demo en vivo",
     "chatbot.heading": "Prueba el agente en acción",
@@ -432,6 +437,11 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.addons.options": [
       "WhatsApp Business — $9/mo extra",
     ],
+
+    /* Payment methods */
+    "payment.title": "💳 How to pay",
+    "payment.desc": "No company or autónomo needed: pay from your personal account. Pick whichever method you prefer.",
+    "payment.copied": "Copied!",
 
     /* Chatbot Demo */
     "chatbot.section": "// Live Demo",

@@ -1,6 +1,7 @@
 import { useState, type FormEvent } from "react";
 import { ArrowRight, CheckCircle } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
+import { PaymentMethods } from "./PaymentMethods";
 
 interface FormState {
   name: string;
@@ -241,6 +242,7 @@ export function ContactSection() {
             </ul>
           </div>
 
+          <PaymentMethods />
           <ContactForm onSubmitted={() => setSubmitted(true)} />
         </div>
       </div>

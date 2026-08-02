@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Navbar } from "@/components/Navbar";
 import { ContactForm } from "@/components/Contact";
+import { PaymentMethods } from "@/components/PaymentMethods";
 
 export const Route = createFileRoute("/contact")({
   validateSearch: (search: Record<string, unknown>) => ({
@@ -53,7 +54,8 @@ function ContactRoute() {
           </p>
         </div>
 
-        <div className="mx-auto mt-10 max-w-2xl">
+        <div className="mx-auto mt-10 max-w-2xl space-y-6">
+          {upgrade && <PaymentMethods />}
           <ContactForm defaultMessage={upgrade ? upgradeMessage : undefined} />
         </div>
       </main>
