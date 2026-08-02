@@ -24,9 +24,19 @@ import {
 
 const ADMIN_EMAIL = "pickaichat@gmail.com";
 
-export function ChatView({ mode }: { mode: "hermes" | "free" }) {
+export function ChatView({
+  mode,
+  impersonatedUser,
+  impersonatedAgentUrl,
+}: {
+  mode: "hermes" | "free";
+  /** Admin impersonation: become this user for the whole session. */
+  impersonatedUser?: string | null;
+  impersonatedAgentUrl?: string | undefined;
+}) {
   const { user } = useUser();
-  const userEmail = user?.primaryEmailAddress?.emailAddress ?? null;
+  // When impersonating, the whole session runs as the target user.
+  const userEmail = impersonatedUser ?? user?.primaryEmailAddress?.emailAddress ?? null;
   const { t } = useLanguage();
   const isMobile = useIsMobile();
   const isAdmin = userEmail === ADMIN_EMAIL;
@@ -41,8 +51,15 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
     agentOptions.find((o) => o.url === (overrideAgentUrl || agentOptions[0]?.url))
       ?.label || "Default";
   // Admin testing a client's agent (not the platform default) -> label + no server save.
-  const testClientLabel =
-    isAdmin && mode === "hermes" && overrideAgentUrl && overrideAgentUrl !== agentOptions[0]?.url
+  // Impersonation overrides this entirely: the session IS the user, so it persists
+  // to their real account (no test mode).
+  const isImpersonating = !!impersonatedUser;
+  const effectiveAgentUrl = isImpersonating
+    ? impersonatedAgentUrl ?? undefined
+    : overrideAgentUrl ?? undefined;
+  const testClientLabel = isImpersonating
+    ? null
+    : isAdmin && mode === "hermes" && overrideAgentUrl && overrideAgentUrl !== agentOptions[0]?.url
       ? currentAgentLabel
       : null;
 
@@ -59,7 +76,7 @@ export function ChatView({ mode }: { mode: "hermes" | "free" }) {
     switchConversation,
     addMessage,
     send,
-  } = useChatSession({ mode, user: userEmail, agentUrl: overrideAgentUrl, testClientLabel });
+  } = useChatSession({ mode, user: userEmail, agentUrl: effectiveAgentUrl, testClientLabel });
 
   const [input, setInput] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);

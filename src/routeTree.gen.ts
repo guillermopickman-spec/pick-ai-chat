@@ -24,6 +24,7 @@ import { Route as ChatRouteImport } from './routes/chat'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as SignInSplatRouteImport } from './routes/sign-in.$'
+import { Route as AdminUsersRouteImport } from './routes/admin.users'
 
 const TycoonRoute = TycoonRouteImport.update({
   id: '/tycoon',
@@ -100,10 +101,15 @@ const SignInSplatRoute = SignInSplatRouteImport.update({
   path: '/sign-in/$',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminUsersRoute = AdminUsersRouteImport.update({
+  id: '/users',
+  path: '/users',
+  getParentRoute: () => AdminRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/chat': typeof ChatRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
@@ -116,11 +122,12 @@ export interface FileRoutesByFullPath {
   '/terms': typeof TermsRoute
   '/try': typeof TryRoute
   '/tycoon': typeof TycoonRoute
+  '/admin/users': typeof AdminUsersRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/chat': typeof ChatRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
@@ -133,12 +140,13 @@ export interface FileRoutesByTo {
   '/terms': typeof TermsRoute
   '/try': typeof TryRoute
   '/tycoon': typeof TycoonRoute
+  '/admin/users': typeof AdminUsersRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/admin': typeof AdminRoute
+  '/admin': typeof AdminRouteWithChildren
   '/chat': typeof ChatRoute
   '/contact': typeof ContactRoute
   '/dashboard': typeof DashboardRoute
@@ -151,6 +159,7 @@ export interface FileRoutesById {
   '/terms': typeof TermsRoute
   '/try': typeof TryRoute
   '/tycoon': typeof TycoonRoute
+  '/admin/users': typeof AdminUsersRoute
   '/sign-in/$': typeof SignInSplatRoute
 }
 export interface FileRouteTypes {
@@ -170,6 +179,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/try'
     | '/tycoon'
+    | '/admin/users'
     | '/sign-in/$'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -187,6 +197,7 @@ export interface FileRouteTypes {
     | '/terms'
     | '/try'
     | '/tycoon'
+    | '/admin/users'
     | '/sign-in/$'
   id:
     | '__root__'
@@ -204,12 +215,13 @@ export interface FileRouteTypes {
     | '/terms'
     | '/try'
     | '/tycoon'
+    | '/admin/users'
     | '/sign-in/$'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AdminRoute: typeof AdminRoute
+  AdminRoute: typeof AdminRouteWithChildren
   ChatRoute: typeof ChatRoute
   ContactRoute: typeof ContactRoute
   DashboardRoute: typeof DashboardRoute
@@ -332,12 +344,29 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SignInSplatRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin/users': {
+      id: '/admin/users'
+      path: '/users'
+      fullPath: '/admin/users'
+      preLoaderRoute: typeof AdminUsersRouteImport
+      parentRoute: typeof AdminRoute
+    }
   }
 }
 
+interface AdminRouteChildren {
+  AdminUsersRoute: typeof AdminUsersRoute
+}
+
+const AdminRouteChildren: AdminRouteChildren = {
+  AdminUsersRoute: AdminUsersRoute,
+}
+
+const AdminRouteWithChildren = AdminRoute._addFileChildren(AdminRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AdminRoute: AdminRoute,
+  AdminRoute: AdminRouteWithChildren,
   ChatRoute: ChatRoute,
   ContactRoute: ContactRoute,
   DashboardRoute: DashboardRoute,
