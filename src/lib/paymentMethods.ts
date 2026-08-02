@@ -35,7 +35,7 @@ export const PAYMENT_METHODS: PaymentMethod[] = [
     id: "bizum",
     label: "Bizum",
     description: "Send via Bizum to my phone number",
-    value: "+34 694 272 902", // TODO: e.g. +34 600 000 000
+    value: "+34 693 41 99 12", // TODO: e.g. +34 600 000 000
   },
   {
     id: "stripe",
