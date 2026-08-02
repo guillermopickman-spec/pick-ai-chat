@@ -1,4 +1,4 @@
-import { createFileRoute, redirect } from "@tanstack/react-router";
+import { createFileRoute, redirect, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { auth } from "@clerk/tanstack-react-start/server";
 import { useUser } from "@clerk/tanstack-react-start";
@@ -95,6 +95,19 @@ function AdminUsers() {
             Select a user to enter their full app session (chat, history,
             agent). Writes are saved to their account.
           </p>
+
+          {/* Tab nav */}
+          <div className="mb-2 mt-4 flex items-center gap-2 border-b border-border">
+            <Link
+              to="/admin"
+              className="px-3 py-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
+            >
+              Dashboard
+            </Link>
+            <span className="border-b-2 border-magenta px-3 py-2 text-sm font-semibold text-foreground">
+              Users
+            </span>
+          </div>
 
           {loading ? (
             <p className="mt-10 text-center text-sm text-muted-foreground">

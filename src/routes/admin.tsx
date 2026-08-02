@@ -1,4 +1,4 @@
-import { createFileRoute, redirect, useRouter } from "@tanstack/react-router";
+import { createFileRoute, redirect, useRouter, Link } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { auth } from "@clerk/tanstack-react-start/server";
 import { useUser } from "@clerk/tanstack-react-start";
@@ -240,7 +240,7 @@ function AdminDashboard() {
       <main className="min-h-screen bg-background pt-24 pb-16">
         <div className="mx-auto max-w-6xl px-4">
           {/* Header */}
-          <div className="mb-8 flex items-center justify-between">
+          <div className="mb-4 flex items-center justify-between">
             <div>
               <div className="mb-1 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
                 // Admin
@@ -269,6 +269,19 @@ function AdminDashboard() {
                 Refresh
               </button>
             </div>
+          </div>
+
+          {/* Tab nav */}
+          <div className="mb-8 flex items-center gap-2 border-b border-border">
+            <span className="border-b-2 border-magenta px-3 py-2 text-sm font-semibold text-foreground">
+              Dashboard
+            </span>
+            <Link
+              to="/admin/users"
+              className="px-3 py-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
+            >
+              Users
+            </Link>
           </div>
 
           {/* Error Banner */}
