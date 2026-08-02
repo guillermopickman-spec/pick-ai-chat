@@ -11,6 +11,36 @@ export function isAdminEmail(email: string | undefined | null): boolean {
   return !!email && ADMIN_EMAILS.includes(email);
 }
 
+/**
+ * Resolve whether the current Clerk session belongs to an admin.
+ * Prefers the session email claim, but falls back to fetching the user's
+ * email addresses from Clerk when the claim is absent (some Google/OAuth
+ * sessions don't populate sessionClaims.email).
+ */
+export async function assertAdmin(
+  userId: string | null,
+  sessionEmail?: string | null,
+): Promise<boolean> {
+  if (!userId) return false;
+  if (isAdminEmail(sessionEmail)) return true;
+  // Fallback: read the user's real emails from Clerk.
+  const secret = process.env.CLERK_SECRET_KEY;
+  if (!secret) return false;
+  try {
+    const res = await fetch(`https://api.clerk.com/v1/users/${userId}`, {
+      headers: { Authorization: `Bearer ${secret}` },
+    });
+    if (!res.ok) return false;
+    const u = await res.json();
+    const emails: string[] = (u.email_addresses ?? []).map(
+      (e: { email_address: string }) => e.email_address,
+    );
+    return emails.some((e) => isAdminEmail(e));
+  } catch {
+    return false;
+  }
+}
+
 interface ClerkUser {
   id: string;
   email: string;
@@ -53,8 +83,8 @@ async function getClerkUsers(): Promise<ClerkUser[]> {
 export const listClerkUsers = createServerFn({ method: "GET" }).handler(
   async () => {
     const { userId, sessionClaims } = await auth();
-    const email = sessionClaims?.email as string | undefined;
-    if (!userId || !isAdminEmail(email)) {
+    const ok = await assertAdmin(userId, sessionClaims?.email as string | undefined);
+    if (!ok) {
       throw new Error("Unauthorized");
     }
     const users = await getClerkUsers();

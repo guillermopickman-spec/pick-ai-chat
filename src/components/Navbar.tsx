@@ -13,16 +13,15 @@ export function Navbar() {
   const location = useLocation();
   const router = useRouter();
   const isHome = location.pathname === "/";
-  const isAdmin = isAdminEmail(user?.primaryEmailAddress?.emailAddress);
+  const userEmails = user?.emailAddresses?.map((e) => e.emailAddress) ?? [];
+  const isAdmin = userEmails.some((e) => isAdminEmail(e));
   // Paid users are manually appointed via Clerk publicMetadata.plan = "paid"
   // (automated once the payment system lands). Admins can always reach the
   // Hermes chat for testing/admin purposes.
   const canUsePaidChat =
     isAdmin ||
     (user?.publicMetadata as { plan?: string } | undefined)?.plan === "paid" ||
-    (user?.primaryEmailAddress?.emailAddress
-      ? getClientAgentUrl(user.primaryEmailAddress.emailAddress) !== undefined
-      : false);
+    userEmails.some((e) => getClientAgentUrl(e) !== undefined);
   const chatHref = canUsePaidChat ? "/chat" : "/free-chat";
 
   const NAV_LINKS = [

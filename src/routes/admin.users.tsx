@@ -5,14 +5,14 @@ import { useUser } from "@clerk/tanstack-react-start";
 import { useEffect, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { ChatView } from "@/components/ChatView";
-import { listClerkUsers, isAdminEmail } from "@/lib/admin-users";
+import { listClerkUsers, assertAdmin, isAdminEmail } from "@/lib/admin-users";
 import { getClientAgentUrl } from "@/utils/api";
 
 export const Route = createFileRoute("/admin/users")({
   beforeLoad: async () => {
     const { userId, sessionClaims } = await auth();
-    const email = sessionClaims?.email as string | undefined;
-    if (!userId || !isAdminEmail(email)) throw redirect({ to: "/" });
+    const ok = await assertAdmin(userId, sessionClaims?.email as string | undefined);
+    if (!ok) throw redirect({ to: "/" });
   },
   head: () => ({
     meta: [
@@ -39,7 +39,8 @@ function AdminUsers() {
 
   useEffect(() => {
     if (!isLoaded) return;
-    if (!isAdminEmail(user?.primaryEmailAddress?.emailAddress)) return;
+    const emails = user?.emailAddresses?.map((e) => e.emailAddress) ?? [];
+    if (!emails.some((e) => isAdminEmail(e))) return;
     listClerkUsers()
       .then(setUsers)
       .catch(() => setUsers([]))
@@ -47,8 +48,9 @@ function AdminUsers() {
   }, [isLoaded, user]);
 
   // Guard
-  if (isLoaded && !isAdminEmail(user?.primaryEmailAddress?.emailAddress)) {
-    return null;
+  if (isLoaded) {
+    const emails = user?.emailAddresses?.map((e) => e.emailAddress) ?? [];
+    if (!emails.some((e) => isAdminEmail(e))) return null;
   }
 
   // ── Impersonation view: full app session as the chosen user ──

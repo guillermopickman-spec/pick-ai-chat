@@ -12,14 +12,13 @@ import {
   fetchAdminStatus, fetchAdminClients, fetchAdminStats,
   type ServerStatus, type Client, type StatsResponse,
 } from "@/lib/admin-api";
-import { isAdminEmail } from "@/lib/admin-users";
+import { isAdminEmail, assertAdmin } from "@/lib/admin-users";
 
 const protectAdmin = createServerFn().handler(async () => {
   const { userId, sessionClaims } = await auth();
   if (!userId) throw redirect({ to: "/" });
-  // Also verify in the server fn
-  const email = sessionClaims?.email as string | undefined;
-  if (!isAdminEmail(email)) throw redirect({ to: "/" });
+  const ok = await assertAdmin(userId, sessionClaims?.email as string | undefined);
+  if (!ok) throw redirect({ to: "/" });
   return {};
 });
 
@@ -210,9 +209,12 @@ function AdminDashboard() {
   }, []);
 
   useEffect(() => {
-    if (isLoaded && !isAdminEmail(user?.primaryEmailAddress?.emailAddress)) {
-      router.navigate({ to: "/" });
-      return;
+    if (isLoaded) {
+      const emails = user?.emailAddresses?.map((e) => e.emailAddress) ?? [];
+      if (!emails.some((e) => isAdminEmail(e))) {
+        router.navigate({ to: "/" });
+        return;
+      }
     }
     loadData();
   }, [isLoaded, user]);
@@ -225,8 +227,9 @@ function AdminDashboard() {
   }, [autoRefresh, loadData]);
 
   // Guard: not admin
-  if (isLoaded && !isAdminEmail(user?.primaryEmailAddress?.emailAddress)) {
-    return null;
+  if (isLoaded) {
+    const emails = user?.emailAddresses?.map((e) => e.emailAddress) ?? [];
+    if (!emails.some((e) => isAdminEmail(e))) return null;
   }
 
   const notifications = getNotifications(status);
