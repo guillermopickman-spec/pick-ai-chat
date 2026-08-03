@@ -1,7 +1,6 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useUser } from "@clerk/tanstack-react-start";
 import { useEffect, useState } from "react";
-import { Navbar } from "@/components/Navbar";
 import { ChatView } from "@/components/ChatView";
 import { listClerkUsers, isAdminEmail } from "@/lib/admin-users";
 import { getClientAgentUrl } from "@/utils/api";
@@ -76,92 +75,74 @@ function AdminUsers() {
 
   // ── User board ──
   return (
-    <>
-      <Navbar />
-      <main className="min-h-screen bg-background px-4 pt-32 pb-24 text-foreground">
-        <div className="mx-auto max-w-3xl">
-          <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
-            // Admin
-          </div>
-          <h1 className="text-3xl font-bold tracking-tight">Users</h1>
-          <p className="mt-1 text-sm text-muted-foreground">
-            Select a user to enter their full app session (chat, history,
-            agent). Writes are saved to their account.
-          </p>
+    <div className="mx-auto max-w-3xl">
+      <div className="mb-3 font-mono text-xs uppercase tracking-[0.2em] text-magenta">
+        // Admin
+      </div>
+      <h1 className="text-3xl font-bold tracking-tight">Users</h1>
+      <p className="mt-1 text-sm text-muted-foreground">
+        Select a user to enter their full app session (chat, history,
+        agent). Writes are saved to their account.
+      </p>
 
-          {/* Tab nav */}
-          <div className="mb-2 mt-4 flex items-center gap-2 border-b border-border">
-            <Link
-              to="/admin"
-              className="px-3 py-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
-            >
-              Dashboard
-            </Link>
-            <span className="border-b-2 border-magenta px-3 py-2 text-sm font-semibold text-foreground">
-              Users
-            </span>
-          </div>
-
-          {loading ? (
-            <p className="mt-10 text-center text-sm text-muted-foreground">
-              Loading users…
-            </p>
-          ) : users.length === 0 ? (
-            <p className="mt-10 text-center text-sm text-muted-foreground">
-              No users found.
-            </p>
-          ) : (
-            <div className="mt-8 space-y-2">
-              {users.map((u) => {
-                const isAdminUser = isAdminEmail(u.email);
-                const hasAgent = !!getClientAgentUrl(u.email);
-                const lastSeen = u.last_sign_in_at
-                  ? new Date(u.last_sign_in_at).toLocaleString()
-                  : "never";
-                return (
-                  <button
-                    key={u.id}
-                    onClick={() => {
-                      setActiveEmail(u.email);
-                      setActiveName(u.email.split("@")[0]);
-                    }}
-                    className="group flex w-full items-center justify-between rounded-xl border border-border bg-card/40 px-4 py-3 text-left transition hover:border-magenta/40 hover:bg-card"
-                  >
-                    <div className="flex items-center gap-3">
-                      <div className="flex h-9 w-9 items-center justify-center rounded-full bg-magenta/10 text-sm font-bold text-magenta">
-                        {u.email[0].toUpperCase()}
-                      </div>
-                      <div>
-                        <p className="text-sm font-medium text-foreground">
-                          {u.email}
-                        </p>
-                        <p className="text-xs text-muted-foreground">
-                          Last seen: {lastSeen}
-                        </p>
-                      </div>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      {isAdminUser && (
-                        <span className="rounded-full bg-magenta/10 px-2 py-0.5 text-[10px] font-medium text-magenta">
-                          Admin
-                        </span>
-                      )}
-                      {hasAgent && (
-                        <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
-                          Paid agent
-                        </span>
-                      )}
-                      <span className="text-xs text-muted-foreground transition group-hover:text-magenta">
-                        Enter →
-                      </span>
-                    </div>
-                  </button>
-                );
-              })}
-            </div>
-          )}
+      {loading ? (
+        <p className="mt-10 text-center text-sm text-muted-foreground">
+          Loading users…
+        </p>
+      ) : users.length === 0 ? (
+        <p className="mt-10 text-center text-sm text-muted-foreground">
+          No users found.
+        </p>
+      ) : (
+        <div className="mt-8 space-y-2">
+          {users.map((u) => {
+            const isAdminUser = isAdminEmail(u.email);
+            const hasAgent = !!getClientAgentUrl(u.email);
+            const lastSeen = u.last_sign_in_at
+              ? new Date(u.last_sign_in_at).toLocaleString()
+              : "never";
+            return (
+              <button
+                key={u.id}
+                onClick={() => {
+                  setActiveEmail(u.email);
+                  setActiveName(u.email.split("@")[0]);
+                }}
+                className="group flex w-full items-center justify-between rounded-xl border border-border bg-card/40 px-4 py-3 text-left transition hover:border-magenta/40 hover:bg-card"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="flex h-9 w-9 items-center justify-center rounded-full bg-magenta/10 text-sm font-bold text-magenta">
+                    {u.email[0].toUpperCase()}
+                  </div>
+                  <div>
+                    <p className="text-sm font-medium text-foreground">
+                      {u.email}
+                    </p>
+                    <p className="text-xs text-muted-foreground">
+                      Last seen: {lastSeen}
+                    </p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  {isAdminUser && (
+                    <span className="rounded-full bg-magenta/10 px-2 py-0.5 text-[10px] font-medium text-magenta">
+                      Admin
+                    </span>
+                  )}
+                  {hasAgent && (
+                    <span className="rounded-full bg-emerald-500/10 px-2 py-0.5 text-[10px] font-medium text-emerald-400">
+                      Paid agent
+                    </span>
+                  )}
+                  <span className="text-xs text-muted-foreground transition group-hover:text-magenta">
+                    Enter →
+                  </span>
+                </div>
+              </button>
+            );
+          })}
         </div>
-      </main>
-    </>
+      )}
+    </div>
   );
 }

@@ -1,4 +1,4 @@
-import { createFileRoute, useRouter, Link } from "@tanstack/react-router";
+import { createFileRoute, useRouter, Link, Outlet, useLocation } from "@tanstack/react-router";
 import { useUser } from "@clerk/tanstack-react-start";
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -168,6 +168,8 @@ function getNotifications(status: ServerStatus | null): { type: "error" | "warni
 function AdminDashboard() {
   const { user, isLoaded } = useUser();
   const router = useRouter();
+  const location = useLocation();
+  const isExactAdmin = location.pathname === "/admin";
 
   const [status, setStatus] = useState<ServerStatus | null>(null);
   const [clients, setClients] = useState<Client[]>([]);
@@ -226,6 +228,33 @@ function AdminDashboard() {
       <Navbar />
       <main className="min-h-screen bg-background pt-24 pb-16">
         <div className="mx-auto max-w-6xl px-4">
+          {/* Tab nav */}
+          <div className="mb-8 flex items-center gap-2 border-b border-border">
+            <Link
+              to="/admin"
+              className={`px-3 py-2 text-sm font-semibold transition ${
+                isExactAdmin
+                  ? "border-b-2 border-magenta text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Dashboard
+            </Link>
+            <Link
+              to="/admin/users"
+              className={`px-3 py-2 text-sm font-semibold transition ${
+                !isExactAdmin
+                  ? "border-b-2 border-magenta text-foreground"
+                  : "text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              Users
+            </Link>
+          </div>
+
+          {/* Dashboard content — only on exact /admin */}
+          {isExactAdmin && (
+            <>
           {/* Header */}
           <div className="mb-4 flex items-center justify-between">
             <div>
@@ -256,19 +285,6 @@ function AdminDashboard() {
                 Refresh
               </button>
             </div>
-          </div>
-
-          {/* Tab nav */}
-          <div className="mb-8 flex items-center gap-2 border-b border-border">
-            <span className="border-b-2 border-magenta px-3 py-2 text-sm font-semibold text-foreground">
-              Dashboard
-            </span>
-            <Link
-              to="/admin/users"
-              className="px-3 py-2 text-sm font-medium text-muted-foreground transition hover:text-foreground"
-            >
-              Users
-            </Link>
           </div>
 
           {/* Error Banner */}
@@ -443,6 +459,11 @@ function AdminDashboard() {
               </button>
             </div>
           )}
+            </>
+          )}
+
+          {/* Child routes */}
+          <Outlet />
         </div>
       </main>
     </>
