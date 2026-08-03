@@ -1,6 +1,4 @@
-import { createFileRoute, redirect, useRouter, Link } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-import { auth } from "@clerk/tanstack-react-start/server";
+import { createFileRoute, useRouter, Link } from "@tanstack/react-router";
 import { useUser } from "@clerk/tanstack-react-start";
 import { useEffect, useState, useCallback } from "react";
 import {
@@ -12,20 +10,9 @@ import {
   fetchAdminStatus, fetchAdminClients, fetchAdminStats,
   type ServerStatus, type Client, type StatsResponse,
 } from "@/lib/admin-api";
-import { isAdminEmail, assertAdmin } from "@/lib/admin-users";
-
-const protectAdmin = createServerFn().handler(async () => {
-  const { userId, sessionClaims } = await auth();
-  if (!userId) throw redirect({ to: "/" });
-  const ok = await assertAdmin(userId, sessionClaims?.email as string | undefined);
-  if (!ok) throw redirect({ to: "/" });
-  return {};
-});
+import { isAdminEmail } from "@/lib/admin-users";
 
 export const Route = createFileRoute("/admin")({
-  beforeLoad: async () => {
-    await protectAdmin();
-  },
   head: () => ({
     meta: [
       { title: "Admin Dashboard — PickAIChat" },

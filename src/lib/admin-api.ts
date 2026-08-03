@@ -1,4 +1,6 @@
 import { createServerFn } from "@tanstack/react-start";
+import { auth } from "@clerk/tanstack-react-start/server";
+import { assertAdmin } from "@/lib/admin-users";
 
 const API_BASE = process.env.ADMIN_API_URL || "https://mail.pickaichat.com";
 const API_KEY = process.env.ADMIN_API_KEY || "pickai-admin-2026";
@@ -57,18 +59,30 @@ async function adminFetch(path: string): Promise<any> {
 
 export const fetchAdminStatus = createServerFn({ method: "GET" })
   .handler(async () => {
+    const { userId, sessionClaims } = await auth();
+    if (!(await assertAdmin(userId, sessionClaims?.email as string | undefined))) {
+      throw new Error("Unauthorized");
+    }
     const data = await adminFetch("/api/admin/status");
     return data as ServerStatus;
   });
 
 export const fetchAdminClients = createServerFn({ method: "GET" })
   .handler(async () => {
+    const { userId, sessionClaims } = await auth();
+    if (!(await assertAdmin(userId, sessionClaims?.email as string | undefined))) {
+      throw new Error("Unauthorized");
+    }
     const data = await adminFetch("/api/admin/clients");
     return data as ClientsResponse;
   });
 
 export const fetchAdminStats = createServerFn({ method: "GET" })
   .handler(async () => {
+    const { userId, sessionClaims } = await auth();
+    if (!(await assertAdmin(userId, sessionClaims?.email as string | undefined))) {
+      throw new Error("Unauthorized");
+    }
     const data = await adminFetch("/api/admin/stats");
     return data as StatsResponse;
   });

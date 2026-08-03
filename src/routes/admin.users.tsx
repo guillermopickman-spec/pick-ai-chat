@@ -1,19 +1,12 @@
-import { createFileRoute, redirect, Link } from "@tanstack/react-router";
-import { createServerFn } from "@tanstack/react-start";
-import { auth } from "@clerk/tanstack-react-start/server";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useUser } from "@clerk/tanstack-react-start";
 import { useEffect, useState } from "react";
 import { Navbar } from "@/components/Navbar";
 import { ChatView } from "@/components/ChatView";
-import { listClerkUsers, assertAdmin, isAdminEmail } from "@/lib/admin-users";
+import { listClerkUsers, isAdminEmail } from "@/lib/admin-users";
 import { getClientAgentUrl } from "@/utils/api";
 
 export const Route = createFileRoute("/admin/users")({
-  beforeLoad: async () => {
-    const { userId, sessionClaims } = await auth();
-    const ok = await assertAdmin(userId, sessionClaims?.email as string | undefined);
-    if (!ok) throw redirect({ to: "/" });
-  },
   head: () => ({
     meta: [
       { title: "Admin — Users — PickAIChat" },
