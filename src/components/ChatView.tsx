@@ -276,18 +276,6 @@ export function ChatView({
           <span className="text-sm font-medium text-foreground truncate">
             {activeConversation?.title || "PickAIChat"}
           </span>
-          {/* New chat — always reachable, even when the sidebar is collapsed */}
-          <button
-            onClick={() => {
-              createConversation();
-              if (isMobile) setSidebarOpen(false);
-            }}
-            className="ml-auto flex items-center gap-1.5 rounded-lg border border-border px-2.5 py-1.5 text-xs font-medium text-foreground transition hover:border-magenta hover:text-magenta"
-            title="New chat"
-          >
-            <Plus size={14} />
-            <span className="hidden sm:inline">New chat</span>
-          </button>
           {mode === "free" && (
             <Link
               to="/contact"
