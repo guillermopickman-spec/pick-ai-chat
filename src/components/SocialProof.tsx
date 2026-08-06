@@ -1,7 +1,7 @@
 import { Quote } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 
-const PLACEHOLDER_LOGOS = ["Come2Ireland", "Restaurantes", "Clinicas", "Inmobiliarias", "Bares", "Tiendas"];
+const PLACEHOLDER_LOGOS = ["Come2Ireland", "Restaurants", "Clinics", "Real Estate", "Bars", "Shops"];
 
 const SOCIAL_KEYS = ["0", "1", "2"];
 

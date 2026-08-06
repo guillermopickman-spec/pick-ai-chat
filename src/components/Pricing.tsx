@@ -170,6 +170,11 @@ export function Pricing() {
               </div>
             ))}
           </div>
+          {t("pricing.disclaimer") && (
+            <p className="mt-5 text-xs text-muted-foreground/70">
+              {t("pricing.disclaimer")}
+            </p>
+          )}
         </div>
         )}
       </div>

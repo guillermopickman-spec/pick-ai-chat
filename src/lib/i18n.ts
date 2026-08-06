@@ -16,7 +16,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "hero.title": "PickAIChat — El Hub de Agentes AI para tu Negocio",
     "hero.subtitle":
       "Un agente o varios. Escala cuando quieras. Automatiza WhatsApp, email, CRM y más.",
-    "hero.subtitle.highlight": "sin precios fijos, contacta con nosotros.",
+    "hero.subtitle.highlight": "planes flexibles y asequibles.",
     "hero.description":
       "PickAIChat es un hub de agentes AI que automatiza tu negocio 24/7: responde en WhatsApp, gestiona pedidos, sincroniza con tu CRM, envía emails y mucho más. AI asequible, sin contratos complicados.",
     "hero.motto": "Contrata un humano, recibe una IA que trabaja.",
@@ -154,10 +154,12 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Claude Sonnet",
     ],
     "pricing.addons.title": "📱 Extras disponibles",
-    "pricing.addons.desc": "Añade canales y funcionalidades extra a tu plan.",
+    "pricing.addons.desc": "WhatsApp incluido en todos los planes. Añade más capacidad o canales extra a tu plan.",
     "pricing.addons.options": [
-      "WhatsApp Business — 9 €/mes adicional",
+      "WhatsApp Business incluido en tu plan",
     ],
+    "pricing.disclaimer":
+      "WhatsApp está incluido en todos los planes. El uso razonable está cubierto; el uso excesivo (volumen anormalmente alto de mensajes) se cobrará aparte según el coste real.",
 
     /* Get Started — hand-holding / service layer */
     "getstarted.section": "// Te acompañamos",
@@ -263,7 +265,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "about.section": "// Quién está detrás",
     "about.heading": "Un humano, una misión: simplificar la AI para tu negocio",
     "about.body":
-      "PickAIChat nació de una idea simple: la AI debería funcionar para el negocio, no al revés. Sin contratos complicados, sin jerga técnica, sin equipos de ingenieros.\n\nSoy Guillermo, creador de PickAIChat. Llevo años construyendo sistemas AI, pero viendo cómo la tecnología se queda solo en manos de grandes empresas. PickAIChat es mi forma de poner agentes AI al alcance de cualquier negocio — desde una ferretería hasta una clínica dental.\n\nEl modelo es sencillo: contratas un humano que entiende de AI, y recibes un sistema que trabaja por ti 24/7. Sin que tengas que aprender nada nuevo.",
+      "PickAIChat nació de una idea simple: la AI debería funcionar para el negocio, no al revés. Sin contratos complicados, sin jerga técnica, sin equipos de ingenieros.\n\nSoy Guillermo, creador de PickAIChat. Llevo años construyendo sistemas AI, pero viendo cómo la tecnología se queda solo en manos de grandes empresas. PickAIChat es mi forma de poner agentes AI al alcance de cualquier negocio — con un trato cercano y a medida.\n\nEl modelo es sencillo: contratas un humano que entiende de AI, y recibes un sistema que trabaja por ti 24/7. Sin que tengas que aprender nada nuevo.",
     "about.cta": "Hablar con Guillermo",
 
     /* Technology */
@@ -318,7 +320,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "hero.title": "PickAIChat — The AI Agent Hub for Your Business",
     "hero.subtitle":
       "One agent or many. Scale as you grow. Automate WhatsApp, email, CRM and more.",
-    "hero.subtitle.highlight": "no fixed prices, contact us.",
+    "hero.subtitle.highlight": "flexible, affordable plans.",
     "hero.description":
       "PickAIChat is an AI agent hub that automates your business 24/7: replies on WhatsApp, manages orders, syncs with your CRM, sends emails, and more. Affordable AI, without complicated contracts.",
     "hero.motto": "Hire a human, get an AI that delivers.",
@@ -455,10 +457,12 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
       "Claude Sonnet",
     ],
     "pricing.addons.title": "📱 Available add-ons",
-    "pricing.addons.desc": "Add extra channels and features to your plan.",
+    "pricing.addons.desc": "WhatsApp included in every plan. Add more capacity or extra channels to your plan.",
     "pricing.addons.options": [
-      "WhatsApp Business — $9/mo extra",
+      "WhatsApp Business included in your plan",
     ],
+    "pricing.disclaimer":
+      "WhatsApp is included in all plans. Reasonable use is covered; excessive use (abnormally high message volume) is billed separately at actual cost.",
 
     /* Get Started — hand-holding / service layer */
     "getstarted.section": "// We've got you",
@@ -564,7 +568,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "about.section": "// Who's behind this",
     "about.heading": "A human with one mission: make AI simple for your business",
     "about.body":
-      "PickAIChat was born from a simple idea: AI should work for the business, not the other way around. No complicated contracts, no tech jargon, no engineering teams.\n\nI'm Guillermo, creator of PickAIChat. I've spent years building AI systems, watching the technology stay locked inside big companies. PickAIChat is my way of putting AI agents within reach of any business — from a hardware store to a dental clinic.\n\nThe model is simple: you hire a human who understands AI, and you get a system that works for you 24/7. Without having to learn anything new.",
+      "PickAIChat was born from a simple idea: AI should work for the business, not the other way around. No complicated contracts, no tech jargon, no engineering teams.\n\nI'm Guillermo, creator of PickAIChat. I've spent years building AI systems, watching the technology stay locked inside big companies. PickAIChat is my way of putting AI agents within reach of any business — with a personal, tailored touch.\n\nThe model is simple: you hire a human who understands AI, and you get a system that works for you 24/7. Without having to learn anything new.",
     "about.cta": "Talk to Guillermo",
 
     /* Technology */
