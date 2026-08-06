@@ -1,7 +1,6 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { auth } from "@clerk/tanstack-react-start/server";
-import { Navbar } from "@/components/Navbar";
 import { ChatView } from "@/components/ChatView";
 
 const protectRoute = createServerFn().handler(async () => {
@@ -29,9 +28,6 @@ export const Route = createFileRoute("/chat")({
 function ChatRoute() {
   return (
     <div className="flex h-[100dvh] flex-col overflow-hidden bg-background">
-      <div className="hidden md:block">
-        <Navbar />
-      </div>
       <main className="flex-1 overflow-hidden">
         <ChatView mode="hermes" />
       </main>
