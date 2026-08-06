@@ -69,18 +69,18 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
 
     /* How It Works */
     "howitworks.section": "// Cómo funciona",
-    "howitworks.heading": "De escanear un QR a tener tu agente en 24 horas",
+    "howitworks.heading": "De contarnos tu negocio a tener tu agente en 24 horas",
     "howitworks.subtitle":
-      "Sin instalaciones complicadas, sin contratar informáticos, sin leer manuales. Configuras PickAIChat como configuras el WiFi de tu casa.",
-    "howitworks.0.title": "Escanear QR",
+      "Sin instalaciones complicadas, sin contratar informáticos, sin leer manuales. Nosotros nos encargamos de todo por ti.",
+    "howitworks.0.title": "Cuéntanos tu negocio",
     "howitworks.0.body":
-      "Te damos acceso al sistema. Escaneas un código QR con tu móvil y conectas el número de WhatsApp de tu negocio. El agente ya está listo.",
-    "howitworks.1.title": "Configurar tu agente",
+      "Una llamada corta o un mensaje. Nos hablas de tu negocio, tus clientes y qué quieres automatizar. Nosotros hacemos el resto.",
+    "howitworks.1.title": "Te lo montamos nosotros",
     "howitworks.1.body":
-      "Subes tus precios, horarios, productos y FAQ. El agente aprende de tu información y empieza a actuar como lo harías tú.",
+      "Configuramos tu agente con tus precios, horarios, productos y FAQ. Lo dejamos listo para que responda como lo harías tú, en los canales que uses.",
     "howitworks.2.title": "A funcionar",
     "howitworks.2.body":
-      "En 24 horas tu agente ya está trabajando. Responde clientes, gestiona pedidos, sincroniza datos. Tú recibes un resumen diario de todo.",
+      "En 24 horas tu agente ya está trabajando. Responde clientes, gestiona pedidos, sincroniza datos. Tú recibes un resumen diario de todo, y te acompañamos en el camino.",
 
     /* Pricing */
     "pricing.section": "// Precios",
@@ -372,18 +372,18 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
 
     /* How It Works */
     "howitworks.section": "// How it works",
-    "howitworks.heading": "From scanning a QR to having your agent in 24 hours",
+    "howitworks.heading": "From telling us about your business to having your agent in 24 hours",
     "howitworks.subtitle":
-      "No complicated installations, no hiring IT people, no reading manuals. You set up PickAIChat like you set up your home WiFi.",
-    "howitworks.0.title": "Scan QR",
+      "No complicated installations, no hiring IT people, no reading manuals. We handle everything for you.",
+    "howitworks.0.title": "Tell us about your business",
     "howitworks.0.body":
-      "We give you system access. Scan a QR code with your phone and connect your business WhatsApp number. Your agent is ready.",
-    "howitworks.1.title": "Configure your agent",
+      "A short call or a message. Tell us about your business, your customers and what you want to automate. We take care of the rest.",
+    "howitworks.1.title": "We set it up for you",
     "howitworks.1.body":
-      "Upload your prices, hours, products and FAQ. The agent learns from your information and starts acting just like you would.",
+      "We configure your agent with your prices, hours, products and FAQ. Ready to reply just like you would, on the channels you use.",
     "howitworks.2.title": "Go live",
     "howitworks.2.body":
-      "In 24 hours your agent is already working. Replying to customers, managing orders, syncing data. You receive a daily summary of everything.",
+      "In 24 hours your agent is already working. Replying to customers, managing orders, syncing data. You receive a daily summary — and we stay by your side.",
 
     /* Pricing */
     "pricing.section": "// Pricing",
