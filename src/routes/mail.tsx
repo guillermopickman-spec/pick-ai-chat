@@ -1,13 +1,19 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { auth } from "@clerk/tanstack-react-start/server";
+import { assertAdmin } from "@/lib/admin-users";
 import { Navbar } from "@/components/Navbar";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { Mail, Inbox, Send, Archive } from "lucide-react";
 
 const protectRoute = createServerFn().handler(async () => {
-  const { isAuthenticated } = await auth();
+  const { isAuthenticated, userId, sessionClaims } = await auth();
   if (!isAuthenticated) {
+    throw redirect({ to: "/" });
+  }
+  // WIP: Mail is admin-only for now.
+  const ok = await assertAdmin(userId, sessionClaims?.email as string | undefined);
+  if (!ok) {
     throw redirect({ to: "/" });
   }
   return {};

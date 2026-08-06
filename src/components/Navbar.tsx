@@ -131,12 +131,14 @@ export function Navbar() {
               >
                 Chat
               </Link>
-              <Link
-                to="/mail"
-                className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
-              >
-                Mail
-              </Link>
+              {canSeeWip && (
+                <Link
+                  to="/mail"
+                  className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                >
+                  Mail
+                </Link>
+              )}
               {isAdmin && (
                 <Link
                   to="/admin/users"
@@ -259,13 +261,15 @@ export function Navbar() {
                   >
                     Chat
                   </Link>
-                  <Link
-                    to="/mail"
-                    onClick={() => setMobileOpen(false)}
-                    className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
-                  >
-                    Mail
-                  </Link>
+                  {canSeeWip && (
+                    <Link
+                      to="/mail"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
+                    >
+                      Mail
+                    </Link>
+                  )}
                   {isAdmin && (
                     <Link
                       to="/admin/users"
