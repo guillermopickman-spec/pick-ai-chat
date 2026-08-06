@@ -4,6 +4,7 @@ import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { useUser, useClerk } from "@clerk/tanstack-react-start";
 import { getClientAgentUrl, isAdminEmail } from "@/utils/api";
+import { canAccessWip } from "@/lib/featureFlags";
 
 export function Navbar() {
   const { t, lang, setLang } = useLanguage();
@@ -15,6 +16,7 @@ export function Navbar() {
   const isHome = location.pathname === "/";
   const userEmails = user?.emailAddresses?.map((e) => e.emailAddress) ?? [];
   const isAdmin = userEmails.some((e) => isAdminEmail(e));
+  const canSeeWip = canAccessWip({ emails: userEmails, plan: (user?.publicMetadata as { plan?: string } | undefined)?.plan, isAdmin });
   // Paid users are manually appointed via Clerk publicMetadata.plan = "paid"
   // (automated once the payment system lands). Admins can always reach the
   // Hermes chat for testing/admin purposes.
@@ -115,12 +117,14 @@ export function Navbar() {
               >
                 Dashboard
               </Link>
-              <Link
-                to="/tycoon"
-                className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-green-500 hover:text-green-500"
-              >
-                🏢 Tycoon
-              </Link>
+              {canSeeWip && (
+                <Link
+                  to="/tycoon"
+                  className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-green-500 hover:text-green-500"
+                >
+                  🏢 Tycoon
+                </Link>
+              )}
               <Link
                 to={chatHref}
                 className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
@@ -239,13 +243,15 @@ export function Navbar() {
                   >
                     Dashboard
                   </Link>
-                  <Link
-                    to="/tycoon"
-                    onClick={() => setMobileOpen(false)}
-                    className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-green-500 hover:text-green-500"
-                  >
-                    🏢 Tycoon
-                  </Link>
+                  {canSeeWip && (
+                    <Link
+                      to="/tycoon"
+                      onClick={() => setMobileOpen(false)}
+                      className="flex-none rounded-lg border border-border px-3 py-1.5 text-center text-xs font-semibold text-foreground transition hover:border-green-500 hover:text-green-500"
+                    >
+                      🏢 Tycoon
+                    </Link>
+                  )}
                   <Link
                     to={chatHref}
                     onClick={() => setMobileOpen(false)}
