@@ -178,7 +178,7 @@ export async function sendToHermesBot(
  * List all conversations for a user (server-backed, paid side).
  */
 export async function fetchConversations(user: string): Promise<ConversationSummary[]> {
-  const baseUrl = hermesBaseUrl();
+  const baseUrl = resolveHermesUrl(user) || hermesBaseUrl();
   const res = await fetch(
     `${baseUrl}/api/conversations?user=${encodeURIComponent(user)}`,
   );
@@ -194,7 +194,7 @@ export async function getConversation(
   user: string,
   convId: string,
 ): Promise<ConversationDetail | null> {
-  const baseUrl = hermesBaseUrl();
+  const baseUrl = resolveHermesUrl(user) || hermesBaseUrl();
   const res = await fetch(
     `${baseUrl}/api/conversations/${encodeURIComponent(convId)}?user=${encodeURIComponent(user)}`,
   );
@@ -210,7 +210,7 @@ export async function deleteConversationApi(
   user: string,
   convId: string,
 ): Promise<void> {
-  const baseUrl = hermesBaseUrl();
+  const baseUrl = resolveHermesUrl(user) || hermesBaseUrl();
   const res = await fetch(
     `${baseUrl}/api/conversations/${encodeURIComponent(convId)}?user=${encodeURIComponent(user)}`,
     { method: "DELETE" },
