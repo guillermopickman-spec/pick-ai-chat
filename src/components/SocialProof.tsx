@@ -1,7 +1,7 @@
 import { Quote } from "lucide-react";
 import { useLanguage } from "../lib/LanguageProvider";
 
-const PLACEHOLDER_LOGOS = ["Ferretería Mendoza", "Clínica DentalCare", "Pizzería Da Miguel", "Tienda Sol", "Taller García"];
+const PLACEHOLDER_LOGOS = ["Come2Ireland", "Restaurantes", "Clinicas", "Inmobiliarias", "Bares", "Tiendas"];
 
 const SOCIAL_KEYS = ["0", "1", "2"];
 

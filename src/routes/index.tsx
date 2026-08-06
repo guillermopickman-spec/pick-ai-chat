@@ -5,6 +5,7 @@ import { Navbar } from "@/components/Navbar";
 import { Features } from "@/components/Features";
 import { SocialProof } from "@/components/SocialProof";
 import { Pricing } from "@/components/Pricing";
+import { GetStarted } from "@/components/GetStarted";
 import { DemoChat } from "@/components/DemoChat";
 import { FAQ } from "@/components/FAQ";
 import { ContactSection } from "@/components/Contact";
@@ -76,6 +77,7 @@ function LandingPage() {
         <Technology />
         <SocialProof />
         <Pricing />
+        <GetStarted />
         <About />
         <FAQ />
         <ContactSection />

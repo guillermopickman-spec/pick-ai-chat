@@ -48,24 +48,24 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "social.heading": "Negocios como el tuyo ya automatizan con AI",
     "social.subtitle":
       "Historias reales de negocios que ya automatizan con PickAIChat.",
-    "social.0.name": "Carlos Mendoza",
-    "social.0.role": "Dueño",
-    "social.0.company": "Ferretería Mendoza",
+    "social.0.name": "José Wilson",
+    "social.0.role": "Fundador",
+    "social.0.company": "Come2Ireland",
     "social.0.quote":
-      "Desde que tengo el agente en WhatsApp, no he perdido una sola venta fuera de horario. Responde como si estuviera yo.",
-    "social.0.initials": "CM",
-    "social.1.name": "Laura García",
-    "social.1.role": "CEO",
-    "social.1.company": "Clínica DentalCare",
+      "El agente atiende a mis clientes por email y web 24/7 y me avisa de cada consulta. Yo no tengo que estar pendiente — todo llega y se responde solo.",
+    "social.0.initials": "JW",
+    "social.1.name": "Una arrendadora",
+    "social.1.role": "Pequeña propietaria",
+    "social.1.company": "Pisos en alquiler",
     "social.1.quote":
-      "El agente gestiona las citas por WhatsApp automáticamente. Mis pacientes contentos y yo sin estrés.",
-    "social.1.initials": "LG",
-    "social.2.name": "Miguel Ángel",
-    "social.2.role": "Fundador",
-    "social.2.company": "Pizzería Da Miguel",
+      "Gestiono mis pisos con el agente: contesta dudas de los inquilinos, coordina visitas y me avisa de cada cosa. Casi no tengo que hacer nada.",
+    "social.1.initials": "AR",
+    "social.2.name": "Un hostelero",
+    "social.2.role": "Dueño",
+    "social.2.company": "Bar local",
     "social.2.quote":
-      "Pedidos por WhatsApp, sincronizados con mi cocina, todo automático. El agente me ha cambiado el negocio.",
-    "social.2.initials": "MA",
+      "El agente responde y toma reservas por el móvil aunque esté en la barra. Mis clientes siempre encuentran respuesta al momento.",
+    "social.2.initials": "DU",
 
     /* How It Works */
     "howitworks.section": "// Cómo funciona",
@@ -158,6 +158,28 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.addons.options": [
       "WhatsApp Business — 9 €/mes adicional",
     ],
+
+    /* Get Started — hand-holding / service layer */
+    "getstarted.section": "// Te acompañamos",
+    "getstarted.heading": "No estás solo: te lo montamos nosotros",
+    "getstarted.subtitle":
+      "Contrata y empieza. Nosotros configuramos tu agente, te enseñamos a usarlo y seguimos a tu lado. Humanidad hoy, tutoriales y automatización mañana.",
+    "getstarted.0.title": "Llamada de configuración 1:1",
+    "getstarted.0.body":
+      "Una llamada personal para entender tu negocio y montar tu agente a tu medida. Tú hablas, nosotros hacemos.",
+    "getstarted.1.title": "Onboarding en grupo",
+    "getstarted.1.body":
+      "Sesiones grupales con otros negocios nuevos: configuramos juntos y resolvemos dudas en directo.",
+    "getstarted.2.title": "Puertas abiertas",
+    "getstarted.2.body":
+      "Fechas recurrentes cada mes para pasar, preguntar y mejorar tu agente. Sin compromiso.",
+    "getstarted.3.title": "Tutoriales",
+    "getstarted.3.body":
+      "Vídeos y guías paso a paso para que algún día lo hagas tú solo. Aprendizaje bajo demanda.",
+    "getstarted.banner.title": "Concierge de verdad",
+    "getstarted.banner.body":
+      "A diferencia de un simple SaaS, tenemos a una persona que te configura el agente y te acompaña. Preferimos un trato cercano y que funcione.",
+    "getstarted.banner.cta": "Empezar hoy",
 
     /* Payment methods */
     "payment.title": "💳 Cómo pagar",
@@ -327,24 +349,24 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "social.section": "// Trusted by",
     "social.heading": "Businesses like yours already automate with AI",
     "social.subtitle": "Real stories from businesses already automating with PickAIChat.",
-    "social.0.name": "Carlos Mendoza",
-    "social.0.role": "Owner",
-    "social.0.company": "Mendoza Hardware Store",
+    "social.0.name": "José Wilson",
+    "social.0.role": "Founder",
+    "social.0.company": "Come2Ireland",
     "social.0.quote":
-      "Since I got the agent on WhatsApp, I haven't lost a single sale after hours. It answers just like I would.",
-    "social.0.initials": "CM",
-    "social.1.name": "Laura García",
-    "social.1.role": "CEO",
-    "social.1.company": "DentalCare Clinic",
+      "The agent answers my clients by email and web 24/7 and alerts me to every inquiry. I don't have to watch it — everything arrives and gets answered on its own.",
+    "social.0.initials": "JW",
+    "social.1.name": "A landlord",
+    "social.1.role": "Small property owner",
+    "social.1.company": "Rental apartments",
     "social.1.quote":
-      "The agent handles appointment booking via WhatsApp automatically. Happy patients and no stress for me.",
-    "social.1.initials": "LG",
-    "social.2.name": "Miguel Ángel",
-    "social.2.role": "Founder",
-    "social.2.company": "Da Miguel Pizzeria",
+      "I run my apartments with the agent: it answers tenant questions, coordinates viewings and keeps me posted on everything. I barely have to do anything.",
+    "social.1.initials": "AR",
+    "social.2.name": "A bar owner",
+    "social.2.role": "Owner",
+    "social.2.company": "Local bar",
     "social.2.quote":
-      "Orders via WhatsApp, synced to my kitchen, all automatic. The agent has transformed my business.",
-    "social.2.initials": "MA",
+      "The agent replies and takes bookings on my phone even while I'm at the bar. My customers always get an instant answer.",
+    "social.2.initials": "BO",
 
     /* How It Works */
     "howitworks.section": "// How it works",
@@ -437,6 +459,28 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     "pricing.addons.options": [
       "WhatsApp Business — $9/mo extra",
     ],
+
+    /* Get Started — hand-holding / service layer */
+    "getstarted.section": "// We've got you",
+    "getstarted.heading": "You're not alone — we set it up for you",
+    "getstarted.subtitle":
+      "Sign up and get started. We configure your agent, teach you how to use it and stay by your side. Human touch today, tutorials & automation tomorrow.",
+    "getstarted.0.title": "1:1 Setup Call",
+    "getstarted.0.body":
+      "A personal call to understand your business and build your agent your way. You talk, we build.",
+    "getstarted.1.title": "Group Onboarding",
+    "getstarted.1.body":
+      "Group sessions with other new businesses: we set up together and answer questions live.",
+    "getstarted.2.title": "Open Doors",
+    "getstarted.2.body":
+      "Recurring dates every month to drop in, ask and improve your agent. No commitment.",
+    "getstarted.3.title": "Tutorials",
+    "getstarted.3.body":
+      "Step-by-step videos and guides so one day you can do it yourself. On-demand learning.",
+    "getstarted.banner.title": "A real concierge",
+    "getstarted.banner.body":
+      "Unlike a plain SaaS, we have a person who configures your agent and stays with you. We'd rather it's personal and it works.",
+    "getstarted.banner.cta": "Start today",
 
     /* Payment methods */
     "payment.title": "💳 How to pay",
