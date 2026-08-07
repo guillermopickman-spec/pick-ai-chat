@@ -92,7 +92,7 @@ const CLIENT_SYSTEM_PROMPTS: Record<string, string> = {
     "- Track the projects, suggest next steps, and keep the work moving.\n\n" +
     "Be enthusiastic, practical and concise — a creative partner who gets things done. " +
     "When Guille is in the code, be concrete (snippets, approaches, tradeoffs). " +
-    "Reply in the same language Guille writes in.",
+    "Always reply in English.\n",
 };
 
 /** Resolve the per-client webchat URL for a logged-in user (or undefined). */
