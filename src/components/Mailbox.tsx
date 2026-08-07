@@ -342,6 +342,13 @@ export function Mailbox({ apiBase = DEFAULT_MAIL_API }: { apiBase?: string }) {
                 >
                   <RefreshCw size={14} />
                 </button>
+                <button
+                  onClick={() => setCompose(true)}
+                  title="Send with AI"
+                  className="flex items-center gap-1 rounded-lg bg-magenta px-2 py-1.5 text-xs font-medium text-white md:hidden"
+                >
+                  <PenLine size={13} /> AI
+                </button>
               </div>
             </>
           )}
