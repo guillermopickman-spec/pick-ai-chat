@@ -16,6 +16,7 @@ import {
   sendToHermesBot,
   sendChatMessage,
   DEFAULT_SETTINGS,
+  getClientSystemPrompt,
   type ConversationSummary,
 } from "@/utils/api";
 import { chatWithAI } from "@/lib/chat-server";
@@ -312,12 +313,16 @@ export function useChatSession(opts: {
 
     const isTest = !!testClientLabel;
     const hermesMessage = buildHermesMessage(text, history);
+    // Per-client bot persona when the user belongs to a client (e.g. Wilson's
+    // Come2Ireland bot); otherwise the generic platform persona.
+    const systemPrompt =
+      getClientSystemPrompt(user ?? "") ?? HERMES_BASE_PROMPT;
     const { reply } = await sendToHermesBot(
       hermesMessage,
       convId,
       user ?? "",
       history,
-      HERMES_BASE_PROMPT,
+      systemPrompt,
       agentUrl ?? undefined,
       !isTest, // test mode: don't persist to the client's server history
     );

@@ -67,9 +67,27 @@ const WEBCHAT_AGENT_URLS: Record<string, string> = {
   "josewilson95@gmail.com": "https://mail.come2ireland.com",
 };
 
+/**
+ * Per-client bot persona sent as the system prompt to each client's own
+ * Hermes agent. Keyed by the same login email as WEBCHAT_AGENT_URLS.
+ * A client's bot speaks for THEIR business — never the generic platform voice.
+ */
+const CLIENT_SYSTEM_PROMPTS: Record<string, string> = {
+  "josewilson95@gmail.com":
+    "You are the virtual assistant for Come2Ireland (Jose Wilson's company). " +
+    "You help with his business broadly — mainly immigration, visas, relocation and " +
+    "moving to Ireland — but you're also happy to help with anything else. " +
+    "Be friendly and clear, and reply in the same language the client writes in.",
+};
+
 /** Resolve the per-client webchat URL for a logged-in user (or undefined). */
 export function getClientAgentUrl(user: string): string | undefined {
   return WEBCHAT_AGENT_URLS[user];
+}
+
+/** Resolve the per-client system prompt (bot persona) for a user (or undefined). */
+export function getClientSystemPrompt(user: string): string | undefined {
+  return CLIENT_SYSTEM_PROMPTS[user];
 }
 
 /** Admin-only agent override (for testing any client's agent). */
