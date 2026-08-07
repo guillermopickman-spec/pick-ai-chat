@@ -53,6 +53,9 @@ export function PaymentMethods() {
         {t("payment.title")}
       </h3>
       <p className="mb-6 text-sm text-muted-foreground">{t("payment.desc")}</p>
+      <p className="mb-6 inline-flex items-center gap-2 rounded-full border border-magenta/30 bg-magenta/5 px-4 py-1.5 text-xs font-medium text-magenta">
+        ⚡ {t("payment.sla")}
+      </p>
 
       <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
         {methods.map((m) => {

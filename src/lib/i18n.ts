@@ -186,6 +186,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     /* Payment methods */
     "payment.title": "💳 Cómo pagar",
     "payment.desc": "Sin empresa ni autónomo: paga con tu cuenta personal. Elige el método que prefieras.",
+    "payment.sla": "Tu agente estará activo en 12–48 h laborables tras el pago.",
     "payment.copied": "¡Copiado!",
 
     /* Chatbot Demo */
@@ -489,6 +490,7 @@ export const translations: Record<Lang, Record<string, TranslationValue>> = {
     /* Payment methods */
     "payment.title": "💳 How to pay",
     "payment.desc": "No company or autónomo needed: pay from your personal account. Pick whichever method you prefer.",
+    "payment.sla": "Your agent will be live within 12–48 business hours after payment.",
     "payment.copied": "Copied!",
 
     /* Chatbot Demo */

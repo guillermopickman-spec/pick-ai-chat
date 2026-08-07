@@ -50,7 +50,7 @@ function ContactRoute() {
             Let's build your chat engine
           </h1>
           <p className="mx-auto mt-4 max-w-xl text-muted-foreground">
-            Fill out the form below and we'll reply with a tailored plan within 24 hours.
+            Fill out the form below and we'll reply within 24 hours — your agent goes live in 12–48 business hours after payment.
           </p>
         </div>
 
