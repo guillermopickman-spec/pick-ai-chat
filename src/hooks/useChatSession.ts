@@ -118,8 +118,10 @@ export function useChatSession(opts: {
   agentUrl?: string | null;
   /** When admin is testing a client's agent: label for the conversation + disable server save. */
   testClientLabel?: string | null;
+  /** When admin selects a specific agent (e.g. PickAGame), use its persona. */
+  personaOverride?: string | null;
 }) {
-  const { mode, user, agentUrl, testClientLabel } = opts;
+  const { mode, user, agentUrl, testClientLabel, personaOverride } = opts;
   const [conversations, setConversations] = useState<Conversation[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
   const [trash, setTrash] = useState<TrashEntry[]>(() => loadTrash());
@@ -314,9 +316,12 @@ export function useChatSession(opts: {
     const isTest = !!testClientLabel;
     const hermesMessage = buildHermesMessage(text, history);
     // Per-client bot persona when the user belongs to a client (e.g. Wilson's
-    // Come2Ireland bot); otherwise the generic platform persona.
+    // Come2Ireland bot) or when an agent was selected (e.g. PickAGame);
+    // otherwise the generic platform persona.
     const systemPrompt =
-      getClientSystemPrompt(user ?? "") ?? HERMES_BASE_PROMPT;
+      personaOverride ??
+      getClientSystemPrompt(user ?? "") ??
+      HERMES_BASE_PROMPT;
     const { reply } = await sendToHermesBot(
       hermesMessage,
       convId,
@@ -327,7 +332,7 @@ export function useChatSession(opts: {
       !isTest, // test mode: don't persist to the client's server history
     );
     return reply;
-  }, [conversations, mode, user, agentUrl, testClientLabel]);
+  }, [conversations, mode, user, agentUrl, testClientLabel, personaOverride]);
 
   return {
     conversations,

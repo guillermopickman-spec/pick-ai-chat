@@ -57,6 +57,14 @@ export function ChatView({
   const effectiveAgentUrl = isImpersonating
     ? impersonatedAgentUrl ?? undefined
     : overrideAgentUrl ?? undefined;
+  // When an agent is selected (e.g. PickAGame), use that agent's persona.
+  const currentAgent =
+    agentOptions.find((o) => o.url === (overrideAgentUrl || agentOptions[0]?.url));
+  const effectivePersona = isImpersonating
+    ? undefined
+    : overrideAgentUrl
+      ? currentAgent?.persona
+      : undefined;
   const testClientLabel = isImpersonating
     ? null
     : isAdmin && mode === "hermes" && overrideAgentUrl && overrideAgentUrl !== agentOptions[0]?.url
@@ -76,7 +84,7 @@ export function ChatView({
     switchConversation,
     addMessage,
     send,
-  } = useChatSession({ mode, user: userEmail, agentUrl: effectiveAgentUrl, testClientLabel });
+  } = useChatSession({ mode, user: userEmail, agentUrl: effectiveAgentUrl, testClientLabel, personaOverride: effectivePersona });
 
   const [input, setInput] = useState("");
   const [sidebarOpen, setSidebarOpen] = useState(true);
