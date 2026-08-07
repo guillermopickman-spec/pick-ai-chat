@@ -206,7 +206,7 @@ function ComposeChat({ contextEmail, onSent, apiBase }:
   );
 }
 
-export function Mailbox({ apiBase = DEFAULT_MAIL_API }: { apiBase?: string }) {
+export function Mailbox({ apiBase = DEFAULT_MAIL_API, apiReady = true }: { apiBase?: string; apiReady?: boolean }) {
   const [aliases, setAliases] = useState<Alias[]>([]);
   const [active, setActive] = useState<string>("all");
   const [emails, setEmails] = useState<Summary[]>([]);
@@ -246,11 +246,11 @@ export function Mailbox({ apiBase = DEFAULT_MAIL_API }: { apiBase?: string }) {
     } catch { /* ignore */ }
   }, []);
 
-  useEffect(() => { loadAliases(); loadSent(); }, [loadAliases, loadSent]);
+  useEffect(() => { if (apiReady) { loadAliases(); loadSent(); } }, [loadAliases, loadSent, apiReady]);
   useEffect(() => {
     setSelected(null);
-    if (active !== "sent") loadEmails();
-  }, [loadEmails, active]);
+    if (apiReady && active !== "sent") loadEmails();
+  }, [loadEmails, active, apiReady]);
 
   async function openEmail(id: number) {
     try {
