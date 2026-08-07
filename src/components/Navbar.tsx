@@ -3,7 +3,7 @@ import { Link, useLocation, useRouter } from "@tanstack/react-router";
 import { Menu, X } from "lucide-react";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { useUser, useClerk } from "@clerk/tanstack-react-start";
-import { getClientAgentUrl, isAdminEmail } from "@/utils/api";
+import { getClientAgentUrl, isAdminEmail, MAIL_ENABLED_USERS } from "@/utils/api";
 import { canAccessWip } from "@/lib/featureFlags";
 
 export function Navbar() {
@@ -24,6 +24,8 @@ export function Navbar() {
     isAdmin ||
     (user?.publicMetadata as { plan?: string } | undefined)?.plan === "paid" ||
     userEmails.some((e) => getClientAgentUrl(e) !== undefined);
+  // Mail clients (users with their own mail backend) see the Mail link, as do admins.
+  const canSeeMail = isAdmin || userEmails.some((e) => MAIL_ENABLED_USERS.includes(e));
   const chatHref = canUsePaidChat ? "/chat" : "/free-chat";
 
   const NAV_LINKS = [
@@ -131,7 +133,7 @@ export function Navbar() {
               >
                 Chat
               </Link>
-              {canSeeWip && (
+              {canSeeMail && (
                 <Link
                   to="/mail"
                   className="rounded-lg border border-border px-3 py-1.5 text-xs font-semibold text-foreground transition hover:border-magenta hover:text-magenta"
@@ -261,7 +263,7 @@ export function Navbar() {
                   >
                     Chat
                   </Link>
-                  {canSeeWip && (
+                  {canSeeMail && (
                     <Link
                       to="/mail"
                       onClick={() => setMobileOpen(false)}
