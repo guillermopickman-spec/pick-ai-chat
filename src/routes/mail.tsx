@@ -2,7 +2,7 @@ import { createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { auth } from "@clerk/tanstack-react-start/server";
 import { useUser } from "@clerk/tanstack-react-start";
-import { assertAdmin } from "@/lib/admin-users";
+import { assertAdmin, getUserEmails } from "@/lib/admin-users";
 import { MAIL_ENABLED_USERS, getMailApiUrl } from "@/utils/api";
 import { Navbar } from "@/components/Navbar";
 import { Mailbox } from "@/components/Mailbox";
@@ -13,9 +13,9 @@ const protectRoute = createServerFn().handler(async () => {
     throw redirect({ to: "/" });
   }
   // Mail is for admins + enabled client users (each sees their own backend).
-  const email = sessionClaims?.email as string | undefined;
-  const isAdmin = await assertAdmin(userId, email);
-  const isMailClient = !!email && MAIL_ENABLED_USERS.includes(email);
+  const isAdmin = await assertAdmin(userId, sessionClaims?.email as string | undefined);
+  const emails = await getUserEmails(userId, sessionClaims?.email as string | undefined);
+  const isMailClient = emails.some((e) => MAIL_ENABLED_USERS.includes(e));
   if (!isAdmin && !isMailClient) {
     throw redirect({ to: "/" });
   }
