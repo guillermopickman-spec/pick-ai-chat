@@ -114,6 +114,30 @@ export function getMailApiUrl(user: string): string {
   return MAIL_API_URLS[user] || "https://mail.pickaichat.com";
 }
 
+/** True if this email is a known client/agent identity (webchat + mail). */
+export function isKnownClientEmail(e: string): boolean {
+  return (
+    !!e &&
+    (!!WEBCHAT_AGENT_URLS[e] ||
+      !!CLIENT_SYSTEM_PROMPTS[e] ||
+      !!MAIL_API_URLS[e] ||
+      isAdminEmail(e))
+  );
+}
+
+/**
+ * Resolve the effective client-identity key from all the user's emails
+ * (primary may differ from the client key). Returns the first known client
+ * email, falling back to primary. Used to route a user's webchat persona/URL
+ * and mail backend correctly regardless of which email is marked primary.
+ */
+export function resolveClientEmail(primary: string | null, all: string[]): string | null {
+  if (all.length && all.some(isKnownClientEmail)) {
+    return all.find(isKnownClientEmail) ?? primary;
+  }
+  return primary;
+}
+
 /** Resolve the per-client system prompt (bot persona) for a user (or undefined). */
 export function getClientSystemPrompt(user: string): string | undefined {
   return CLIENT_SYSTEM_PROMPTS[user];

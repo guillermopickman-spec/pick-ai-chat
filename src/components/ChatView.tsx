@@ -7,7 +7,7 @@ import { useChatSession, type Message } from "@/hooks/useChatSession";
 import { useLanguage } from "@/lib/LanguageProvider";
 import { useIsMobile } from "@/hooks/use-mobile";
 import { Link } from "@tanstack/react-router";
-import { getAgentOptions, setOverrideHermesUrl, getOverrideHermesUrl, isAdminEmail } from "@/utils/api";
+import { getAgentOptions, setOverrideHermesUrl, getOverrideHermesUrl, isAdminEmail, resolveClientEmail } from "@/utils/api";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 import {
@@ -36,7 +36,11 @@ export function ChatView({
   const { user } = useUser();
   const clerk = useClerk();
   // When impersonating, the whole session runs as the target user.
-  const userEmail = impersonatedUser ?? user?.primaryEmailAddress?.emailAddress ?? null;
+  const resolvedClient = resolveClientEmail(
+    user?.primaryEmailAddress?.emailAddress ?? null,
+    user?.emailAddresses?.map((e) => e.emailAddress) ?? [],
+  );
+  const userEmail = impersonatedUser ?? resolvedClient;
   const { t } = useLanguage();
   const isMobile = useIsMobile();
   const isAdmin = isAdminEmail(userEmail);

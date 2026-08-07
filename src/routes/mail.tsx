@@ -39,8 +39,11 @@ export const Route = createFileRoute("/mail")({
 
 function MailRoute() {
   const { user } = useUser();
-  const email = user?.primaryEmailAddress?.emailAddress ?? "";
-  const apiBase = getMailApiUrl(email);
+  // Match against ALL the user's emails (primary may differ from the mail
+  // client key, e.g. Wilson has multiple addresses on his Clerk account).
+  const emails = user?.emailAddresses?.map((e) => e.emailAddress) ?? [];
+  const mailEmail = emails.find((e) => MAIL_ENABLED_USERS.includes(e));
+  const apiBase = mailEmail ? getMailApiUrl(mailEmail) : "https://mail.pickaichat.com";
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
