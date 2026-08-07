@@ -5,7 +5,7 @@ import {
 } from "lucide-react";
 
 // CORS open on the webhook, so browser fetch works from the app.
-const MAIL_API = "https://mail.pickaichat.com";
+const DEFAULT_MAIL_API = "https://mail.pickaichat.com";
 
 interface Summary {
   id: number;
@@ -39,8 +39,8 @@ function timeAgo(iso: string): string {
 }
 
 /* ── "Send with AI" chat composer ─────────────────────────────────────────── */
-function ComposeChat({ contextEmail, onSent }:
-  { contextEmail: EmailDetail | null; onSent: () => void }) {
+function ComposeChat({ contextEmail, onSent, apiBase }:
+  { contextEmail: EmailDetail | null; onSent: () => void; apiBase: string }) {
   const [input, setInput] = useState("");
   const [thinking, setThinking] = useState(false);
   const [draft, setDraft] = useState<Draft | null>(null);
@@ -56,7 +56,7 @@ function ComposeChat({ contextEmail, onSent }:
     setThinking(true);
     setLines((p) => [...p, req]);
     try {
-      const r = await fetch(`${MAIL_API}/emails/draft`, {
+      const r = await fetch(`${apiBase}/emails/draft`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
@@ -82,7 +82,7 @@ function ComposeChat({ contextEmail, onSent }:
     setSending(true);
     setError("");
     try {
-      const r = await fetch(`${MAIL_API}/emails/send`, {
+      const r = await fetch(`${apiBase}/emails/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(draft),
@@ -206,7 +206,7 @@ function ComposeChat({ contextEmail, onSent }:
   );
 }
 
-export function Mailbox() {
+export function Mailbox({ apiBase = DEFAULT_MAIL_API }: { apiBase?: string }) {
   const [aliases, setAliases] = useState<Alias[]>([]);
   const [active, setActive] = useState<string>("all");
   const [emails, setEmails] = useState<Summary[]>([]);
@@ -218,7 +218,7 @@ export function Mailbox() {
 
   const loadAliases = useCallback(async () => {
     try {
-      const r = await fetch(`${MAIL_API}/emails/aliases`);
+      const r = await fetch(`${apiBase}/emails/aliases`);
       const d = await r.json();
       setAliases(d.aliases ?? []);
     } catch { /* ignore */ }
@@ -230,7 +230,7 @@ export function Mailbox() {
       const params = new URLSearchParams({ limit: "60" });
       if (active !== "all") params.set("to", active);
       if (q) params.set("q", q);
-      const r = await fetch(`${MAIL_API}/emails?${params}`);
+      const r = await fetch(`${apiBase}/emails?${params}`);
       const d = await r.json();
       setEmails(d.emails ?? []);
     } finally {
@@ -240,7 +240,7 @@ export function Mailbox() {
 
   const loadSent = useCallback(async () => {
     try {
-      const r = await fetch(`${MAIL_API}/emails/sent?limit=60`);
+      const r = await fetch(`${apiBase}/emails/sent?limit=60`);
       const d = await r.json();
       setSent(d.sent ?? []);
     } catch { /* ignore */ }
@@ -254,7 +254,7 @@ export function Mailbox() {
 
   async function openEmail(id: number) {
     try {
-      const r = await fetch(`${MAIL_API}/emails/${id}`);
+      const r = await fetch(`${apiBase}/emails/${id}`);
       const d = await r.json();
       setSelected(d);
     } catch { /* ignore */ }
@@ -349,7 +349,7 @@ export function Mailbox() {
 
         {compose ? (
           <div className="h-[560px]">
-            <ComposeChat contextEmail={selected} onSent={() => { loadSent(); }} />
+            <ComposeChat contextEmail={selected} onSent={() => { loadSent(); }} apiBase={apiBase} />
           </div>
         ) : selected ? (
           <div className="p-6">

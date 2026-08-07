@@ -100,6 +100,20 @@ export function getClientAgentUrl(user: string): string | undefined {
   return WEBCHAT_AGENT_URLS[user];
 }
 
+/**
+ * Per-client mail backend (their own webmail + Send-with-AI). Keyed by login
+ * email. Users not in the map fall back to the platform mailbox.
+ */
+const MAIL_API_URLS: Record<string, string> = {
+  "josewilson95@gmail.com": "https://mail.come2ireland.com",
+};
+/** Emails allowed into the /mail route (admins always allowed too). */
+export const MAIL_ENABLED_USERS = Object.keys(MAIL_API_URLS);
+/** Resolve which mail backend a user should talk to. */
+export function getMailApiUrl(user: string): string {
+  return MAIL_API_URLS[user] || "https://mail.pickaichat.com";
+}
+
 /** Resolve the per-client system prompt (bot persona) for a user (or undefined). */
 export function getClientSystemPrompt(user: string): string | undefined {
   return CLIENT_SYSTEM_PROMPTS[user];

@@ -1,7 +1,9 @@
 import { createFileRoute, redirect } from "@tanstack/react-router";
 import { createServerFn } from "@tanstack/react-start";
 import { auth } from "@clerk/tanstack-react-start/server";
+import { useUser } from "@clerk/tanstack-react-start";
 import { assertAdmin } from "@/lib/admin-users";
+import { MAIL_ENABLED_USERS, getMailApiUrl } from "@/utils/api";
 import { Navbar } from "@/components/Navbar";
 import { Mailbox } from "@/components/Mailbox";
 
@@ -10,9 +12,11 @@ const protectRoute = createServerFn().handler(async () => {
   if (!isAuthenticated) {
     throw redirect({ to: "/" });
   }
-  // WIP: Mail is admin-only for now.
-  const ok = await assertAdmin(userId, sessionClaims?.email as string | undefined);
-  if (!ok) {
+  // Mail is for admins + enabled client users (each sees their own backend).
+  const email = sessionClaims?.email as string | undefined;
+  const isAdmin = await assertAdmin(userId, email);
+  const isMailClient = !!email && MAIL_ENABLED_USERS.includes(email);
+  if (!isAdmin && !isMailClient) {
     throw redirect({ to: "/" });
   }
   return {};
@@ -34,11 +38,14 @@ export const Route = createFileRoute("/mail")({
 });
 
 function MailRoute() {
+  const { user } = useUser();
+  const email = user?.primaryEmailAddress?.emailAddress ?? "";
+  const apiBase = getMailApiUrl(email);
   return (
     <div className="flex min-h-screen flex-col bg-background">
       <Navbar />
       <main className="flex-1 pt-20">
-        <Mailbox />
+        <Mailbox apiBase={apiBase} />
       </main>
     </div>
   );
